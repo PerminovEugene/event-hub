@@ -1,5 +1,7 @@
 const path = require('path');
 
+// TODO remove it?
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {

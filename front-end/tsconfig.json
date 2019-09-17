@@ -2,12 +2,16 @@
   "compilerOptions": {
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "commonjs",
     "target": "es6",
     "allowJs": true,
     "lib": ["es2015", "es2017", "dom"],
-    "removeComments": true,
+    "removeComments": false,
     "allowSyntheticDefaultImports": false,
-    "jsx": "react"
-  }
+    "module": "commonjs",
+    "types": ["node"],
+    "jsx": "react",
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist", "public", "./webpack.config.js"]
 }
