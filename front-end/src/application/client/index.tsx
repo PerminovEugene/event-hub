@@ -1,4 +1,15 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { Application } from './application';
 
-const application = new Application();
-application.initialize();
+export class EntryPoint {
+  initialize = () => {
+    const rootElement = document.getElementById('root');
+
+    if (rootElement) {
+      ReactDOM.hydrate(<Application />, rootElement);
+    }
+  };
+}
+
+new EntryPoint();

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Router from './navigation/router';
+import { Provider } from 'react-redux';
+import { getEnvManager } from '../../framework/configuration/environment-manger-keeper';
+import { ServerRouter, ClientRouter } from './navigation/router';
 
-export class Application {
-  initialize = () => {
-    const rootElement = document.getElementById('root');
-
-    if (rootElement) {
-      ReactDOM.render(<Router />, rootElement);
-    }
-  };
-}
+export const Application = ({ store, ...props }: any) => (
+  <Provider store={store}>
+    {getEnvManager().isServerSide() && <ServerRouter {...props} />}
+    {getEnvManager().isClientSide() && <ClientRouter {...props} />}
+  </Provider>
+);

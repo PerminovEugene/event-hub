@@ -1,12 +1,17 @@
-import * as path from 'path';
 import * as express from 'express';
 import * as webpack from 'webpack';
 import * as webpackDevMiddleware from 'webpack-dev-middleware';
-import * as config from '../../../webpack.dev.config.js';
+import * as config from './webpack.dev.config.js';
+import { buildTemplate } from './page-template';
+import { renderPageContent } from './page-content';
+import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
+import { EnvironmentManager } from '../../framework/configuration/environment-manager.js';
+
+const manager = new EnvironmentManager();
+manager.loadEnv({ path: 'config/server.env' });
+saveEnvManager(manager);
 
 const app = express(),
-  DIST_DIR = __dirname,
-  HTML_FILE = path.join(DIST_DIR, './../static/index.html'),
   compiler = webpack(config as any);
 
 app.use(
@@ -15,15 +20,14 @@ app.use(
   })
 );
 app.get('*', (req, res, next) => {
-  const a: any = compiler.outputFileSystem;
-  a.readFile(HTML_FILE, (err: any, result: any) => {
-    if (err) {
-      return next(err);
-    }
-    res.set('content-type', 'text/html');
-    res.send(result);
-    res.end();
-  });
+  const content = renderPageContent(req.url);
+  const jsFilePath = '',
+    cssFilePath = '';
+
+  const page = buildTemplate({ title: 'Hey', content, jsFilePath, cssFilePath });
+  res.send(page);
+  res.set('content-type', 'text/html');
+  res.end();
 });
 
 const PORT = process.env.PORT || 8080;

@@ -10,8 +10,9 @@
     "module": "commonjs",
     "types": ["node"],
     "jsx": "react",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist", "public", "./webpack.config.js"]
+  "exclude": ["node_modules", "public", "./webpack.config.js"]
 }
