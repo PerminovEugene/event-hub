@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Switch, Route, Router, StaticRouter } from 'react-router';
-import { createBrowserHistory } from 'history';
+import { Switch, Route, StaticRouter } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import routes from './routes';
 import { PublicRoute } from './routes';
 import { generateNodeKey } from '../../../framework/generators/string-generator';
@@ -19,8 +19,13 @@ const SwitchWrapper = () => (
   </Switch>
 );
 
-export const ServerRouter = () => (
-  <StaticRouter>
+type ServerRouterProps = {
+  url: string;
+  context: any;
+};
+
+export const ServerRouter = ({ url, context }: ServerRouterProps) => (
+  <StaticRouter location={url} context={context}>
     <SwitchWrapper />
   </StaticRouter>
 );

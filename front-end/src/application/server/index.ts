@@ -5,9 +5,10 @@ import * as config from './webpack.dev.config.js';
 import { buildTemplate } from './page-template';
 import { renderPageContent } from './page-content';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
-import { EnvironmentManager } from '../../framework/configuration/environment-manager.js';
+import { ServerEnvironmentManager } from '../../framework/configuration/server-environment-manager.js';
+import { createStore } from 'redux';
 
-const manager = new EnvironmentManager();
+const manager = new ServerEnvironmentManager();
 manager.loadEnv({ path: 'config/server.env' });
 saveEnvManager(manager);
 
@@ -20,13 +21,16 @@ app.use(
   })
 );
 app.get('*', (req, res, next) => {
-  const content = renderPageContent(req.url);
+  const context = {};
+  const data = { foo: 'bar' };
+  const store = createStore(state => state, data);
+  const content = renderPageContent(req.url, context, store);
   const jsFilePath = '',
     cssFilePath = '';
 
   const page = buildTemplate({ title: 'Hey', content, jsFilePath, cssFilePath });
-  res.send(page);
   res.set('content-type', 'text/html');
+  res.send(page);
   res.end();
 });
 

@@ -1,15 +1,37 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Application } from './application';
+import { createStore } from 'redux';
+import { clientRestoreData } from './client-restore-data';
+import { ClientEnvironmentManager } from '../../framework/configuration/client-environment-manager';
+import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
+
+const manager = new ClientEnvironmentManager();
+saveEnvManager(manager);
 
 export class EntryPoint {
-  initialize = () => {
+  start = (store: any) => {
     const rootElement = document.getElementById('root');
 
     if (rootElement) {
-      ReactDOM.hydrate(<Application />, rootElement);
+      ReactDOM.hydrate(<Application store={store} />, rootElement);
     }
   };
 }
 
-new EntryPoint();
+const entryPoint = new EntryPoint();
+
+export function reducer(state: any, action: any) {
+  if (!action) {
+    return state;
+  }
+
+  if (action.type === 'UPDATE_STORE') {
+    return action.payload;
+  }
+
+  return state;
+}
+
+let store = createStore(reducer, clientRestoreData());
+entryPoint.start(store);

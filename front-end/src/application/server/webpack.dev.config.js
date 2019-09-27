@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-
-console.log(__dirname, 'Webpack dev config location');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -45,11 +43,18 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: 'static/index.html',
-      filename: './index.html',
-      excludeChunks: ['server']
+    new Dotenv({
+      path: './config/client.env', // load this now instead of the ones in '.env'
+      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      silent: true, // hide any errors
+      defaults: false // load '.env.defaults' as the default values if empty.
     }),
+    // new HtmlWebPackPlugin({
+    //   template: 'static/index.html',
+    //   filename: './index.html',
+    //   excludeChunks: ['server']
+    // }),
     new webpack.NoEmitOnErrorsPlugin()
   ]
 };

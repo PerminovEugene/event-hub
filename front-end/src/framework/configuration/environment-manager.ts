@@ -1,4 +1,3 @@
-import { config, DotenvConfigOptions } from 'dotenv';
 import { Environment, SIDE, NODE_ENV } from './types';
 
 export interface IEnvironmentManager {
@@ -10,19 +9,9 @@ export interface IEnvironmentManager {
 }
 
 export class EnvironmentManager implements IEnvironmentManager {
-  private env: Environment;
+  protected env: Environment;
 
-  public loadEnv = (options: DotenvConfigOptions) => {
-    const envSource = config(options);
-    if (envSource.error) {
-      throw envSource.error;
-    }
-    // TODO may be add some validations by enum?
-    this.env = {
-      side: envSource.parsed.SIDE as SIDE,
-      nodeEnv: envSource.parsed.NODE_ENV as NODE_ENV
-    };
-  };
+  public loadEnv = (options: any) => {};
 
   public isServerSide = () => this.env.side === SIDE.server;
   public isClientSide = () => this.env.side === SIDE.client;
