@@ -3,9 +3,16 @@ export type PageTemplateParams = {
   content: string;
   jsFilePath: string;
   cssFilePath: string;
+  storeData: any;
 };
 
-export const buildTemplate = ({ title, content, jsFilePath, cssFilePath }: PageTemplateParams) =>
+export const buildTemplate = ({
+  title,
+  content,
+  jsFilePath,
+  cssFilePath,
+  storeData
+}: PageTemplateParams) =>
   `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -16,6 +23,9 @@ export const buildTemplate = ({ title, content, jsFilePath, cssFilePath }: PageT
     </head>
     <body>
       <div id="root">${content}</div>
+
+      <script type="application/json" id="data">${storeData.replace(/</g, '&lt;')}</script>
+      <script  type="text/javascript" src="${jsFilePath}"></script>
     </body>
   </html>
   `;

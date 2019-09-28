@@ -2,14 +2,17 @@ const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
+const assets = 'assets';
+const jsBundle = assets + '/js';
+
 module.exports = {
   entry: {
     main: '/home/eugene/projects/startups/game/hipe-app/front-end/dist/application/client/index.js'
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].js'
+    path: path.join(__dirname, '/home/eugene/projects/startups/game/hipe-app/front-end/assets'),
+    publicPath: '/assets/',
+    filename: 'bundle.js'
   },
   mode: 'development',
   target: 'web',
@@ -50,11 +53,7 @@ module.exports = {
       silent: true, // hide any errors
       defaults: false // load '.env.defaults' as the default values if empty.
     }),
-    // new HtmlWebPackPlugin({
-    //   template: 'static/index.html',
-    //   filename: './index.html',
-    //   excludeChunks: ['server']
-    // }),
+    // new CleanWebpackPlugin([jsBundle]),
     new webpack.NoEmitOnErrorsPlugin()
   ]
 };

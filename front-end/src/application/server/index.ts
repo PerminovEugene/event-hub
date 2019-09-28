@@ -15,20 +15,28 @@ saveEnvManager(manager);
 const app = express(),
   compiler = webpack(config as any);
 
-app.use(
-  webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-  })
-);
+if (manager.isDevelopment()) {
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: config.output.publicPath
+    })
+  );
+}
+
+// app.use('/assets/**/*', express.static(__dirname + '/assets'));
+// app.use('/assets/*', express.static(__dirname + '/assets'));
+// app.use('assets/js/*', express.static(__dirname + '/assets/js'));
+
 app.get('*', (req, res, next) => {
   const context = {};
   const data = { foo: 'bar' };
   const store = createStore(state => state, data);
   const content = renderPageContent(req.url, context, store);
-  const jsFilePath = '',
+  const jsFilePath = config.output.publicPath + config.output.filename,
     cssFilePath = '';
 
-  const page = buildTemplate({ title: 'Hey', content, jsFilePath, cssFilePath });
+  const storeData = JSON.stringify(data);
+  const page = buildTemplate({ title: 'Hey', content, jsFilePath, cssFilePath, storeData });
   res.set('content-type', 'text/html');
   res.send(page);
   res.end();
