@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { getEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import { ServerRouter } from './navigation/router';
-import { ClientRouter } from './navigation/client-router';
+import { ClientRouter } from './navigation/router';
 
 export interface ApplicationProps {
   store: any;
