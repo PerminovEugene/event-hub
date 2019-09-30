@@ -23,11 +23,13 @@ if (manager.isDevelopment()) {
   );
 }
 
-// app.use('/assets/**/*', express.static(__dirname + '/assets'));
-// app.use('/assets/*', express.static(__dirname + '/assets'));
-// app.use('assets/js/*', express.static(__dirname + '/assets/js'));
+// :|
+app.get('/assets/**/*', (req, res) => {
+  res.send(404);
+});
 
 app.get('*', (req, res, next) => {
+  console.log(req.url);
   const context = {};
   const data = { foo: 'bar' };
   const store = createStore(state => state, data);
