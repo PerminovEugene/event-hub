@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as webpack from 'webpack';
 import * as webpackDevMiddleware from 'webpack-dev-middleware';
-import * as config from './webpack.dev.config.js';
+import * as config from './../../framework/build/webpack.dev.client.config';
 import { buildTemplate } from './page-template';
 import { renderPageContent } from './page-content';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
@@ -18,8 +18,8 @@ const app = express(),
 if (manager.isDevelopment()) {
   app.use(
     webpackDevMiddleware(compiler, {
-      publicPath: config.output.publicPath
-    })
+      publicPath: config.output.publicPath,
+    }),
   );
 }
 
@@ -29,10 +29,9 @@ app.get('/assets/**/*', (req, res) => {
 });
 
 app.get('*', (req, res, next) => {
-  console.log(req.url);
   const context = {};
   const data = { foo: 'bar' };
-  const store = createStore(state => state, data);
+  const store = createStore((state: any) => state, data);
   const content = renderPageContent(req.url, context, store);
   const jsFilePath = config.output.publicPath + config.output.filename,
     cssFilePath = '';

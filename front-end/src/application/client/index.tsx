@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Application } from './application';
 import { createStore } from 'redux';
+import { Application } from './application';
 import { clientRestoreData } from './client-restore-data';
 import { ClientEnvironmentManager } from '../../framework/configuration/client-environment-manager';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
@@ -11,7 +11,7 @@ manager.loadEnv();
 saveEnvManager(manager);
 
 export class EntryPoint {
-  start = (store: any) => {
+  public start = (store: any) => {
     const rootElement = document.getElementById('root');
 
     if (rootElement) {
