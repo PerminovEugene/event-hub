@@ -8,11 +8,11 @@
     "allowSyntheticDefaultImports": false,
     "noImplicitAny": true,
     "module": "commonjs",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "jsx": "react",
     "outDir": "./dist",
     "rootDir": "./src"
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "public", "./webpack.config.js"]
+  "exclude": ["node_modules", "./src/**/*.test.*"]
 }

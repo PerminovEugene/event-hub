@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PagePath } from './pathes';
 import Root from '../pages/root';
-import NotFound from '../pages/not-found';
+import NotFound from '../pages/not-found/not-found.component';
 
 type Route = {
   component: React.ComponentType;
@@ -11,7 +11,7 @@ type Route = {
 enum UserRole { //TODO mock, later should be in core
   guest = 'guest',
   authorised = 'authorised',
-  admin = 'admin'
+  admin = 'admin',
 }
 
 export type PrivateRoute =
@@ -36,12 +36,12 @@ const routes: Routes = {
   publicRoutes: [
     {
       component: Root,
-      path: PagePath.root
-    }
+      path: PagePath.root,
+    },
   ],
   privateRoutes: [],
   notFound: {
-    component: NotFound
-  }
+    component: NotFound,
+  },
 };
 export default routes;
