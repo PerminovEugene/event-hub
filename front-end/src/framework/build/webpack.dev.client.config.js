@@ -1,13 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack').default; // TODO fuck this shit I am out
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const rootPath = path.join(__dirname, './../../../');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// const extractCSS = new ExtractTextPlugin('styles.min.css');
+// import * as Dotenv from 'dotenv-webpack';
 
 module.exports = {
   entry: {
-    main: '/home/eugene/projects/startups/game/hipe-app/front-end/src/application/client/index.tsx',
+    main: path.join(rootPath, 'src/application/client/index.tsx'),
   },
   output: {
-    path: path.join(__dirname, '/home/eugene/projects/startups/game/hipe-app/front-end/assets'),
+    path: path.join(rootPath, 'assets'), //'/home/eugene/projects/startups/game/hipe-app/front-end/assets'
     publicPath: '/assets/',
     filename: 'bundle.js',
   },
@@ -20,91 +26,86 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        options: { configFile: './../../../client.tsconfig.json' },
+        options: { configFile: path.join(rootPath, 'client.tsconfig.json') },
       },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // publicPath: (resourcePath, context) => {
+              //   // publicPath is the relative path of the resource to the context
+              //   // e.g. for ./css/admin/main.css the publicPath will be ../../
+              //   // while for ./css/main.css the publicPath will be ../
+              //   return path.relative(path.dirname(resourcePath), context) + '/';
+              // },
+            },
+          },
+          'css-loader',
+        ],
+      },
+      // {
+      //   test: /\.css$/,
+      //   // use: ['style-loader', 'postcss-loader'],
+      //   use: extractCSS.extract([
+      //     'css-loader',
+      //     {
+      //       loader: 'postcss-loader',
+      //       options: {
+      //         path: '/home/eugene/projects/startups/game/hipe-app/front-end/src/framework/build/',
+      //       },
+      //     },
+      //   ]),
+      // },
+      // {
+      //   test: /\.(sa|sc|c)ss$/,
+      //   use: [
+      //     {
+      //       loader: MiniCssExtractPlugin.loader,
+      //       options: {
+      //         hmr: process.env.NODE_ENV === 'development',
+      //         // you can specify a publicPath here
+      //         // by default it uses publicPath in webpackOptions.output
+      //         publicPath: '/assets/',
+      //       },
+      //     },
+      //     'css-loader',
+      //     'postcss-loader',
+      //     // 'sass-loader',
+      //   ],
+      // },
+      // {
+      //   test: /\.jsx?$/,
+      //   use: ['babel-loader', 'astroturf/loader'],
+      // },
+      // {
+      //   test: /\.css$/,
+      //   use: extractCSS.extract(['css-loader', 'postcss-loader']),
+      // },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.css', '.less', 'json'],
   },
   plugins: [
     new Dotenv({
       path: './config/client.env',
-      silent: false, // hide any errors
+      silent: true,
     }),
-    // new CleanWebpackPlugin([jsBundle]),
     new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
+    }),
+    // new MiniCssExtractPlugin({
+    //   // Options similar to the same options in webpackOptions.output
+    //   // both options are optional
+    //   filename: devMode ? '[name].css' : '[name].[hash].css',
+    //   chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    // }),
   ],
 };
-
-// module.exports = {
-//   entry: {
-//     main: '/home/eugene/projects/startups/game/hipe-app/front-end/src/application/client/index.tsx'
-//   },
-//   output: {
-//     path: path.join(__dirname, '/home/eugene/projects/startups/game/hipe-app/front-end/assets'),
-//     publicPath: '/assets/',
-//     filename: 'bundle.js'
-//   },
-//   mode: 'development',
-//   target: 'web',
-//   devtool: 'source-map',
-//   module: {
-//     rules: [
-//       // {
-//       //   test: /\.js$/,
-//       //   exclude: /node_modules/,
-//       //   loader: 'babel-loader'
-//       // },
-//       // {
-//       //   // Loads the javacript into html template provided.
-//       //   // Entry point is set below in HtmlWebPackPlugin in Plugins
-//       //   test: /\.html$/,
-//       //   use: [
-//       //     {
-//       //       loader: 'html-loader'
-//       //       //options: { minimize: true }
-//       //     }
-//       //   ]
-//       // },
-//       // {
-//       //   test: /\.css$/,
-//       //   use: ['style-loader', 'css-loader']
-//       // },
-//       // {
-//       //   test: /\.(png|svg|jpg|gif)$/,
-//       //   use: ['file-loader']
-//       // },
-//       {
-//         test: /\.ts(x?)$/,
-//         exclude: /node_modules/,
-//         use: [
-//           {
-//             loader: 'ts-loader'
-//           }
-//         ]
-//       }
-//       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-//       // {
-//       //   enforce: 'pre',
-//       //   test: /\.js$/,
-//       //   loader: 'source-map-loader'
-//       // }
-//     ]
-//   },
-//   externals: {
-//     react: 'React',
-//     'react-dom': 'ReactDOM'
-//   },
-//   plugins: [
-//     new Dotenv({
-//       path: './config/client.env',
-//       // safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
-//       // systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
-//       silent: false // hide any errors
-//       // defaults: false // load '.env.defaults' as the default values if empty.
-//     }),
-//     // new CleanWebpackPlugin([jsBundle]),
-//     new webpack.NoEmitOnErrorsPlugin()
-//   ]
-// };

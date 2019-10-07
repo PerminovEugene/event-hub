@@ -5,17 +5,18 @@ import * as config from './../../framework/build/webpack.dev.client.config';
 import { buildTemplate } from './page-template';
 import { renderPageContent } from './page-content';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
-import { ServerEnvironmentManager } from '../../framework/configuration/server-environment-manager.js';
+import { ServerEnvironmentManager } from '../../framework/configuration/server-environment-manager';
 import { createStore } from 'redux';
 
 const manager = new ServerEnvironmentManager();
 manager.loadEnv({ path: 'config/server.env' });
 saveEnvManager(manager);
 
-const app = express(),
-  compiler = webpack(config as any);
+const app = express();
+const compiler = webpack(config as any);
 
 if (manager.isDevelopment()) {
+  console.log('webpack build is started');
   app.use(
     webpackDevMiddleware(compiler, {
       publicPath: config.output.publicPath,
@@ -24,7 +25,7 @@ if (manager.isDevelopment()) {
 }
 
 // :|
-app.get('/assets/**/*', (req, res) => {
+app.get('/assets/*', (req, res) => {
   res.send(404);
 });
 
@@ -34,7 +35,10 @@ app.get('*', (req, res, next) => {
   const store = createStore((state: any) => state, data);
   const content = renderPageContent(req.url, context, store);
   const jsFilePath = config.output.publicPath + config.output.filename,
-    cssFilePath = '';
+    cssFilePath = config.output.publicPath + 'main.css';
+
+  // const jsFilePath = 'config.output.publicPath' + 'config.output.filename',
+  // cssFilePath = 'config.output.publicPath' + 'main.css';
 
   const storeData = JSON.stringify(data);
   const page = buildTemplate({ title: 'Hey', content, jsFilePath, cssFilePath, storeData });
