@@ -5,8 +5,9 @@ const EmitAllPlugin = require('webpack-emit-all-plugin');
 
 const rootPath = path.join(__dirname, './');
 
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const extractCSS = new ExtractTextPlugin('styles.min.css');
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
+const styledComponentsTransformer = createStyledComponentsTransformer();
+
 module.exports = {
   entry: {
     build: path.join(rootPath, 'src/application/server/index.ts'),
@@ -26,7 +27,10 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        options: { configFile: path.join(rootPath, 'tsconfig.json') },
+        options: {
+          configFile: path.join(rootPath, 'tsconfig.json'),
+          getCustomTransformers: () => ({ before: [styledComponentsTransformer] }),
+        },
       },
       {
         test: /\.css$/,
@@ -45,6 +49,23 @@ module.exports = {
           },
           'css-loader',
         ],
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: [
+              '@babel/plugin-proposal-object-rest-spread',
+              'babel-plugin-styled-components',
+              // {
+              //   ssr: false,
+              // },
+            ],
+          },
+        },
       },
       // {
       //   test: /\.(less)$/,

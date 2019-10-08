@@ -1,28 +1,33 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
+const styledComponentsTransformer = createStyledComponentsTransformer();
 
-const rootPath =  path.join(__dirname, '../../../'); //'/home/eugene/projects/startups/game/hipe-app/front-end';
-console.log(rootPath)
-module.exports = {
-  entry: {
-    main: path.join(rootPath, 'src/application/client/index.tsx'),
-  },
-  output: {
-    path: path.join(rootPath, 'assets'), //'/home/eugene/projects/startups/game/hipe-app/front-end/assets'
-    publicPath: '/assets/',
-    filename: 'bundle.js',
-  },
+const rootPath = path.join(__dirname, '../../../'); //'/home/eugene/projects/startups/game/hipe-app/front-end';
+
+module.exports = options => ({
+  // entry: {
+  //   main: path.join(rootPath, 'src/application/client/index.tsx'),
+  // },
+  // output: {
+  //   path: path.join(rootPath, 'assets'), //'/home/eugene/projects/startups/game/hipe-app/front-end/assets'
+  //   publicPath: '/assets/',
+  //   filename: 'bundle.js',module.exports =
+  // },
   mode: 'development',
-  target: 'web',
-  devtool: 'source-map',
+  // target: 'web',
+  // devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        options: { configFile: path.join(rootPath, 'client.tsconfig.json') },
+        options: {
+          configFile: path.join(rootPath, options.tsConfigPath),
+          getCustomTransformers: () => ({ before: [styledComponentsTransformer] }),
+        },
       },
       {
         test: /\.css$/,
@@ -40,6 +45,30 @@ module.exports = {
           },
           'css-loader',
         ],
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: [
+              '@babel/plugin-proposal-object-rest-spread',
+              [
+                'babel-plugin-styled-components',
+                {
+                  fileName: true,
+                  minify: false,
+                  pure: false,
+                },
+              ],
+              // {
+              //   ssr: false,
+              // },
+            ],
+          },
+        },
       },
       // {
       //   test: /\.css$/,
@@ -86,10 +115,10 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false, // Enable to remove warnings about conflicting order
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].css',
+    //   chunkFilename: '[id].css',
+    //   ignoreOrder: false, // Enable to remove warnings about conflicting order
+    // }),
   ],
-};
+});
