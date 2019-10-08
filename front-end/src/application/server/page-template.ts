@@ -1,12 +1,12 @@
 export type PageTemplateParams = {
   title: string;
-  content: string;
+  html: string;
   jsFilePath: string;
-  cssFilePath: string;
+  css: string;
   storeData: any;
 };
 
-export const buildTemplate = ({ title, content, jsFilePath, cssFilePath, storeData }: PageTemplateParams) =>
+export const buildTemplate = ({ title, html, jsFilePath, css, storeData }: PageTemplateParams) =>
   `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -14,11 +14,11 @@ export const buildTemplate = ({ title, content, jsFilePath, cssFilePath, storeDa
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>${title}</title>
-      <link rel="stylesheet" href="${cssFilePath}" />
+      ${css}
       <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     </head>
     <body>
-      <div id="root">${content}</div>
+      <div id="root">${html}</div>
 
       <script type="application/json" id="data">${storeData.replace(/</g, '&lt;')}</script>
       <script  type="text/javascript" src="${jsFilePath}"></script>

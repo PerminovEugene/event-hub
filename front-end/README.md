@@ -1,15 +1,11 @@
-# 🚀 Welcome to your new awesome project!
+# Front-end part of project
 
-This project has been created using **webpack scaffold**, you can now run
+## TODO list
 
-```
-npm run build
-```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
+1. Add CSS
+2. Source maps and Production build
+3. CI. Include precommit hooks? Right words, debugger, test coverage?
+4. Refactoring project structure
+5. GraphQL + Appolo/Relay
+6. Login page form dynamic (hooks or ...?). Inputs should be in framework\application general components folder
+7. Layout
