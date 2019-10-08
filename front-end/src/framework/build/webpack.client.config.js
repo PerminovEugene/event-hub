@@ -1,24 +1,20 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const EmitAllPlugin = require('webpack-emit-all-plugin');
 
-const rootPath = path.join(__dirname, './');
-
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const extractCSS = new ExtractTextPlugin('styles.min.css');
+const rootPath =  path.join(__dirname, '../../../'); //'/home/eugene/projects/startups/game/hipe-app/front-end';
+console.log(rootPath)
 module.exports = {
   entry: {
-    build: path.join(rootPath, 'src/application/server/index.ts'),
+    main: path.join(rootPath, 'src/application/client/index.tsx'),
   },
   output: {
-    path: path.join(rootPath, 'builded-server'), //'/home/eugene/projects/startups/game/hipe-app/front-end/assets'
-    publicPath: '/builded-server/',
-    filename: '[name].js',
-    sourceMapFilename: 'build/[name].js.map',
+    path: path.join(rootPath, 'assets'), //'/home/eugene/projects/startups/game/hipe-app/front-end/assets'
+    publicPath: '/assets/',
+    filename: 'bundle.js',
   },
   mode: 'development',
-  target: 'node',
+  target: 'web',
   devtool: 'source-map',
   module: {
     rules: [
@@ -26,12 +22,11 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        options: { configFile: path.join(rootPath, 'tsconfig.json') },
+        options: { configFile: path.join(rootPath, 'client.tsconfig.json') },
       },
       {
         test: /\.css$/,
         use: [
-          //'null-loader'],
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -46,32 +41,6 @@ module.exports = {
           'css-loader',
         ],
       },
-      // {
-      //   test: /\.(less)$/,
-      //   use: ['css-hot-loader'].concat(
-      //     extractCSS.extract({
-      //       fallback: 'style-loader',
-      //       use: [
-      //         {
-      //           loader: 'css-loader',
-      //         },
-      //         {
-      //           loader: 'postcss-loader',
-      //         },
-      //         {
-      //           loader: 'less-loader',
-      //         },
-      //       ],
-      //     }),
-      //   ),
-      // },
-      // {
-      //   test: /\.css$/,
-      //   use: extractCSS.extract({
-      //     fallback: 'style-loader',
-      //     use: 'css-loader',
-      //   }),
-      // },
       // {
       //   test: /\.css$/,
       //   // use: ['style-loader', 'postcss-loader'],
@@ -108,37 +77,19 @@ module.exports = {
       // },
       // {
       //   test: /\.css$/,
-      //   use: 'null-loader',
+      //   use: extractCSS.extract(['css-loader', 'postcss-loader']),
       // },
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css', '.less', 'json'],
-    alias: {
-      // 'dotenv-webpack': 'dotenv-webpack/dist/index.js',
-      // 'ts-loader': 'node_modules/ts-loader/index.js',
-    },
-    modules: ['node_modules', 'src'],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // all options are optional
       filename: '[name].css',
       chunkFilename: '[id].css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
-    // new EmitAllPlugin({
-    //   ignorePattern: /node_modules/, /'.css'/ // default,
-    //   path: path.join(__dirname, 'builded-server'), // defaults to `output.path`
-    // }),
-    // new webpack.NoEmitOnErrorsPlugin(),
-    // new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // both options are optional
-    //   filename: devMode ? '[name].css' : '[name].[hash].css',
-    //   chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    // }),
   ],
 };
