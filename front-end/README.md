@@ -2,7 +2,7 @@
 
 ## TODO list
 
-1. Add CSS
+1. Add CSS `Done`
 2. Source maps and Production build
 3. CI. Include precommit hooks? Right words, debugger, test coverage?
 4. Refactoring project structure
