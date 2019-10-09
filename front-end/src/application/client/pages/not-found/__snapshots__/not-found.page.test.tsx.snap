@@ -2,6 +2,8 @@
 
 exports[`NotFound page basic render 1`] = `
 <div>
-  Not found page
+  <styled.section>
+    Not found page
+  </styled.section>
 </div>
 `;

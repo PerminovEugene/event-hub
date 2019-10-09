@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
+import 'jest-styled-components';
 import NotFound from './not-found.component';
 
 test('NotFound page basic render', () => {

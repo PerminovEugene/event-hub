@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es6",
+    "target": "es5",
     "allowJs": true,
     "lib": ["es2015", "es2017", "dom"],
     "removeComments": false,
@@ -10,9 +10,13 @@
     "module": "commonjs",
     "types": ["node", "jest"],
     "jsx": "react",
-    "outDir": "./dist",
     "rootDir": "./src"
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "./src/**/*.test.*"]
+  "exclude": [
+    "node_modules",
+    "./src/**/*.test.*",
+    "./src/webpack.dev.client.config.starter.js",
+    "./src/framework/build/setupEnzyme.ts"
+  ]
 }

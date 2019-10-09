@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { getEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import { ServerRouter } from './navigation/router';
 import { ClientRouter } from './navigation/router';
+import { Normalize } from 'styled-normalize';
+import GlobalStyles from './styles/global';
 
 export interface ApplicationProps {
   store: any;
@@ -12,6 +14,8 @@ export interface ApplicationProps {
 
 export const Application = ({ store, url, context }: ApplicationProps) => (
   <Provider store={store}>
+    <Normalize />
+    <GlobalStyles />
     {getEnvManager().isServerSide() && <ServerRouter url={url} context={context} />}
     {getEnvManager().isClientSide() && <ClientRouter />}
   </Provider>
