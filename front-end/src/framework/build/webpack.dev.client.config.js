@@ -1,110 +1,38 @@
-const path = require('path');
-const webpack = require('webpack');
+const getConfig = require('./webpack.config');
 const Dotenv = require('dotenv-webpack');
+const path = require('path');
+const rootPath = path.join(__dirname, '../../../');
+
+const config = getConfig({
+  tsConfigPath: 'client.tsconfig.json',
+});
 
 module.exports = {
+  watchOptions: {
+    ignored: ['src/**/*.test.*', 'node_modules'],
+  },
   entry: {
-    main: '/home/eugene/projects/startups/game/hipe-app/front-end/src/application/client/index.tsx',
+    main: path.join(rootPath, 'src/application/client/index.tsx'),
   },
   output: {
-    path: path.join(__dirname, '/home/eugene/projects/startups/game/hipe-app/front-end/assets'),
+    path: path.join(rootPath, 'assets'),
     publicPath: '/assets/',
     filename: 'bundle.js',
   },
-  mode: 'development',
   target: 'web',
   devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: { configFile: './../../../client.tsconfig.json' },
-      },
-    ],
-  },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    ...config.resolve,
+  },
+  mode: config.mode,
+  module: {
+    ...config.module,
   },
   plugins: [
     new Dotenv({
       path: './config/client.env',
-      silent: false, // hide any errors
+      silent: true,
     }),
-    // new CleanWebpackPlugin([jsBundle]),
-    new webpack.NoEmitOnErrorsPlugin(),
+    ...config.plugins,
   ],
 };
-
-// module.exports = {
-//   entry: {
-//     main: '/home/eugene/projects/startups/game/hipe-app/front-end/src/application/client/index.tsx'
-//   },
-//   output: {
-//     path: path.join(__dirname, '/home/eugene/projects/startups/game/hipe-app/front-end/assets'),
-//     publicPath: '/assets/',
-//     filename: 'bundle.js'
-//   },
-//   mode: 'development',
-//   target: 'web',
-//   devtool: 'source-map',
-//   module: {
-//     rules: [
-//       // {
-//       //   test: /\.js$/,
-//       //   exclude: /node_modules/,
-//       //   loader: 'babel-loader'
-//       // },
-//       // {
-//       //   // Loads the javacript into html template provided.
-//       //   // Entry point is set below in HtmlWebPackPlugin in Plugins
-//       //   test: /\.html$/,
-//       //   use: [
-//       //     {
-//       //       loader: 'html-loader'
-//       //       //options: { minimize: true }
-//       //     }
-//       //   ]
-//       // },
-//       // {
-//       //   test: /\.css$/,
-//       //   use: ['style-loader', 'css-loader']
-//       // },
-//       // {
-//       //   test: /\.(png|svg|jpg|gif)$/,
-//       //   use: ['file-loader']
-//       // },
-//       {
-//         test: /\.ts(x?)$/,
-//         exclude: /node_modules/,
-//         use: [
-//           {
-//             loader: 'ts-loader'
-//           }
-//         ]
-//       }
-//       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-//       // {
-//       //   enforce: 'pre',
-//       //   test: /\.js$/,
-//       //   loader: 'source-map-loader'
-//       // }
-//     ]
-//   },
-//   externals: {
-//     react: 'React',
-//     'react-dom': 'ReactDOM'
-//   },
-//   plugins: [
-//     new Dotenv({
-//       path: './config/client.env',
-//       // safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
-//       // systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
-//       silent: false // hide any errors
-//       // defaults: false // load '.env.defaults' as the default values if empty.
-//     }),
-//     // new CleanWebpackPlugin([jsBundle]),
-//     new webpack.NoEmitOnErrorsPlugin()
-//   ]
-// };
