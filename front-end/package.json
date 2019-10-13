@@ -8,7 +8,7 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "dev": "npm-run-all --parallel nodemon-dev-server bsdw bcdw test:watch",
+    "dev": "npm-run-all --parallel nodemon-dev-server bsdw bcdw",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "build:server:dev": "webpack --config=./src/framework/build/webpack.dev.server.config.js",
@@ -86,6 +86,8 @@
     "webpack-emit-all-plugin": "^2.0.1"
   },
   "dependencies": {
+    "@material-ui/core": "^4.5.0",
+    "@material-ui/icons": "^4.4.3",
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.2.0",
     "@typescript-eslint/eslint-plugin": "^2.3.2",

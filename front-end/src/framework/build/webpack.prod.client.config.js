@@ -20,11 +20,11 @@ module.exports = {
     filename: 'bundle.js',
   },
   target: 'web',
-  devtool: 'eval-source-map',
+  devtool: 'none',
   resolve: {
     ...config.resolve,
   },
-  mode: config.mode,
+  mode: 'production',
   module: {
     ...config.module,
   },
