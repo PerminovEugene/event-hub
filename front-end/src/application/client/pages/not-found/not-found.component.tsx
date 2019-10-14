@@ -10,7 +10,7 @@ export default class NotFound extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-        <Wrapper>Not found page ept 1</Wrapper>
+        <Wrapper>Not found page</Wrapper>
       </div>
     );
   }
