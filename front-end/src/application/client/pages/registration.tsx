@@ -1,84 +1,39 @@
 import * as React from 'react';
-import { ThemeTextField } from '../components/text-field/text-field.component';
-import { ThemeButton } from '../components/button/button.component';
 import styled from 'styled-components';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { Formik, FormikActions, FormikProps, Form, Field, FieldProps } from 'formik';
-
-interface MyFormValues {
-  email: string;
-  password: string;
-  passwordRepeat: string;
-}
+import RegistrationForm from './registration/registration.form';
+import { ThemeLink } from './../components/link/link.component';
 
 export default class Registration extends React.Component<{}, {}> {
   render() {
     return (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="sm">
         <Paper>
-          <Box color="primary.contrastText" p={2} m={12} borderTop={1}>
-            <FormHeader component="h1" variant="h5" color="primary">
+          <FormBox color="primary.contrastText" borderTop={1}>
+            <Typography component="h1" variant="h5" color="primary" align="center">
               Sign up
-            </FormHeader>
-            <Formik
-              initialValues={{
-                email: undefined,
-                password: undefined,
-                passwordRepeat: undefined,
-              }}
-              onSubmit={(values: MyFormValues, actions: FormikActions<MyFormValues>) => {
-                console.log({ values, actions });
-                alert(JSON.stringify(values, null, 2));
-                actions.setSubmitting(false);
-              }}
-              render={(props: FormikProps<MyFormValues>) => (
-                <Form>
-                  <ThemeTextField
-                    label="Email"
-                    name="email"
-                    autoFocus
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.email}
-                  />
-                  <ThemeTextField
-                    label="Password"
-                    type="password"
-                    name="password"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.password}
-                  />
-                  <ThemeTextField
-                    label="Password repeat"
-                    type="password"
-                    name="passwordRepeat"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.password}
-                  />
-                  {props.errors.email && <div id="feedback">{props.errors.email}</div>}
-                  <ThemeButton variant="contained" color="secondary" type="submit">
-                    sign up
-                  </ThemeButton>
-                </Form>
-              )}
-            />
-          </Box>
+            </Typography>
+            <RegistrationForm />
+            <Typography component="p" color="primary" align="center">
+              <ThemeLink to="/login">Already have an account? Sign in</ThemeLink>
+            </Typography>
+            <Typography component="p" color="primary" align="center">
+              <ThemeLink to="/restore-password">Forgot password?</ThemeLink>
+            </Typography>
+          </FormBox>
         </Paper>
       </Container>
     );
   }
 }
 
-const Paper: React.ComponentType<any> = styled.div`
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+const FormBox: React.ComponentType<any> = styled(Box)`
+  max-width: 400px;
+  margin: auto;
 `;
 
-const FormHeader: React.ComponentType<any> = styled(Typography)`
-  text-align: center;
+const Paper: React.ComponentType<any> = styled.div`
+  margin-top: 64px;
 `;
