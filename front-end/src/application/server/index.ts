@@ -4,6 +4,7 @@ import { renderPageContent, Content } from './page-content';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import { ServerEnvironmentManager } from '../../framework/configuration/server-environment-manager';
 import { createStore } from 'redux';
+import { handle } from 'i18next-express-middleware';
 
 const start = async () => {
   const manager = new ServerEnvironmentManager();
@@ -12,6 +13,13 @@ const start = async () => {
   const app = express();
 
   app.use('/assets', express.static('assets'));
+
+  app.use(
+    handle(i18next, {
+      ignoreRoutes: ['/assets'], // or function(req, res, options, i18next) { /* return true to ignore */ }
+      removeLngFromUrl: false,
+    }),
+  );
 
   app.get('*', (req, res, next) => {
     const context = {};

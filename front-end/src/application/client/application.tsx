@@ -6,8 +6,6 @@ import { ClientRouter } from './navigation/router';
 import { Normalize } from 'styled-normalize';
 import GlobalStyles from './styles/global';
 import { ThemeProvider } from '@material-ui/styles';
-
-// import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
 export interface ApplicationProps {

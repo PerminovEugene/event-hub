@@ -3,6 +3,8 @@ import { renderToString } from 'react-dom/server';
 import { Application } from '../client/application';
 import { ServerStyleSheet } from 'styled-components';
 import { ServerStyleSheets } from '@material-ui/styles';
+import './../I18n';
+// import { useSSR } from 'react-i18next';
 
 export type Content = {
   html: string;
@@ -12,6 +14,8 @@ export type Content = {
 export const renderPageContent = (url: string, context: any, store: any): Content => {
   const sheet = new ServerStyleSheet(); // styled components
   try {
+    // useSSR(initialI18nStore, initialLanguage);
+
     const sheets = new ServerStyleSheets(); // material UI styles
     const html = renderToString(
       sheet.collectStyles(sheets.collect(<Application url={url} context={context} store={store} />)),

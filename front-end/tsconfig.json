@@ -18,5 +18,8 @@
     "./src/**/*.test.*",
     "./src/webpack.dev.client.config.starter.js",
     "./src/framework/build/setupEnzyme.ts"
-  ]
+  ],
+  "rules": {
+    "ordered-imports": [false]
+  }
 }
