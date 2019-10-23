@@ -8,3 +8,12 @@ type Query {
   getCats: [Cat]
   cat(id: ID!): Cat
 }
+
+input CatInput {
+  name: String
+  age: Int
+}
+
+type Mutation {
+  createCat(cat: CatInput): String
+}

@@ -11,6 +11,15 @@ export class AppResolver {
     },
   ];
 
+  @Mutation()
+  createCat(
+    @Args('cat')
+    cat: any,
+  ): Promise<string> {
+    this.cats = [...this.cats, { ...cat, id: this.cats.length + 1 }];
+    return Promise.resolve('cat created');
+  }
+
   @Query()
   getCats() {
     console.log('getCats');
