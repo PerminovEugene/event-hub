@@ -1,0 +1,20 @@
+type AppUser {
+  id: Int
+  email: String
+  role: String
+  status: String
+}
+
+type Query {
+  login(email: String!, password: String!): AppUser
+}
+
+input AppUserInput {
+  email: String
+  password: String
+  passwordConfirm: String
+}
+
+type Mutation {
+  registration(user: AppUserInput): AppUser
+}
