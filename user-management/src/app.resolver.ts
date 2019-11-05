@@ -22,15 +22,20 @@ export class AppResolver {
 
   @Query()
   getCats() {
-    console.log('getCats');
+    console.error('getCats');
     return this.cats;
   }
 
-  @Query('cat')
+  @Query('oneCat')
   async findOneById(
     @Args('id', ParseIntPipe)
     id: number,
   ): Promise<any> {
-    return this.cats.find(c => c.id === id);
+    console.log('hey');
+    return {
+      id: 1,
+      name: 'Mjau',
+      age: 17,
+    };
   }
 }

@@ -1,0 +1,23 @@
+type Event {
+  id: Int!
+  type: String!
+  name: String!
+  description: String
+  date: String!
+}
+
+type Query {
+  getEvents(month: String): [Event]
+}
+
+input EventInput {
+  id: Int
+  name: String
+  description: String
+  type: String
+  date: String
+}
+
+type Mutation {
+  createEvent(event: EventInput): Event
+}

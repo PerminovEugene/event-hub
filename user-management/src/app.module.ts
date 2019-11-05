@@ -4,9 +4,19 @@ import { AppResolver } from './app.resolver';
 import { join } from 'path';
 import { AppUserModule } from './app-user/app-user.module';
 
+// import { PassportModule } from '@nestjs/passport';
+// import { JwtModule } from '@nestjs/jwt';
+// import { JwtStrategy } from './jwt.strategy';
+// import { LocalStrategy } from './auth/local.strategy';
+import { AuthModule } from './auth/auth.module';
+import { EventModule } from './event/event.module';
+
+const secret = 'qwee12r11r1r1'; // TODO you know waht to do
+const expiresIn = '60s';
 @Module({
   imports: [
     GraphQLModule.forRoot({
+      context: ({ req }) => ({ req }),
       debug: false, // TODO add configuration
       playground: true, // TODO add configuration // http://localhost:3000/graphql
       typePaths: ['./**/*.graphql'],
@@ -14,12 +24,12 @@ import { AppUserModule } from './app-user/app-user.module';
         path: join(process.cwd(), 'src/graphql.ts'),
         outputAs: 'class',
       },
-      include: [AppUserModule],
+      include: [AppUserModule, AuthModule, EventModule],
     }),
     AppUserModule,
+    AuthModule,
+    EventModule,
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
   providers: [AppResolver],
 })
 export class AppModule {}

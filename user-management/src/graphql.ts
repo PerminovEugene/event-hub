@@ -5,22 +5,23 @@
  */
 
 /* tslint:disable */
-export class AppUserInput {
-    email?: string;
-    password?: string;
-    passwordConfirm?: string;
-}
-
 export class CatInput {
     name?: string;
     age?: number;
 }
 
-export class AppUser {
+export class EventInput {
     id?: number;
+    name?: string;
+    description?: string;
+    type?: string;
+    date?: string;
+}
+
+export class RegistrationInput {
     email?: string;
-    role?: string;
-    status?: string;
+    password?: string;
+    passwordConfirm?: string;
 }
 
 export class Cat {
@@ -29,16 +30,35 @@ export class Cat {
     age?: number;
 }
 
-export abstract class IMutation {
-    abstract registration(user?: AppUserInput): AppUser | Promise<AppUser>;
+export class Event {
+    id: number;
+    type: string;
+    name: string;
+    description?: string;
+    date: string;
+}
 
+export abstract class IMutation {
     abstract createCat(cat?: CatInput): string | Promise<string>;
+
+    abstract registration(user?: RegistrationInput): SessionData | Promise<SessionData>;
+
+    abstract createEvent(event?: EventInput): Event | Promise<Event>;
 }
 
 export abstract class IQuery {
-    abstract login(email: string, password: string): AppUser | Promise<AppUser>;
-
     abstract getCats(): Cat[] | Promise<Cat[]>;
 
     abstract cat(id: string): Cat | Promise<Cat>;
+
+    abstract login(email: string, password: string): SessionData | Promise<SessionData>;
+
+    abstract getEvents(month?: string): Event[] | Promise<Event[]>;
+}
+
+export class SessionData {
+    id?: number;
+    email?: string;
+    role?: string;
+    status?: string;
 }

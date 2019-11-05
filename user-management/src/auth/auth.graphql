@@ -1,4 +1,4 @@
-type AppUser {
+type SessionData {
   id: Int
   email: String
   role: String
@@ -6,15 +6,15 @@ type AppUser {
 }
 
 type Query {
-  login(email: String!, password: String!): AppUser
+  login(email: String!, password: String!): SessionData
 }
 
-input AppUserInput {
+input RegistrationInput {
   email: String
   password: String
   passwordConfirm: String
 }
 
 type Mutation {
-  registration(user: AppUserInput): AppUser
+  registration(user: RegistrationInput): SessionData
 }
