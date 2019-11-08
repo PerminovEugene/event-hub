@@ -1,8 +1,6 @@
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { EventService } from './event.service';
 import { EventInput } from '../graphql';
-import { AppError } from '../errors/app.error';
-import { handleError } from '../errors/helper';
 
 @Resolver('Event')
 export class EventResolver {
@@ -21,10 +19,6 @@ export class EventResolver {
     @Args('event')
     event: EventInput,
   ) {
-    try {
-      return await this.eventService.createEvent(event);
-    } catch (e) {
-      handleError(e);
-    }
+    return await this.eventService.createEvent(event);
   }
 }

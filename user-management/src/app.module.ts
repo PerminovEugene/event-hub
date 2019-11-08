@@ -11,12 +11,12 @@ import { AppUserModule } from './app-user/app-user.module';
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
 
-const secret = 'qwee12r11r1r1'; // TODO you know waht to do
-const expiresIn = '60s';
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      context: ({ req }) => ({ req }),
+      context: (req, res) => {
+        return { req, res };
+      },
       debug: false, // TODO add configuration
       playground: true, // TODO add configuration // http://localhost:3000/graphql
       typePaths: ['./**/*.graphql'],

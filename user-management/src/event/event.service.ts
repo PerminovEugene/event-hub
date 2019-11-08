@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Event as EventEntity } from './event.entity';
-import { EventInput, Event } from '../graphql';
+import { EventInput } from '../graphql';
 import { SaveEventError } from '../errors/save-event.error';
 
 @Injectable()
@@ -16,27 +16,31 @@ export class EventService {
     return this.eventRepository.find();
   }
 
+  // CREATE EVENT
+
   public async createEvent(eventDTO: EventInput): Promise<EventEntity> {
+    const event: EventEntity = this.createEventEntity(eventDTO);
+    await event.validate();
+    return await this.saveEventEntity(event);
+  }
+
+  protected createEventEntity(eventDTO: EventInput): EventEntity {
     try {
-      const newEvent: EventEntity = new EventEntity();
-      Object.assign(newEvent, eventDTO);
-      const event: EventEntity = await this.eventRepository.create(newEvent);
-      await this.eventRepository.save(event);
+      const event: EventEntity = new EventEntity();
+      Object.assign(event, eventDTO);
       return event;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  protected async saveEventEntity(
+    eventEntity: EventEntity,
+  ): Promise<EventEntity> {
+    try {
+      return await this.eventRepository.save(eventEntity);
     } catch (e) {
       throw new SaveEventError(e);
     }
   }
-
-  // public async createEvent(data): Promise<any> {
-  //   const result = await this.appUserRepository.insert({
-  //     email,
-  //     password: hashedPassword,
-  //     salt,
-  //     role,
-  //     status,
-  //   });
-  //   // TODO check email unique
-  //   return { email, status, id: result.raw[0].id, role } as any;
-  // }
 }
