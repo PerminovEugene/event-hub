@@ -1,11 +1,12 @@
 import { Args, Mutation, Query, Resolver, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { GqlAuthGuard } from '../auth/gql.guard';
+import { GqlLoginGuard } from '../auth/gql.login.guard';
 import { UseGuards } from '@nestjs/common';
 // import { CurrentUser } from '../auth/user.decorator';
 // import { Request, Response } from 'express';
 import { CurrentUser } from './user.decorator';
 import { SessionData } from '../graphql';
+import { GqlAuthenticatedGuard } from './gql.guard';
 
 // export interface MyContext {
 //   req: any; // Request (any);
@@ -16,7 +17,7 @@ import { SessionData } from '../graphql';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlLoginGuard)
   @Mutation()
   async registration(
     @Args('user')
@@ -30,23 +31,23 @@ export class AuthResolver {
   }
 
   @Query('login')
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlLoginGuard)
   async login(
-    // @Args('LoginInput')
-    // loginInput: any,
-    // @Args('email')
-    // email: string,
-    // @Args('password')
-    // password: string,
+    @Args('email')
+    email: string,
+    @Args('password')
+    password: string,
 
     @Context() ctx: any,
   ): Promise<any> {
     console.error('qweqw1');
-    // const user = {}await this.authService.login({ email, password });
+    const user = await this.authService.login({ email, password });
     // ctx.req.session.userId = 1; //user.id;
     // return user;
+    // debugger;
     debugger;
-    return ctx.user;
+    // ctx.req.req.logIn(user, { session: true });
+    return ctx.req.user;
   }
 
   // @Query(returns => SessionData)
@@ -76,4 +77,10 @@ export class AuthResolver {
   // async logout(@Context() ctx: MyContext) {
   //   return this.userService.logout(ctx);
   // }
+
+  @Query(returns => SessionData)
+  @UseGuards(GqlAuthenticatedGuard)
+  whoAmI(@CurrentUser() user: any) {
+    return user;
+  }
 }

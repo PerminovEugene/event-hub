@@ -18,3 +18,7 @@ input RegistrationInput {
 type Mutation {
   registration(user: RegistrationInput): SessionData
 }
+
+type Query {
+  whoAmI: SessionData
+}

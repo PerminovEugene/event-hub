@@ -15,7 +15,7 @@ import { EventModule } from './event/event.module';
   imports: [
     GraphQLModule.forRoot({
       context: (req, res) => {
-        return { req, res };
+        return req;
       },
       debug: false, // TODO add configuration
       playground: true, // TODO add configuration // http://localhost:3000/graphql

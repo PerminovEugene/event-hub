@@ -4,13 +4,14 @@ import { AppUserModule } from '../app-user/app-user.module';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { AuthResolver } from './auth.resolver';
+import { SessionSerializer } from './session.serializer';
 
 @Module({
   imports: [
     AppUserModule,
     PassportModule.register({ defaultStrategy: 'local', session: true }),
   ],
-  providers: [AuthService, AuthResolver, LocalStrategy],
+  providers: [AuthService, AuthResolver, LocalStrategy, SessionSerializer],
   exports: [AuthService],
 })
 export class AuthModule {}

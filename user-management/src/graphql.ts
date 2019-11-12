@@ -53,6 +53,8 @@ export abstract class IQuery {
 
     abstract login(email: string, password: string): SessionData | Promise<SessionData>;
 
+    abstract whoAmI(): SessionData | Promise<SessionData>;
+
     abstract getEvents(month?: string): Event[] | Promise<Event[]>;
 }
 
