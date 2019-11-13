@@ -14,9 +14,15 @@ async function bootstrap() {
 
   app.use(
     session({
-      secret: 'nest cats',
-      resave: false,
+      // store: new RedisStore({client: redisClient}),
+      secret: 'saeca',
+      resave: true,
+      rolling: true,
       saveUninitialized: false,
+      cookie: {
+        maxAge: 10 * 60 * 1000,
+        httpOnly: false,
+      },
     }),
   );
 

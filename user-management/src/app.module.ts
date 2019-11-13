@@ -3,11 +3,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { AppResolver } from './app.resolver';
 import { join } from 'path';
 import { AppUserModule } from './app-user/app-user.module';
-
-// import { PassportModule } from '@nestjs/passport';
-// import { JwtModule } from '@nestjs/jwt';
-// import { JwtStrategy } from './jwt.strategy';
-// import { LocalStrategy } from './auth/local.strategy';
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
 

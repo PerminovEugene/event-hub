@@ -7,10 +7,7 @@ import { AuthResolver } from './auth.resolver';
 import { SessionSerializer } from './session.serializer';
 
 @Module({
-  imports: [
-    AppUserModule,
-    PassportModule.register({ defaultStrategy: 'local', session: true }),
-  ],
+  imports: [AppUserModule, PassportModule],
   providers: [AuthService, AuthResolver, LocalStrategy, SessionSerializer],
   exports: [AuthService],
 })

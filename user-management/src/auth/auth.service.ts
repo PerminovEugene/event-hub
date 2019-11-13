@@ -9,9 +9,8 @@ import { Status } from '../app-user/app-user.entity';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly appUsersService: AppUserService,
-  ) // private readonly prisma: PrismaService,
-  {}
+    private readonly appUsersService: AppUserService, // private readonly prisma: PrismaService,
+  ) {}
 
   // new
   // async validate({ id }): Promise<any> {
@@ -23,7 +22,6 @@ export class AuthService {
   // }
 
   async validateUser(email: string, password: string): Promise<any> {
-    debugger;
     const user = await this.appUsersService.findByEmail(email);
     if (
       !user ||
@@ -42,7 +40,6 @@ export class AuthService {
   }
 
   public async login(user: any) {
-    debugger;
     return {
       email: user.email,
       status: user.status,
@@ -55,7 +52,6 @@ export class AuthService {
   }
 
   public async registration(input: any) {
-    debugger;
     const user = await this.appUsersService.create(input.email, input.password);
     return {};
   }

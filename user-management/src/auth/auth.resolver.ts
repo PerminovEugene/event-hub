@@ -41,11 +41,10 @@ export class AuthResolver {
     @Context() ctx: any,
   ): Promise<any> {
     console.error('qweqw1');
-    const user = await this.authService.login({ email, password });
+    // const user = await this.authService.login({ email, password });
     // ctx.req.session.userId = 1; //user.id;
     // return user;
     // debugger;
-    debugger;
     // ctx.req.req.logIn(user, { session: true });
     return ctx.req.user;
   }

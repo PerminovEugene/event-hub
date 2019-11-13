@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
 const styledComponentsTransformer = createStyledComponentsTransformer();
-
 const rootPath = path.join(__dirname, '../../../');
 
 module.exports = options => ({
@@ -45,5 +44,8 @@ module.exports = options => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css', '.less', 'json'],
   },
-  plugins: [new webpack.NoEmitOnErrorsPlugin(), new CleanWebpackPlugin()],
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    // , new CleanWebpackPlugin()
+  ],
 });

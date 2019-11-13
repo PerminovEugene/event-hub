@@ -9,7 +9,6 @@ import { AppError } from '../errors/app.error';
 @Catch()
 export class AllExceptionsFilter implements GqlExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
-    debugger;
     if (this.isAppError(exception)) {
       return (exception as AppError).clientError;
     }
