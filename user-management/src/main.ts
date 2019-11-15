@@ -5,10 +5,12 @@ import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 
 import * as passport from 'passport';
+import { corsOptions } from './config/cors';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
 
+  app.enableCors(corsOptions);
   app.use(cookieParser());
   app.useGlobalFilters(new AllExceptionsFilter());
 

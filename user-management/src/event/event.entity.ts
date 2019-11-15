@@ -28,7 +28,6 @@ export class Event extends BaseEntity {
   @Column('text')
   type: Type;
 
-  // TODO wrap decorators with default messages
   @IsDate({
     message: 'Invalid date',
   })

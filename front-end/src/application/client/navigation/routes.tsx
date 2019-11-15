@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PagePath } from './pathes';
 import Root from '../pages/root';
 import NotFound from '../pages/not-found/not-found.component';
+import Registration from '../pages/registration';
 
 type Route = {
   component: React.ComponentType;
@@ -37,6 +38,10 @@ const routes: Routes = {
     {
       component: Root,
       path: PagePath.root,
+    },
+    {
+      component: Registration,
+      path: PagePath.registration,
     },
   ],
   privateRoutes: [],

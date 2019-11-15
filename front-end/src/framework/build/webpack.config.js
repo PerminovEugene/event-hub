@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
 const styledComponentsTransformer = createStyledComponentsTransformer();
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const rootPath = path.join(__dirname, '../../../');
 
 module.exports = options => ({

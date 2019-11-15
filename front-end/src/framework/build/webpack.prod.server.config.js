@@ -19,9 +19,9 @@ module.exports = {
     filename: '[name].js',
     sourceMapFilename: 'build/[name].js.map',
   },
-  mode: 'development',
+  mode: 'production',
   target: 'node',
-  devtool: 'eval-source-map',
+  devtool: 'none',
   resolve: {
     ...config.resolve,
   },

@@ -18,6 +18,11 @@ export class EventInput {
     date?: string;
 }
 
+export class LoginInput {
+    email: string;
+    password: string;
+}
+
 export class RegistrationInput {
     email?: string;
     password?: string;
@@ -43,6 +48,8 @@ export abstract class IMutation {
 
     abstract registration(user?: RegistrationInput): SessionData | Promise<SessionData>;
 
+    abstract login(email: string, password: string): SessionData | Promise<SessionData>;
+
     abstract createEvent(event?: EventInput): Event | Promise<Event>;
 }
 
@@ -50,8 +57,6 @@ export abstract class IQuery {
     abstract getCats(): Cat[] | Promise<Cat[]>;
 
     abstract cat(id: string): Cat | Promise<Cat>;
-
-    abstract login(email: string, password: string): SessionData | Promise<SessionData>;
 
     abstract whoAmI(): SessionData | Promise<SessionData>;
 

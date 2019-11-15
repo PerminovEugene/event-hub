@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppUserModule } from './app-user/app-user.module';
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
+import { corsOptions } from './config/cors';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { EventModule } from './event/event.module';
         outputAs: 'class',
       },
       include: [AppUserModule, AuthModule, EventModule],
+      cors: corsOptions,
     }),
     AppUserModule,
     AuthModule,

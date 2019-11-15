@@ -30,24 +30,39 @@ export class AuthResolver {
     return saved;
   }
 
-  @Query('login')
   @UseGuards(GqlLoginGuard)
+  @Mutation('login')
   async login(
     @Args('email')
-    email: string,
+    email: any,
     @Args('password')
-    password: string,
-
+    password: any,
     @Context() ctx: any,
   ): Promise<any> {
-    console.error('qweqw1');
-    // const user = await this.authService.login({ email, password });
-    // ctx.req.session.userId = 1; //user.id;
-    // return user;
-    // debugger;
-    // ctx.req.req.logIn(user, { session: true });
+    console.log(email, password);
+    // const saved = await this.authService.login(loginInput);
+    // ctx.req.session.userId = saved.id;
     return ctx.req.user;
   }
+
+  // @Query('login')
+  // @UseGuards(GqlLoginGuard)
+  // async login(
+  //   @Args('email')
+  //   email: string,
+  //   @Args('password')
+  //   password: string,
+
+  //   @Context() ctx: any,
+  // ): Promise<any> {
+  //   console.error('qweqw1');
+  //   // const user = await this.authService.login({ email, password });
+  //   // ctx.req.session.userId = 1; //user.id;
+  //   // return user;
+  //   // debugger;
+  //   // ctx.req.req.logIn(user, { session: true });
+  //   return ctx.req.user;
+  // }
 
   // @Query(returns => SessionData)
   // @UseGuards(GqlAuthGuard)

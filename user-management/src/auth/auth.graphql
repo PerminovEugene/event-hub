@@ -5,9 +5,9 @@ type SessionData {
   status: String
 }
 
-type Query {
-  login(email: String!, password: String!): SessionData
-}
+# type Query {
+#   login(email: String!, password: String!): SessionData
+# }
 
 input RegistrationInput {
   email: String
@@ -15,8 +15,17 @@ input RegistrationInput {
   passwordConfirm: String
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   registration(user: RegistrationInput): SessionData
+}
+
+type Mutation {
+  login(email: String!, password: String!): SessionData
 }
 
 type Query {

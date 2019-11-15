@@ -5,6 +5,7 @@ import { Application } from './application';
 import { clientRestoreData } from './client-restore-data';
 import { ClientEnvironmentManager } from '../../framework/configuration/client-environment-manager';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
+import './../../framework/i18n/client';
 
 const manager = new ClientEnvironmentManager();
 manager.loadEnv();
@@ -37,6 +38,6 @@ export function reducer(state: any, action: any) {
 let store = createStore(
   reducer,
   clientRestoreData(),
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
 );
 entryPoint.start(store);
