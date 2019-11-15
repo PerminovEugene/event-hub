@@ -6,6 +6,7 @@ import * as session from 'express-session';
 
 import * as passport from 'passport';
 import { corsOptions } from './config/cors';
+import { configService, EnvField } from './config/environment/service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +18,7 @@ async function bootstrap() {
   app.use(
     session({
       // store: new RedisStore({client: redisClient}),
-      secret: 'saeca',
+      secret: configService.get(EnvField.COOKIE_SECRET),
       resave: true,
       rolling: true,
       saveUninitialized: false,
@@ -31,7 +32,7 @@ async function bootstrap() {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  await app.listen(3000);
+  await app.listen(configService.get(EnvField.PORT));
 }
 bootstrap();
 console.log('WHAT THE');

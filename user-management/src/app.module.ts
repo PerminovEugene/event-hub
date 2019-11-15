@@ -6,6 +6,7 @@ import { AppUserModule } from './app-user/app-user.module';
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
 import { corsOptions } from './config/cors';
+import { ConfigService, configService } from './config/environment/service';
 
 @Module({
   imports: [
@@ -24,9 +25,16 @@ import { corsOptions } from './config/cors';
       cors: corsOptions,
     }),
     AppUserModule,
+
     AuthModule,
     EventModule,
   ],
-  providers: [AppResolver],
+  providers: [
+    AppResolver,
+    {
+      provide: ConfigService,
+      useValue: configService,
+    },
+  ],
 })
 export class AppModule {}
