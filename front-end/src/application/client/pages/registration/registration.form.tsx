@@ -5,6 +5,7 @@ import { Formik, FormikActions, FormikProps, Form, Field, FieldProps } from 'for
 import schema from './validation.schema';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import { withRouter } from 'react-router-dom';
 
 interface MyFormValues {
   email: string;
@@ -32,12 +33,8 @@ const LOGIN = gql`
   }
 `;
 
-export const RegistrationForm = () => {
-  const [login] = useMutation<{ saveForm: FormResult }>(LOGIN, {
-    onCompleted: (data: any) => {
-      debugger;
-    },
-  });
+const RegistrationForm = () => {
+  const [login] = useMutation<{ saveForm: FormResult }>(LOGIN);
   return (
     <Formik
       validationSchema={schema}
@@ -51,9 +48,13 @@ export const RegistrationForm = () => {
           const result = await login({
             variables: { email: values.email, password: values.password },
           });
+          // TODO
+          // save session data to the storage
           debugger;
+          // history.push('/');
           actions.setSubmitting(false);
         } catch (e) {
+          // TODO
           console.warn(e);
         }
       }}
@@ -102,3 +103,5 @@ export const RegistrationForm = () => {
     />
   );
 };
+export default RegistrationForm;
+// export default withRouter(RegistrationForm);

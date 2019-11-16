@@ -7,16 +7,16 @@ import { Normalize } from 'styled-normalize';
 import GlobalStyles from './styles/global';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './styles/theme';
-import { client } from '../../provider/transport';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 export interface ApplicationProps {
   store: any;
+  client: any;
   url?: string;
   context?: any;
 }
 
-export const Application = ({ store, url, context }: ApplicationProps) => (
+export const Application = ({ store, url, context, client }: ApplicationProps) => (
   <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
       <Provider store={store}>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { RegistrationForm } from './registration/registration.form';
+import RegistrationForm from './registration/registration.form';
 import { ThemeLink } from './../components/link/link.component';
 import { withTranslation, WithTranslation } from 'react-i18next';
 

@@ -1,12 +1,5 @@
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
-import { createHttpLink } from 'apollo-link-http';
+import ApolloClient from 'apollo-boost';
 
-export const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
-  // link: link,
-  cache: new InMemoryCache(),
-  // headers: {
-  // 'x-custom-header': 'test'
-  //  },
-  credentials: 'include',
-});
+export const getTransport = (options: any) => {
+  return new ApolloClient(options);
+};

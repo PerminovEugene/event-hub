@@ -6,6 +6,8 @@ import { clientRestoreData } from './client-restore-data';
 import { ClientEnvironmentManager } from '../../framework/configuration/client-environment-manager';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import './../../framework/i18n/client';
+import { getTransport } from '../../provider/transport';
+import { options } from '../../provider/transport.client-options';
 
 const manager = new ClientEnvironmentManager();
 manager.loadEnv();
@@ -14,9 +16,9 @@ saveEnvManager(manager);
 export class EntryPoint {
   public start = (store: any) => {
     const rootElement = document.getElementById('root');
-
+    const client = getTransport(options);
     if (rootElement) {
-      ReactDOM.hydrate(<Application store={store} />, rootElement);
+      ReactDOM.hydrate(<Application store={store} client={client} />, rootElement);
     }
   };
 }

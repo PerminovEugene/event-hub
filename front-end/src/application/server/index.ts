@@ -14,12 +14,12 @@ const start = async () => {
 
   app.use('/assets', express.static('assets'));
 
-  app.use(
-    handle(i18next, {
-      ignoreRoutes: ['/assets'], // or function(req, res, options, i18next) { /* return true to ignore */ }
-      removeLngFromUrl: false,
-    }),
-  );
+  // app.use(
+  //   handle(i18next, {
+  //     ignoreRoutes: ['/assets'], // or function(req, res, options, i18next) { /* return true to ignore */ }
+  //     removeLngFromUrl: false,
+  //   }),
+  // );
 
   app.get('*', (req, res, next) => {
     const context = {};
