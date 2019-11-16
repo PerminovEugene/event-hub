@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { PagePath } from './pathes';
-import Root from '../pages/root';
-import NotFound from '../pages/not-found/not-found.component';
-import Registration from '../pages/registration';
+import Calendar from '../features/domain/calendar/calendar.page';
+import NotFound from '../features/system/not-found/not-found.component';
+import Registration from '../features/auth/registration/registration.page';
+import Login from '../features/auth/login/login.page';
 
 type Route = {
   component: React.ComponentType;
@@ -36,12 +37,16 @@ type Routes = {
 const routes: Routes = {
   publicRoutes: [
     {
-      component: Root,
+      component: Calendar,
       path: PagePath.root,
     },
     {
       component: Registration,
       path: PagePath.registration,
+    },
+    {
+      component: Login,
+      path: PagePath.login,
     },
   ],
   privateRoutes: [],

@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { ThemeTextField } from '../../components/text-field/text-field.component';
-import { ThemeButton } from '../../components/button/button.component';
-import { Formik, FormikActions, FormikProps, Form, Field, FieldProps } from 'formik';
+import { ThemeTextField } from '../../../components/text-field/text-field.component';
+import { ThemeButton } from '../../../components/button/button.component';
+import { Formik, FormikActions, FormikProps, Form } from 'formik';
 import schema from './validation.schema';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
 
+// TODO hell with typings
 interface MyFormValues {
   email: string;
   password: string;
-  passwordRepeat: string;
 }
 
 interface FormResult {
@@ -33,7 +34,9 @@ const LOGIN = gql`
   }
 `;
 
-const RegistrationForm = () => {
+interface LoginFormProps extends Partial<RouteComponentProps> {}
+
+const LoginForm = ({ history }: LoginFormProps) => {
   const [login] = useMutation<{ saveForm: FormResult }>(LOGIN);
   return (
     <Formik
@@ -41,7 +44,6 @@ const RegistrationForm = () => {
       initialValues={{
         email: undefined,
         password: undefined,
-        passwordRepeat: undefined,
       }}
       onSubmit={async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
         try {
@@ -50,8 +52,7 @@ const RegistrationForm = () => {
           });
           // TODO
           // save session data to the storage
-          debugger;
-          // history.push('/');
+          history.push('/');
           actions.setSubmitting(false);
         } catch (e) {
           // TODO
@@ -82,20 +83,9 @@ const RegistrationForm = () => {
               touched={props.touched.password}
               errorText={props.errors.password}
             />
-            {/* <ThemeTextField
-                label="Password repeat"
-                type="password"
-                name="passwordRepeat"
-                fullWidth
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.passwordRepeat}
-                touched={props.touched.passwordRepeat}
-                errorText={props.errors.passwordRepeat}
-              /> */}
             {/* {props.errors.email && <div id="feedback">{props.errors.email}</div>} */}
             <ThemeButton variant="contained" color="secondary" type="submit" disabled={!props.isValid} fullWidth>
-              sign up
+              sign in
             </ThemeButton>
           </Form>
         );
@@ -103,5 +93,4 @@ const RegistrationForm = () => {
     />
   );
 };
-export default RegistrationForm;
-// export default withRouter(RegistrationForm);
+export default withRouter(LoginForm);

@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import RegistrationForm from './registration/registration.form';
-import { ThemeLink } from './../components/link/link.component';
+import RegistrationForm from './registration.form';
+import { ThemeLink } from './../../../components/link/link.component';
 import { withTranslation, WithTranslation } from 'react-i18next';
+import { PagePath } from '../../../navigation/pathes';
 
 class Registration extends React.Component<WithTranslation, {}> {
   render() {
@@ -19,10 +20,7 @@ class Registration extends React.Component<WithTranslation, {}> {
             </Typography>
             <RegistrationForm />
             <Typography component="p" color="primary" align="center">
-              <ThemeLink to="/login">Already have an account? Sign in</ThemeLink>
-            </Typography>
-            <Typography component="p" color="primary" align="center">
-              <ThemeLink to="/restore-password">Forgot password?</ThemeLink>
+              <ThemeLink to={PagePath.login}>Already have an account? Sign in</ThemeLink>
             </Typography>
           </FormBox>
         </Paper>
