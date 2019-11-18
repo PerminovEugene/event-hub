@@ -48,5 +48,5 @@ export class ConfigService {
   }
 }
 export const configService = new ConfigService(
-  resolve(__dirname, `../../../../env/.env`),
+  resolve(__dirname, `../../../env/.env`),
 );

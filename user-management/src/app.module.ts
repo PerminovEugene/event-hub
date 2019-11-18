@@ -1,31 +1,16 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppResolver } from './app.resolver';
-import { join } from 'path';
 import { AppUserModule } from './app-user/app-user.module';
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
-import { corsOptions } from './config/cors';
 import { ConfigService, configService } from './config/environment/service';
+import { graphqlConfig } from './config/app/graphql.config';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot({
-      context: (req, res) => {
-        return req;
-      },
-      debug: false, // TODO add configuration
-      playground: true, // TODO add configuration // http://localhost:3000/graphql
-      typePaths: ['./**/*.graphql'],
-      definitions: {
-        path: join(process.cwd(), 'src/graphql.ts'),
-        outputAs: 'class',
-      },
-      include: [AppUserModule, AuthModule, EventModule],
-      cors: corsOptions,
-    }),
+    GraphQLModule.forRoot(graphqlConfig),
     AppUserModule,
-
     AuthModule,
     EventModule,
   ],

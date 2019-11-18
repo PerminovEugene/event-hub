@@ -1,24 +1,21 @@
 import * as React from 'react';
-import { ThemeTextField } from '../../../components/text-field/text-field.component';
-import { ThemeButton } from '../../../components/button/button.component';
-import { Formik, FormikActions, FormikProps, Form } from 'formik';
+import { FormikActions } from 'formik';
 import schema from './validation.schema';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+import { FormWrapper, FormActions } from './form';
+import { ElementView } from './form.elements';
 
-// TODO hell with typings
-interface MyFormValues {
+interface User {
   email: string;
-  password: string;
-}
-
-interface FormResult {
+  role: string;
   id: number;
+  status: string;
 }
 
-interface Form {
+interface LoginFormFields {
   email: string;
   password: string;
 }
@@ -34,18 +31,26 @@ const LOGIN = gql`
   }
 `;
 
+const config = [
+  { type: 'text', label: 'Email', view: ElementView.textInput, name: 'email' },
+  { type: 'password', label: 'Password', view: ElementView.textInput, name: 'password' },
+];
+
+const initialValues: LoginFormFields = {
+  email: undefined,
+  password: undefined,
+};
 interface LoginFormProps extends Partial<RouteComponentProps> {}
 
 const LoginForm = ({ history }: LoginFormProps) => {
-  const [login] = useMutation<{ saveForm: FormResult }>(LOGIN);
+  const [login] = useMutation<{ user: User }>(LOGIN);
   return (
-    <Formik
+    <FormWrapper
       validationSchema={schema}
-      initialValues={{
-        email: undefined,
-        password: undefined,
-      }}
-      onSubmit={async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
+      initialValues={initialValues}
+      elements={config}
+      submitText="sign in" // TODO i18n
+      onSubmit={async (values: LoginFormFields, actions: FormActions<LoginFormFields>) => {
         try {
           const result = await login({
             variables: { email: values.email, password: values.password },
@@ -59,38 +64,8 @@ const LoginForm = ({ history }: LoginFormProps) => {
           console.warn(e);
         }
       }}
-      render={(props: FormikProps<MyFormValues>) => {
-        return (
-          <Form>
-            <ThemeTextField
-              label="Email"
-              name="email"
-              fullWidth
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.email}
-              touched={props.touched.email}
-              errorText={props.errors.email}
-            />
-            <ThemeTextField
-              label="Password"
-              type="password"
-              name="password"
-              fullWidth
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.password}
-              touched={props.touched.password}
-              errorText={props.errors.password}
-            />
-            {/* {props.errors.email && <div id="feedback">{props.errors.email}</div>} */}
-            <ThemeButton variant="contained" color="secondary" type="submit" disabled={!props.isValid} fullWidth>
-              sign in
-            </ThemeButton>
-          </Form>
-        );
-      }}
     />
   );
 };
+
 export default withRouter(LoginForm);
