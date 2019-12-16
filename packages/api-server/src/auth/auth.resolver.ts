@@ -4,7 +4,7 @@ import { GqlLoginGuard } from '../auth/gql.login.guard';
 import { UseGuards } from '@nestjs/common';
 // import { CurrentUser } from '../auth/user.decorator';
 import { CurrentUser } from './user.decorator';
-import { SessionData } from '@calendar/shared/dist';
+import { SessionData } from '@calendar/shared';
 import { GqlAuthenticatedGuard } from './gql.guard';
 
 @Resolver('Auth')

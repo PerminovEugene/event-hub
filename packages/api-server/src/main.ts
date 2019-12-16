@@ -8,11 +8,8 @@ import * as passport from 'passport';
 import { corsOptions } from './config/cors';
 import { configService, EnvField } from './config/environment/service';
 
-import { test } from '@calendar/shared/dist';
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  console.warn(test());
   app.enableCors(corsOptions);
   app.use(cookieParser());
   app.useGlobalFilters(new AllExceptionsFilter());

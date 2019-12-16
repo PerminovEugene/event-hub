@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { EventService } from './event.service';
-import { EventInput } from '@calendar/shared/dist';
+import { EventInput } from '@calendar/shared';
 
 @Resolver('Event')
 export class EventResolver {

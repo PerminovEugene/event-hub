@@ -4,22 +4,19 @@
   "description": "Shared between services data",
   "author": "Eugene Perminov",
   "license": "MIT",
+  "main": "dist/index",
+  "types": "dist/index",
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
-    "compile": "tsc -p tsconfig.build.json"
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist"
   ],
-  "build": true,
   "devDependencies": {
+    "typescript": "^3.7.3",
     "@types/node": "^12.12.9"
-  },
-  "sideEffects": false,
-  "private": true,
-  "dependencies": {
-    "ts": "^0.2.2",
-    "typescript": "^3.7.3"
   }
 }
