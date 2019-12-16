@@ -33,7 +33,6 @@ export class AuthResolver {
     password: any,
     @Context() ctx: any,
   ): Promise<any> {
-    console.log(email, password);
     // const saved = await this.authService.login(loginInput);
     // ctx.req.session.userId = saved.id;
     return ctx.req.user;

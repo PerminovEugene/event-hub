@@ -47,7 +47,6 @@ export class ConfigService {
     return validatedEnvConfig;
   }
 }
-console.log(process.cwd());
 
 export const configService = new ConfigService(
   resolve(process.cwd(), `env/.env`),

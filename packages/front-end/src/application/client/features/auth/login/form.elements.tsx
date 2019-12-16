@@ -19,7 +19,6 @@ interface TextInputProps {
 }
 
 export const TextInput = ({ element, handleChange, handleBlur, values, touched, errors }: any) => {
-  console.log('re render');
   return (
     <ThemeTextField
       label={element.label}

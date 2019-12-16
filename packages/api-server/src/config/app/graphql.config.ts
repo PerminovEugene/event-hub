@@ -9,14 +9,18 @@ export const graphqlConfig: GqlModuleOptions = {
   context: (req, res) => {
     return req;
   },
-  debug: false, // TODO add configuration
+  debug: true, // TODO add configuration
   playground: true, // TODO add configuration // http://localhost:3000/graphql
-  typePaths: [`${__dirname}/**/*.graphql`],
-  definitions: {
-    // dist/src/../../shared
-    path: join(__dirname, '../../../../shared/transport/graphql.ts'),
-    outputAs: 'class',
-  },
+  // typePaths: [`${__dirname}/src/**/*.graphql`],
+  typePaths: ['./**/*.graphql'],
+
+
+  // definitions: {
+  //   // dist/src/../../shared
+  //   // path: join(__dirname, '../../graphql.ts'),
+  //   path: join(process.cwd(), 'src/graphql.ts'),
+  //   outputAs: 'class',
+  // },
   include: [AppUserModule, AuthModule, EventModule],
   cors: corsOptions,
 };

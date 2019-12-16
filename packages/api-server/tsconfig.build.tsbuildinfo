@@ -133,10 +133,6 @@
         "version": "873c09f1c309389742d98b7b67419a8e0a5fa6f10ce59fd5149ecd31a2818594",
         "signature": "873c09f1c309389742d98b7b67419a8e0a5fa6f10ce59fd5149ecd31a2818594"
       },
-      "./src/app.controller.spec.ts": {
-        "version": "c1aca75f0821b607a6c658be488162a4ed1c0217f892ad8df767ea9423fa523e",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      },
       "../../node_modules/reflect-metadata/index.d.ts": {
         "version": "8d6d51a5118d000ed3bfe6e1dd1335bebfff3fef23cd2af2f84a24d30f90cc90",
         "signature": "8d6d51a5118d000ed3bfe6e1dd1335bebfff3fef23cd2af2f84a24d30f90cc90"
@@ -3530,7 +3526,7 @@
         "signature": "4cf034136b3e5482c913ce9c19c8cdfc8141e3414d24dd8d8a8a5521b0b79cdc"
       },
       "./src/auth/auth.resolver.ts": {
-        "version": "b1e1e2db1dc96a9b7c2368a0180b80a42c0f0036502b206f2709fb54f4f9ec66",
+        "version": "44fc2046d6847359ff2ac6ac4c613a86fa6ea6f50c2b965ef5da30ac15e6934e",
         "signature": "4aea68b9563022af2425e9f05fe105aaf4a2c2e32b42ed99805b6708e431ff65"
       },
       "./src/auth/session.serializer.ts": {
@@ -3658,15 +3654,15 @@
         "signature": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528"
       },
       "./src/config/environment/service.ts": {
-        "version": "4f47df43d86bb2a658d2c92d1121e00b577009de96d12f8527c5c404153ffd2f",
-        "signature": "579b0a8c9dd509b20b66b75a183542de088ff3754d72c64ddd5db2245b2d5273"
+        "version": "9292bfd050f3c82099694266fbe891bf4ec7ae414cda5d669030a3ed27808e96",
+        "signature": "651e562f4ee1db3ab2a5bd0c6e7ef4b25c73ffb4e66b5dd9fe0280ea639e3784"
       },
       "./src/config/cors.ts": {
         "version": "0ec844d354ab20a6c2a535f7bb67aeb6e58c14837de3522008799ac491ab3545",
         "signature": "90d2ebb058863616ebfd800f511a7ef9de5768b280e4e0d6a538decc6af175b5"
       },
       "./src/config/app/graphql.config.ts": {
-        "version": "2eac10002ac9ffe5a0bc26c0ac87e03129dc87eafb08e0d04f34c7ee6a86c3c2",
+        "version": "558f65b577a5afe46c9ec5c9e352044cd7fd97304c3764e710a5baed5b1e80e3",
         "signature": "5d944d91f7402124b93109d02f6341a0a47a30358e8779292d9e4510e468e189"
       },
       "./src/app.module.ts": {
@@ -3686,15 +3682,15 @@
         "signature": "903153d18b0365f1b99d9698f1feda333a65864fac218542f128536b9081c7fe"
       },
       "./src/main.ts": {
-        "version": "766e4d7354a7a727880537db65d8cd5f0dc33918d04d2ce8cf6b240232e97133",
+        "version": "72d9f7f5497ac643f979a3b39ce14a26163cbc6e2b2c68ad7569c8cf949c4355",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
       },
       "./src/auth/jwt.strategy.ts": {
         "version": "8b568b5dbe11b0ed9659193c6cb6746b026db6967478ccf9bc521b3626a6842e",
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
-      "./src/scripts/generate-typings.ts": {
-        "version": "ab8e42537b4c14a5ece69ed272b564443f784c5144ffebad46c410a3ab7daffb",
+      "./src/scripts/generate-graphql-definitions.ts": {
+        "version": "b4c630faa3fa43104c045f66be0330fcff4f5de2219299e9a350071bbf744ba5",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
       }
     },
@@ -3702,15 +3698,19 @@
       "module": 1,
       "target": 4,
       "sourceMap": true,
-      "rootDir": "./src",
       "baseUrl": "./",
+      "paths": {
+        "@calendar/*": [
+          "packages/*/src"
+        ]
+      },
+      "rootDir": "./src",
       "outDir": "./dist",
       "types": [
         "node"
       ],
       "declaration": true,
       "experimentalDecorators": true,
-      "removeComments": true,
       "emitDecoratorMetadata": true,
       "incremental": true,
       "configFilePath": "./tsconfig.build.json"
@@ -3909,12 +3909,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../node_modules/typescript/lib/lib.es2017.full.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/app.controller.spec.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -11587,7 +11581,7 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./src/scripts/generate-typings.ts": [
+      "./src/scripts/generate-graphql-definitions.ts": [
         "../../node_modules/@nestjs/graphql/index.d.ts",
         "./node_modules/@types/node/path.d.ts",
         "./node_modules/@types/node/fs.d.ts",

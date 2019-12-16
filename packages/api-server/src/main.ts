@@ -33,4 +33,5 @@ async function bootstrap() {
 
   await app.listen(configService.get(EnvField.PORT));
 }
-bootstrap();
+setTimeout(bootstrap, 100)
+// bootstrap();
