@@ -1,5 +1,9 @@
-front-end/node_modules/
-front-end/config/client.env
-front-end/config/server.env
-front-end/assets
-front-end/builded-server
+packages/front-end/config/client.env
+packages/front-end/config/server.env
+packages/front-end/assets
+packages/front-end/builded-server
+
+node_modules
+
+packages/*/node_modules
+packages/*/dist

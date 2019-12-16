@@ -1,0 +1,25 @@
+{
+  "name": "@calendar/shared",
+  "version": "0.0.1",
+  "description": "Shared between services data",
+  "author": "Eugene Perminov",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "build": true,
+  "devDependencies": {
+    "@types/node": "^12.12.9"
+  },
+  "sideEffects": false,
+  "private": true,
+  "dependencies": {
+    "ts": "^0.2.2",
+    "typescript": "^3.7.3"
+  }
+}

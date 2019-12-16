@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "baseUrl": "./",
+    "outDir": "dist",
+    "types": ["node"],
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "ES5"
+  },
+  "include": ["./src"],
+  "references": [{ "path": "../shared" }]
+}
