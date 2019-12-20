@@ -27,6 +27,7 @@ export class ServerEnvironmentManager extends EnvironmentManager {
         nodeEnv: envSource.parsed.NODE_ENV as NODE_ENV,
       };
 
+      // TODO -_- you know what to do
       setTimeout(() => {
         resolve();
       }, 1000);

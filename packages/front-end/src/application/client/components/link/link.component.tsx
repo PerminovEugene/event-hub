@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link, LinkProps } from 'react-router-dom';
+import { Link, LinkProps, withRouter } from 'react-router-dom';
 import { palette } from './../../styles/theme/colors';
 
 const StyledLink: React.ComponentType<any> = styled(Link)`

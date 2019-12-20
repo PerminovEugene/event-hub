@@ -1,45 +1,65 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Application } from './application';
-import { clientRestoreData } from './client-restore-data';
+// import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import Application from './application';
+// import { clientRestoreData } from './client-restore-data';
 import { ClientEnvironmentManager } from '../../framework/configuration/client-environment-manager';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
-import './../../framework/i18n/client';
 import { getTransport } from '../../provider/transport';
 import { options } from '../../provider/transport.client-options';
+import { ClientRouter } from './navigation/client-router';
 
 const manager = new ClientEnvironmentManager();
 manager.loadEnv();
 saveEnvManager(manager);
 
 export class EntryPoint {
-  public start = (store: any) => {
+  public start = () => {
     const rootElement = document.getElementById('root');
     const client = getTransport(options);
+    const store = {};
+    // const store = this.initStore(client);
     if (rootElement) {
-      ReactDOM.hydrate(<Application store={store} client={client} />, rootElement);
+      ReactDOM.hydrate(
+        <Application store={store} client={client}>
+          <ClientRouter />
+        </Application>,
+        rootElement,
+      );
     }
   };
 }
 
+//   public initStore = (client: any) => (
+//     // let store = createStore(
+//       // reducer,
+//       // (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
+//     // );
+//     createStore(
+//     combineReducers({
+//       reducer: reducer,
+//       apollo: client.reducer(),
+//     }),
+//     clientRestoreData(),
+//     compose(
+//         applyMiddleware(client.middleware()),
+//         (typeof (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined') ? (window as any).__REDUX_DEVTOOLS_EXTENSION__() : (f: any) => f,
+//     ))
+//   )
+// }
+
 const entryPoint = new EntryPoint();
 
-export function reducer(state: any, action: any) {
-  if (!action) {
-    return state;
-  }
+// export function reducer(state: any, action: any) {
+//   if (!action) {
+//     return state;
+//   }
 
-  if (action.type === 'UPDATE_STORE') {
-    return action.payload;
-  }
+//   if (action.type === 'UPDATE_STORE') {
+//     return action.payload;
+//   }
 
-  return state;
-}
+//   return state;
+// }
 
-let store = createStore(
-  reducer,
-  clientRestoreData(),
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
-);
-entryPoint.start(store);
+entryPoint.start();

@@ -1,10 +1,14 @@
-import { InMemoryCache } from 'apollo-boost';
+import { HttpLink, createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 import fetch from 'node-fetch';
 
+const link = createHttpLink({ uri: 'http://localhost:3000/graphql', fetch: fetch as any, credentials: 'include', });
+
+
 export const options = {
-  uri: 'http://localhost:3000/graphql',
-  credentials: 'include',
+  link: link,
+  
   ssrMode: true,
-  fetch: fetch,
   cache: new InMemoryCache(),
 };

@@ -8,6 +8,7 @@ import Login from '../features/auth/login/login.page';
 type Route = {
   component: React.ComponentType;
   path: PagePath;
+  exact?: true;
 };
 
 enum UserRole { //TODO mock, later should be in core
@@ -39,6 +40,7 @@ const routes: Routes = {
     {
       component: Calendar,
       path: PagePath.root,
+      exact: true,
     },
     {
       component: Registration,

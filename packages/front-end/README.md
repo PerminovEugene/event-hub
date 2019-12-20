@@ -1,5 +1,11 @@
 # Front-end part of project
 
+### Development setup
+
+1. create ```server.env``` and ```client.env``` in ```/config``` dirrectory
+2. fill them using ```example.env``` as example
+3.
+
 ## TODO list
 
 current: private routes

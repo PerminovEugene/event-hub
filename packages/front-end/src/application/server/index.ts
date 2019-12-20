@@ -3,8 +3,9 @@ import { buildTemplate } from './page-template';
 import { renderPageContent, Content } from './page-content';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import { ServerEnvironmentManager } from '../../framework/configuration/server-environment-manager';
-import { createStore } from 'redux';
-import { handle } from 'i18next-express-middleware';
+// import { createStore } from 'redux';
+import { options } from '../../provider/transport.server-options';
+import { getTransport } from '../../provider/transport';
 
 const start = async () => {
   const manager = new ServerEnvironmentManager();
@@ -13,24 +14,24 @@ const start = async () => {
   const app = express();
 
   app.use('/assets', express.static('assets'));
-
-  // app.use(
-  //   handle(i18next, {
-  //     ignoreRoutes: ['/assets'], // or function(req, res, options, i18next) { /* return true to ignore */ }
-  //     removeLngFromUrl: false,
-  //   }),
-  // );
+  app.use('/assets/images/*', (req, res, next) => {
+    res.send(404);
+    res.end();
+  });
 
   app.get('*', (req, res, next) => {
     const context = {};
     const data = { foo: 'bar' }; //TODO
-    const store = createStore((state: any) => state, data);
-    const content: Content = renderPageContent(req.url, context, store);
+    // const store = createStore((state: any) => state, data);
+
+    const store = {}
+    const client = getTransport(options);
+    const content: Content = renderPageContent(req.url, context, store, client);
 
     const jsFilePath = '/assets/' + 'bundle.js'; // TODO
 
-    const storeData = JSON.stringify(data);
-    const page = buildTemplate({ title: 'Hey', jsFilePath, storeData, ...content });
+    // const storeData = JSON.stringify(data);
+    const page = buildTemplate({ title: 'Hey', jsFilePath, client, ...content });
 
     res.set('content-type', 'text/html');
     res.send(page);

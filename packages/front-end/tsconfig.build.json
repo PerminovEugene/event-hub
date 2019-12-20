@@ -12,7 +12,7 @@
         "emitDecoratorMetadata": true,
         "target": "es2017",
         "sourceMap": true,
-        "incremental": true
+        "incremental": true,
     },
     "include": ["./src/**/*"],
     "exclude": [

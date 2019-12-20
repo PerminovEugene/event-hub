@@ -17,15 +17,14 @@ module.exports = {
     path: path.join(rootPath, 'builded-server'),
     publicPath: '/builded-server/',
     filename: '[name].js',
-    sourceMapFilename: 'build/[name].js.map',
+    sourceMapFilename: '[name].js.map',
   },
   mode: 'development',
   target: 'node',
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   resolve: {
     ...config.resolve,
   },
-  devtool: config.devtool,
   module: {
     ...config.module,
   },

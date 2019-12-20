@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { Provider } from 'react-redux';
-import { getEnvManager } from '../../framework/configuration/environment-manger-keeper';
-import { ServerRouter } from './navigation/router';
-import { ClientRouter } from './navigation/router';
+import { ThemeProvider } from '@material-ui/styles';
 import { Normalize } from 'styled-normalize';
 import GlobalStyles from './styles/global';
-import { ThemeProvider } from '@material-ui/styles';
 import theme from './styles/theme';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-common';
+import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
 
 export interface ApplicationProps {
   store: any;
@@ -16,15 +13,19 @@ export interface ApplicationProps {
   context?: any;
 }
 
-export const Application = ({ store, url, context, client }: ApplicationProps) => (
-  <ThemeProvider theme={theme}>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <Normalize />
-        <GlobalStyles />
-        {getEnvManager().isServerSide() && <ServerRouter url={url} context={context} />}
-        {getEnvManager().isClientSide() && <ClientRouter />}
-      </Provider>
-    </ApolloProvider>
-  </ThemeProvider>
-);
+export default class Application extends React.Component<ApplicationProps, {}> {
+  render() {
+    const { client, children } = this.props;
+    return (
+      <ApolloProvider client={client}>
+        <ApolloHooksProvider client={client}>
+          <ThemeProvider theme={theme}>
+            <Normalize />
+            <GlobalStyles />
+            {children}
+          </ThemeProvider>
+        </ApolloHooksProvider>
+      </ApolloProvider>
+    );
+  }
+}

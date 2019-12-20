@@ -57,6 +57,7 @@ const LoginForm = ({ history }: LoginFormProps) => {
           });
           // TODO
           // save session data to the storage
+          console.log('redirect');
           history.push('/');
           actions.setSubmitting(false);
         } catch (e) {
