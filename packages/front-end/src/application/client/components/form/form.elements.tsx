@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeTextField } from '../../../components/text-field/text-field.component';
+import { ThemeTextField } from '../text-field/text-field.component';
 import { FormikProps } from 'formik';
 
 export enum ElementView {

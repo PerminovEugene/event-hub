@@ -2,7 +2,7 @@ import { GqlExecutionContext, GraphQLExecutionContext } from '@nestjs/graphql';
 import { ExecutionContext, Injectable, CanActivate } from '@nestjs/common';
 
 @Injectable()
-export class GqlAuthenticatedGuard implements CanActivate {
+export class GqlAuthenticationGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const ctx: GraphQLExecutionContext = GqlExecutionContext.create(context);
     const request = this.getRequest(ctx);

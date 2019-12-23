@@ -3,25 +3,13 @@ import { AppUserService } from '../app-user/app-user.service';
 import * as bcrypt from 'bcrypt';
 import { Status } from '../app-user/app-user.entity';
 
-// import { PrismaService } from '../prisma/prisma.service';
-// import { User } from '../../generated/prisma-client';
-
 @Injectable()
 export class AuthService {
   constructor(
     private readonly appUsersService: AppUserService, // private readonly prisma: PrismaService,
   ) {}
 
-  // new
-  // async validate({ id }): Promise<any> {
-  //   // const user = await this.prisma.client.user({ id });
-  //   if (!user) {
-  //     throw Error('Authenticate validation error');
-  //   }
-  //   return user;
-  // }
-
-  async validateUser(email: string, password: string): Promise<any> {
+  public async validateUser(email: string, password: string): Promise<any> {
     const user = await this.appUsersService.findByEmail(email);
     if (
       !user ||

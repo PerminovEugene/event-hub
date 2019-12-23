@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { ThemeButton } from '../../../components/button/button.component';
+import { ThemeButton } from '../button/button.component';
 import { Formik, FormikActions, FormikProps, Form } from 'formik';
 import { ElementView, FormElement, TextInput } from './form.elements';
 
+// type FormFields = { [fieldName: string]: string };
+type FormFields = any;
+
 export interface FormProps {
   validationSchema: any;
-  initialValues: any;
+  initialValues: FormFields;
   elements: FormElement[];
   submitText: string;
-  onSubmit: (values: any, formikActions: FormikActions<any>) => Promise<void>;
+  onSubmit: (values: FormFields, formikActions: FormikActions<FormFields>) => Promise<void>;
 }
 
 export const FormWrapper = ({ validationSchema, initialValues, onSubmit, elements, submitText }: FormProps) => {
