@@ -9,13 +9,14 @@ import { ElementView } from './../../../components/form/form.elements';
 import { LoginInput, SessionData } from '@calendar/shared';
 
 const LOGIN = gql`
-  mutation login($loginInput: LoginInput!) {
-    login(loginInput: $loginInput) {
-      email
-      role
-      id
-      status
-    }
+  mutation login_success {
+    isLoggedIn: true
+  }
+`;
+
+const SET_LOGIN_STATUS = gql`
+  mutation setLoginStatus($Status: Boolean!) {
+    isLoggedIn @client
   }
 `;
 
@@ -44,8 +45,7 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
               loginInput: { email: values.email, password: values.password },
             },
           });
-          // TODO
-          // save session data to the storage
+
           history.push('/');
           actions.setSubmitting(false);
         } catch (e) {

@@ -7,7 +7,6 @@ import { ApolloProvider } from '@apollo/react-common';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
 
 export interface ApplicationProps {
-  store: any;
   client: any;
   url?: string;
   context?: any;

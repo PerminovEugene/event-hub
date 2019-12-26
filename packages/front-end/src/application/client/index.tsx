@@ -1,12 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import Application from './application';
-// import { clientRestoreData } from './client-restore-data';
 import { ClientEnvironmentManager } from '../../framework/configuration/client-environment-manager';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import { getTransport } from '../../provider/transport';
-import { options } from '../../provider/transport.client-options';
+import { getOptions } from '../../provider/transport.client-options';
 import { ClientRouter } from './navigation/client-router';
 
 const manager = new ClientEnvironmentManager();
@@ -16,12 +14,10 @@ saveEnvManager(manager);
 export class EntryPoint {
   public start = () => {
     const rootElement = document.getElementById('root');
-    const client = getTransport(options);
-    const store = {};
-    // const store = this.initStore(client);
+    const client = getTransport(getOptions());
     if (rootElement) {
       ReactDOM.hydrate(
-        <Application store={store} client={client}>
+        <Application client={client}>
           <ClientRouter />
         </Application>,
         rootElement,

@@ -19,20 +19,8 @@ input LoginInput {
 type Mutation {
   registration(registrationInput: RegistrationInput): SessionData
   login(loginInput: LoginInput): SessionData
-
-  # login($loginInput: LoginInput) {
-  #   login(loginInput: $loginInput): SessionData
-  # }
+  logout: Boolean
 }
-
-# type Mutation login($loginInput: LoginInput) {
-#   hero(loginInput: $loginInput) {
-#     name
-#     friends {
-#       name
-#     }
-#   }
-# }
 
 type Query {
   whoAmI: SessionData

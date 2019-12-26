@@ -3,10 +3,10 @@ export type PageTemplateParams = {
   html: string;
   jsFilePath: string;
   css: any; //string;
-  client: any;
+  initialState: any;
 };
 
-export const buildTemplate = ({ title, html, jsFilePath, css, client }: PageTemplateParams) =>
+export const buildTemplate = ({ title, html, jsFilePath, css, initialState }: PageTemplateParams) =>
   `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -25,13 +25,14 @@ export const buildTemplate = ({ title, html, jsFilePath, css, client }: PageTemp
     </head>
     <body>
       <div id="root">${html}</div>
-
-      <script  type="text/javascript" src="${jsFilePath}"></script>
       <script>
-      window.__APOLLO_STATE__=${JSON.stringify(client.extract())};
-    </script>
+        window.__APOLLO_STATE__=${JSON.stringify(initialState)};
+      </script>
+      <script  type="text/javascript" src="${jsFilePath}"></script>
+      
     </body>
     
   </html>
   `;
-// <script type="application/json" id="data">${storeData.replace(/</g, '&lt;')}</script>
+
+// export const buildHtml = () => {}

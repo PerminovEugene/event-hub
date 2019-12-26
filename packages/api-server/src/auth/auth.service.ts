@@ -11,11 +11,7 @@ export class AuthService {
 
   public async validateUser(email: string, password: string): Promise<any> {
     const user = await this.appUsersService.findByEmail(email);
-    if (
-      !user ||
-      !this.passwordIsCorrect(user.password, user.salt, password) ||
-      !this.userStatusAllowToLogin(user.status)
-    ) {
+    if (!(await this.isUserCanLogin(user, password))) {
       return null;
     }
 
@@ -34,9 +30,6 @@ export class AuthService {
       role: user.role,
       id: user.id,
     };
-    // return {
-    //   access_token: this.jwtService.sign(payload),
-    // };
   }
 
   public async registration(input: any) {
@@ -46,7 +39,16 @@ export class AuthService {
 
   // UTILS
 
-  private async passwordIsCorrect(
+  // TODO any
+  private async isUserCanLogin(user: any, password: string) {
+    return (
+      user &&
+      (await this.isPasswordCorrect(user.password, user.salt, password)) &&
+      this.isUserStatusAllowedLogin(user.status)
+    );
+  }
+
+  private async isPasswordCorrect(
     userPassword: string,
     userSalt: string,
     password: string,
@@ -56,7 +58,7 @@ export class AuthService {
   }
 
   // TODO rename
-  private userStatusAllowToLogin(status: Status) {
+  private isUserStatusAllowedLogin(status: Status) {
     return status === Status.active;
   }
 

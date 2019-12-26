@@ -4,34 +4,34 @@ import { renderPageContent, Content } from './page-content';
 import { saveEnvManager } from '../../framework/configuration/environment-manger-keeper';
 import { ServerEnvironmentManager } from '../../framework/configuration/server-environment-manager';
 // import { createStore } from 'redux';
-import { options } from '../../provider/transport.server-options';
+import { buildOptions } from '../../provider/transport.server-options';
 import { getTransport } from '../../provider/transport';
+import * as cookieParser from 'cookie-parser';
 
 const start = async () => {
   const manager = new ServerEnvironmentManager();
   await manager.loadEnvAsync({ path: 'config/server.env' });
   saveEnvManager(manager);
+
   const app = express();
+  app.use(cookieParser());
 
   app.use('/assets', express.static('assets'));
   app.use('/assets/images/*', (req, res, next) => {
+    // TODO
     res.send(404);
     res.end();
   });
-
-  app.get('*', (req, res, next) => {
+  app.get('*', async (req: any, res, next) => {
     const context = {};
-    const data = { foo: 'bar' }; //TODO
-    // const store = createStore((state: any) => state, data);
+    const transportOptions = buildOptions({ isLoggedIn: !!req.cookie && req.cookie['conect.sid'] });
+    const client = getTransport(transportOptions);
 
-    const store = {}
-    const client = getTransport(options);
-    const content: Content = renderPageContent(req.url, context, store, client);
+    const content: Content = await renderPageContent(req.url, context, client);
 
     const jsFilePath = '/assets/' + 'bundle.js'; // TODO
 
-    // const storeData = JSON.stringify(data);
-    const page = buildTemplate({ title: 'Hey', jsFilePath, client, ...content });
+    const page = buildTemplate({ title: 'Hey', jsFilePath, ...content });
 
     res.set('content-type', 'text/html');
     res.send(page);

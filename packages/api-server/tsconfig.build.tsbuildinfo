@@ -2221,19 +2221,19 @@
         "version": "9e2f68d1b70625fada007266b5acd918c6e4f780bfe74791fc5b76d8f14c9fdd",
         "signature": "9e2f68d1b70625fada007266b5acd918c6e4f780bfe74791fc5b76d8f14c9fdd"
       },
-      "../../node_modules/@types/range-parser/index.d.ts": {
+      "./node_modules/@types/range-parser/index.d.ts": {
         "version": "4e88b833be14c7f384e0dcd57bb30acd799e8e34d212635d693e41a75a71164b",
         "signature": "4e88b833be14c7f384e0dcd57bb30acd799e8e34d212635d693e41a75a71164b"
       },
-      "../../node_modules/@types/express-serve-static-core/index.d.ts": {
-        "version": "88300a14933efa862bf68f8444082c7ce0cfb23f67b3eeaf1575933a1ce84b3d",
-        "signature": "88300a14933efa862bf68f8444082c7ce0cfb23f67b3eeaf1575933a1ce84b3d"
+      "./node_modules/@types/express-serve-static-core/index.d.ts": {
+        "version": "ac05327cf8bee4cee686e41f66d7dc26e6fb837d3823c290a0d8ba0fa157677b",
+        "signature": "ac05327cf8bee4cee686e41f66d7dc26e6fb837d3823c290a0d8ba0fa157677b"
       },
-      "../../node_modules/@types/mime/index.d.ts": {
+      "./node_modules/@types/mime/index.d.ts": {
         "version": "be27a64e821a3e5af838650e4aa25805c60f057d0c37a9762c378d19d364b3e6",
         "signature": "be27a64e821a3e5af838650e4aa25805c60f057d0c37a9762c378d19d364b3e6"
       },
-      "../../node_modules/@types/serve-static/index.d.ts": {
+      "./node_modules/@types/serve-static/index.d.ts": {
         "version": "cdbae5083ef8f786069519405ca1f1e2ce72b9efebdf5e1931584fba747f3bc0",
         "signature": "cdbae5083ef8f786069519405ca1f1e2ce72b9efebdf5e1931584fba747f3bc0"
       },
@@ -2244,6 +2244,18 @@
       "../../node_modules/@types/body-parser/index.d.ts": {
         "version": "599abfa56230d73afc30a3bde749c2efd90acb58301b446835d5e235b35e2768",
         "signature": "599abfa56230d73afc30a3bde749c2efd90acb58301b446835d5e235b35e2768"
+      },
+      "../../node_modules/@types/serve-static/index.d.ts": {
+        "version": "cdbae5083ef8f786069519405ca1f1e2ce72b9efebdf5e1931584fba747f3bc0",
+        "signature": "cdbae5083ef8f786069519405ca1f1e2ce72b9efebdf5e1931584fba747f3bc0"
+      },
+      "../../node_modules/@types/range-parser/index.d.ts": {
+        "version": "4e88b833be14c7f384e0dcd57bb30acd799e8e34d212635d693e41a75a71164b",
+        "signature": "4e88b833be14c7f384e0dcd57bb30acd799e8e34d212635d693e41a75a71164b"
+      },
+      "../../node_modules/@types/express-serve-static-core/index.d.ts": {
+        "version": "88300a14933efa862bf68f8444082c7ce0cfb23f67b3eeaf1575933a1ce84b3d",
+        "signature": "88300a14933efa862bf68f8444082c7ce0cfb23f67b3eeaf1575933a1ce84b3d"
       },
       "../../node_modules/@types/express/index.d.ts": {
         "version": "6e1c6fe784daeba017901db7766e6b872f535defe33b0e0196d2a12c26f50517",
@@ -3450,8 +3462,8 @@
         "signature": "5df67abb746f2613464fccaf164ce3bcfc947e6f7a91acbeef36f501dde4e9b5"
       },
       "./src/auth/auth.service.ts": {
-        "version": "426dfbc00b09c31a73d5ee2e45ddea35f49f20c587fc5b16f22b131e140f769b",
-        "signature": "ccfe2c0da138d9269b6c41e4872115c22e89a84468470653c3087c47c8a53dfe"
+        "version": "b015cdfdf90c17eaab4b510a088370b895999d9544aa67745f33388a0e390638",
+        "signature": "7dfd0139e11a3655ed70bed59931078e3b903129215b238d8a9d1b7ed7a528c6"
       },
       "../../node_modules/@nestjs/passport/dist/abstract.strategy.d.ts": {
         "version": "ba63131c5e91f797736444933af16ffa42f9f8c150d859ec65f568f037a416ea",
@@ -3497,6 +3509,10 @@
         "version": "82740a0724b94de65a10042e62192d3e39a1dd89ea231d00c81874d34e0b26a6",
         "signature": "82740a0724b94de65a10042e62192d3e39a1dd89ea231d00c81874d34e0b26a6"
       },
+      "./node_modules/@types/express/index.d.ts": {
+        "version": "6e1c6fe784daeba017901db7766e6b872f535defe33b0e0196d2a12c26f50517",
+        "signature": "6e1c6fe784daeba017901db7766e6b872f535defe33b0e0196d2a12c26f50517"
+      },
       "../../node_modules/@types/passport-strategy/index.d.ts": {
         "version": "29d59e921bc723594bbfc98230d24f38f0d5a669f28fcf989b7468f4f95b7c52",
         "signature": "29d59e921bc723594bbfc98230d24f38f0d5a669f28fcf989b7468f4f95b7c52"
@@ -3530,8 +3546,8 @@
         "signature": "7e08b5ce451f2d8accc87b8199282704f67c651c3a75a5b136636daa861ed938"
       },
       "./src/auth/auth.resolver.ts": {
-        "version": "8f6f12349be321acb866fd2200e8252ea254fe3adb61ab6fc81714016970c6d7",
-        "signature": "658163ed25f5d992f05d10fa162088cef18b363f6bffb5d6b683110a2c487060"
+        "version": "20659180210f1a01c192e999d13521c1a388b7514849d149c136842ce29fac87",
+        "signature": "4451911d0ac35f0720dafe7749f313c69e2a0eba736474383db5d3a54e8924ba"
       },
       "./src/auth/session.serializer.ts": {
         "version": "ded5c890622d161e65150436765c0c1f20ef7a17e76ced058681220e2efe16d3",
@@ -3677,7 +3693,7 @@
         "version": "b6017f9aa7e6b6ce2847992e0c01274469c55a55c65d7370f6d77aa31b75130b",
         "signature": "95f6351edef35c76216566e8e9b0d14df3d6ecfba23ef9efdb4e73f1cb061843"
       },
-      "../../node_modules/@types/cookie-parser/index.d.ts": {
+      "./node_modules/@types/cookie-parser/index.d.ts": {
         "version": "8d77ed4e39114c32edc2e35b683b6f54a6b3292ecdf392e4bfc5f726734955d8",
         "signature": "8d77ed4e39114c32edc2e35b683b6f54a6b3292ecdf392e4bfc5f726734955d8"
       },
@@ -8321,31 +8337,31 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/range-parser/index.d.ts": [
+      "./node_modules/@types/range-parser/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/express-serve-static-core/index.d.ts": [
+      "./node_modules/@types/express-serve-static-core/index.d.ts": [
         "./node_modules/@types/node/http.d.ts",
         "./node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/range-parser/index.d.ts",
+        "./node_modules/@types/range-parser/index.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/mime/index.d.ts": [
+      "./node_modules/@types/mime/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/serve-static/index.d.ts": [
-        "../../node_modules/@types/express-serve-static-core/index.d.ts",
-        "../../node_modules/@types/mime/index.d.ts",
+      "./node_modules/@types/serve-static/index.d.ts": [
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/mime/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -8368,10 +8384,35 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../node_modules/@types/serve-static/index.d.ts": [
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/mime/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/range-parser/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../node_modules/@types/express-serve-static-core/index.d.ts": [
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/range-parser/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/express/index.d.ts": [
         "../../node_modules/@types/body-parser/index.d.ts",
-        "../../node_modules/@types/serve-static/index.d.ts",
+        "./node_modules/@types/serve-static/index.d.ts",
         "../../node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -11169,9 +11210,20 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/@types/express/index.d.ts": [
+        "../../node_modules/@types/body-parser/index.d.ts",
+        "./node_modules/@types/serve-static/index.d.ts",
+        "../../node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../node_modules/@types/passport-strategy/index.d.ts": [
         "../../node_modules/@types/passport/index.d.ts",
         "../../node_modules/@types/express/index.d.ts",
+        "./node_modules/@types/express/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -11554,7 +11606,7 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/cookie-parser/index.d.ts": [
+      "./node_modules/@types/cookie-parser/index.d.ts": [
         "../../node_modules/@types/express/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -11574,7 +11626,7 @@
         "../../node_modules/@nestjs/core/index.d.ts",
         "./src/app.module.ts",
         "./src/exceptions-filters/all-exceptions.filter.ts",
-        "../../node_modules/@types/cookie-parser/index.d.ts",
+        "./node_modules/@types/cookie-parser/index.d.ts",
         "../../node_modules/@types/express-session/index.d.ts",
         "../../node_modules/@types/passport/index.d.ts",
         "./src/config/cors.ts",
@@ -16199,23 +16251,18 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/range-parser/index.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../node_modules/@types/express-serve-static-core/index.d.ts": [
+      "../../node_modules/@types/connect/index.d.ts": [
         "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/range-parser/index.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/mime/index.d.ts": [
+      "../../node_modules/@types/body-parser/index.d.ts": [
+        "../../node_modules/@types/connect/index.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -16229,17 +16276,16 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/connect/index.d.ts": [
-        "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
+      "../../node_modules/@types/range-parser/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/body-parser/index.d.ts": [
-        "../../node_modules/@types/connect/index.d.ts",
+      "../../node_modules/@types/express-serve-static-core/index.d.ts": [
         "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/range-parser/index.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -19045,7 +19091,8 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/auth/auth.resolver.ts": [
-        "./src/auth/auth.service.ts"
+        "./src/auth/auth.service.ts",
+        "../shared/dist/index.d.ts"
       ],
       "./src/auth/session.serializer.ts": [
         "../../node_modules/@nestjs/passport/index.d.ts"
@@ -19234,17 +19281,57 @@
         "../../node_modules/@nestjs/common/index.d.ts",
         "../../node_modules/@nestjs/graphql/index.d.ts"
       ],
-      "../../node_modules/@types/cookie-parser/index.d.ts": [
+      "../../node_modules/@types/express-session/index.d.ts": [
         "../../node_modules/@types/express/index.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../node_modules/@types/express-session/index.d.ts": [
-        "../../node_modules/@types/express/index.d.ts",
+      "./node_modules/@types/range-parser/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/express-serve-static-core/index.d.ts": [
+        "./node_modules/@types/node/http.d.ts",
         "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/range-parser/index.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/express/index.d.ts": [
+        "../../node_modules/@types/body-parser/index.d.ts",
+        "./node_modules/@types/serve-static/index.d.ts",
+        "../../node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/serve-static/index.d.ts": [
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
+        "./node_modules/@types/mime/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/mime/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/cookie-parser/index.d.ts": [
+        "../../node_modules/@types/express/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -19804,33 +19891,17 @@
       "../../node_modules/@apollographql/apollo-tools/lib/buildServiceDefinition.d.ts",
       "../../node_modules/@apollographql/apollo-tools/lib/index.d.ts",
       "../../node_modules/apollo-server-core/dist/types.d.ts",
-      "../../node_modules/apollo-server-core/dist/requestPipeline.d.ts",
-      "../../node_modules/apollo-server-core/dist/ApolloServer.d.ts",
       "../../node_modules/apollo-server-core/dist/requestPipelineAPI.d.ts",
-      "../../node_modules/@types/range-parser/index.d.ts",
-      "../../node_modules/@types/express-serve-static-core/index.d.ts",
-      "../../node_modules/@types/mime/index.d.ts",
-      "../../node_modules/@types/serve-static/index.d.ts",
       "../../node_modules/@types/connect/index.d.ts",
       "../../node_modules/@types/body-parser/index.d.ts",
-      "../../node_modules/@types/express/index.d.ts",
+      "../../node_modules/@types/range-parser/index.d.ts",
       "../../node_modules/@types/accepts/index.d.ts",
       "../../node_modules/@types/keygrip/index.d.ts",
-      "../../node_modules/@types/cookies/index.d.ts",
       "../../node_modules/@types/http-assert/index.d.ts",
-      "../../node_modules/@types/koa-compose/index.d.ts",
-      "../../node_modules/@types/koa/index.d.ts",
       "../../node_modules/@types/fs-capacitor/index.d.ts",
-      "../../node_modules/@types/graphql-upload/index.d.ts",
-      "../../node_modules/apollo-server-core/dist/processFileUploads.d.ts",
-      "../../node_modules/apollo-server-core/dist/index.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/interfaces/gql-module-options.interface.d.ts",
       "../../node_modules/@nestjs/graphql/dist/interfaces/resolver-metadata.interface.d.ts",
       "../../node_modules/@nestjs/graphql/dist/services/base-explorer.service.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/services/scalars-explorer.service.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/graphql-schema-builder.d.ts",
       "../../node_modules/@nestjs/core/metadata-scanner.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/services/delegates-explorer.service.d.ts",
       "../../node_modules/@nestjs/common/interfaces/exceptions/exception-filter-metadata.interface.d.ts",
       "../../node_modules/@nestjs/core/exceptions/exceptions-handler.d.ts",
       "../../node_modules/@nestjs/core/router/router-proxy.d.ts",
@@ -19852,17 +19923,11 @@
       "../../node_modules/@nestjs/core/helpers/interfaces/external-handler-metadata.interface.d.ts",
       "../../node_modules/@nestjs/core/helpers/interfaces/params-metadata.interface.d.ts",
       "../../node_modules/@nestjs/core/helpers/external-context-creator.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/services/resolvers-explorer.service.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/graphql.factory.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/graphql.module.d.ts",
       "../../node_modules/@nestjs/graphql/dist/interfaces/custom-scalar.interface.d.ts",
       "../../node_modules/@nestjs/graphql/dist/interfaces/gql-exception-filter.interface.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/interfaces/index.d.ts",
       "../../node_modules/@nestjs/graphql/dist/services/gql-arguments-host.d.ts",
       "../../node_modules/@nestjs/graphql/dist/services/gql-execution-context.d.ts",
       "../../node_modules/@nestjs/graphql/dist/tokens.d.ts",
-      "../../node_modules/@nestjs/graphql/dist/index.d.ts",
-      "../../node_modules/@nestjs/graphql/index.d.ts",
       "../../node_modules/typeorm/schema-builder/options/TableColumnOptions.d.ts",
       "../../node_modules/typeorm/schema-builder/table/TableColumn.d.ts",
       "../../node_modules/typeorm/common/ObjectLiteral.d.ts",
@@ -20125,17 +20190,9 @@
       "../../node_modules/@nestjs/passport/dist/passport/passport.strategy.d.ts",
       "../../node_modules/@nestjs/passport/dist/index.d.ts",
       "../../node_modules/@nestjs/passport/index.d.ts",
-      "../../node_modules/@types/passport/index.d.ts",
-      "../../node_modules/@types/passport-strategy/index.d.ts",
-      "../../node_modules/@types/passport-local/index.d.ts",
-      "./src/auth/local.strategy.ts",
-      "./src/auth/guards/gql.guard.ts",
-      "./src/auth/guards/gql.login.guard.ts",
-      "./src/auth/guards/gql.authentification.guard.ts",
       "./src/auth/user.decorator.ts",
       "../shared/dist/index.d.ts",
       "./src/auth/session.serializer.ts",
-      "./src/auth/auth.module.ts",
       "../../node_modules/class-validator/validation/ValidationError.d.ts",
       "../../node_modules/class-validator/validation/ValidatorOptions.d.ts",
       "../../node_modules/class-validator/validation-schema/ValidationSchema.d.ts",
@@ -20162,19 +20219,10 @@
       "./src/errors/database.errors.ts",
       "./src/errors/save-event.error.ts",
       "./src/event/event.service.ts",
-      "./src/event/event.resolver.ts",
       "./src/event/event.module.ts",
       "./node_modules/dotenv/types/index.d.ts",
       "./src/config/environment/service.ts",
-      "./src/config/cors.ts",
-      "./src/config/app/graphql.config.ts",
-      "./src/app.module.ts",
-      "./src/exceptions-filters/all-exceptions.filter.ts",
-      "../../node_modules/@types/cookie-parser/index.d.ts",
-      "../../node_modules/@types/express-session/index.d.ts",
-      "./src/main.ts",
-      "./src/scripts/generate-graphql-definitions.ts",
-      "./src/auth/auth.resolver.ts"
+      "./src/config/cors.ts"
     ]
   },
   "version": "3.7.3"
