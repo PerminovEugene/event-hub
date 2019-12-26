@@ -1,9 +1,10 @@
 export const resolvers = () => {
   return {
-    // Query: {
-    //   isLoggedIn: () => {
-    //     return false;
-    //   },
-    // },
+    Mutation: {
+      setLoginStatus: () => {
+        debugger;
+        return false;
+      },
+    },
   };
 };

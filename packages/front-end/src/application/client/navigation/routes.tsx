@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { PagePath } from './pathes';
 import Calendar from '../features/domain/calendar/calendar.page';
-import NotFound from '../features/system/not-found/not-found.component';
+import NotFound from '../features/system/not-found/not-found.page';
 import Registration from '../features/auth/registration/registration.page';
 import Login from '../features/auth/login/login.page';
+import CreateEventPage from '../features/domain/event-managment/create-event/create-event.page';
 
 type Route = {
   component: React.ComponentType;
@@ -17,11 +18,9 @@ enum UserRole { //TODO mock, later should be in core
   admin = 'admin',
 }
 
-export type PrivateRoute =
-  | Route
-  | {
-      accessRights: Array<UserRole>; // TODO
-    };
+export type PrivateRoute = Route & {
+  accessRights: Array<UserRole>; // TODO
+};
 
 type NotFoundRoute = {
   component: React.ComponentType;
@@ -51,7 +50,13 @@ const routes: Routes = {
       path: PagePath.login,
     },
   ],
-  privateRoutes: [],
+  privateRoutes: [
+    {
+      component: CreateEventPage,
+      path: PagePath.createEvent,
+      accessRights: [UserRole.authorised],
+    },
+  ],
   notFound: {
     component: NotFound,
   },

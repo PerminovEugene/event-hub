@@ -16,11 +16,8 @@ const IS_USER_LOGGED_IN = gql`
 
 const Root = () => {
   const {
-    // data: { isLoggedIn },
-    data,
+    data: { isLoggedIn },
   } = useQuery(IS_USER_LOGGED_IN);
-  console.log('data:', data);
-  const isLoggedIn = false;
   return (
     <div>
       {isLoggedIn && <LogoutButton />}

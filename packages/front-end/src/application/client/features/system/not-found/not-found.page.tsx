@@ -6,7 +6,7 @@ const Wrapper = styled.section`
   background: papayawhip;
 `;
 
-export default class NotFound extends React.Component<{}, {}> {
+export default class NotFoundPage extends React.Component<{}, {}> {
   render() {
     return (
       <div>

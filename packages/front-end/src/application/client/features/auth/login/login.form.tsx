@@ -1,7 +1,7 @@
 import * as React from 'react';
 import schema from './validation.schema';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { FormWrapper, FormActions } from './../../../components/form/form.wrapper';
@@ -9,14 +9,13 @@ import { ElementView } from './../../../components/form/form.elements';
 import { LoginInput, SessionData } from '@calendar/shared';
 
 const LOGIN = gql`
-  mutation login_success {
-    isLoggedIn: true
-  }
-`;
-
-const SET_LOGIN_STATUS = gql`
-  mutation setLoginStatus($Status: Boolean!) {
-    isLoggedIn @client
+  mutation login($loginInput: LoginInput!) {
+    login(loginInput: $loginInput) {
+      email
+      role
+      id
+      status
+    }
   }
 `;
 
@@ -32,6 +31,8 @@ const initialValues: LoginInput = {
 
 const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
   const [login] = useMutation<{ sessionData: SessionData }>(LOGIN);
+  const client = useApolloClient();
+
   return (
     <FormWrapper
       validationSchema={schema}
@@ -45,7 +46,12 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
               loginInput: { email: values.email, password: values.password },
             },
           });
-
+          // TODO facade
+          client.writeData({
+            data: {
+              isLoggedIn: true,
+            },
+          });
           history.push('/');
           actions.setSubmitting(false);
         } catch (e) {

@@ -24,7 +24,7 @@ const start = async () => {
   });
   app.get('*', async (req: any, res, next) => {
     const context = {};
-    const transportOptions = buildOptions({ isLoggedIn: !!req.cookie && req.cookie['conect.sid'] });
+    const transportOptions = buildOptions({ isLoggedIn: !!(req.cookies && req.cookies['connect.sid']) });
     const client = getTransport(transportOptions);
 
     const content: Content = await renderPageContent(req.url, context, client);
