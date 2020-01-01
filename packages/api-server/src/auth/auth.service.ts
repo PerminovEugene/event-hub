@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AppUserService } from '../app-user/app-user.service';
 import * as bcrypt from 'bcrypt';
-import { Status } from '../app-user/app-user.entity';
+import { Status, AppUser } from '../app-user/app-user.entity';
+import { SessionData, RegistrationInput } from '@calendar/shared';
 
 @Injectable()
 export class AuthService {
@@ -9,38 +10,28 @@ export class AuthService {
     private readonly appUsersService: AppUserService, // private readonly prisma: PrismaService,
   ) {}
 
-  public async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.appUsersService.findByEmail(email);
+  public async validateUser(
+    email: string,
+    password: string,
+  ): Promise<SessionData> {
+    const user: AppUser = await this.appUsersService.findByEmail(email);
     if (!(await this.isUserCanLogin(user, password))) {
       return null;
     }
-
-    return {
-      email: user.email,
-      status: user.status,
-      role: user.role,
-      id: user.id,
-    };
+    return this.makeSessionDataByUser(user);
   }
 
-  public async login(user: any) {
-    return {
-      email: user.email,
-      status: user.status,
-      role: user.role,
-      id: user.id,
-    };
-  }
-
-  public async registration(input: any) {
-    const user = await this.appUsersService.create(input.email, input.password);
-    return {};
+  public async registration(input: RegistrationInput) {
+    const user: AppUser = await this.appUsersService.create(
+      input.email,
+      input.password,
+    );
+    return this.makeSessionDataByUser(user);
   }
 
   // UTILS
 
-  // TODO any
-  private async isUserCanLogin(user: any, password: string) {
+  private async isUserCanLogin(user: any, password: string): Promise<boolean> {
     return (
       user &&
       (await this.isPasswordCorrect(user.password, user.salt, password)) &&
@@ -57,8 +48,7 @@ export class AuthService {
     return userPassword === hashedPassword;
   }
 
-  // TODO rename
-  private isUserStatusAllowedLogin(status: Status) {
+  private isUserStatusAllowedLogin(status: Status): boolean {
     return status === Status.active;
   }
 
@@ -67,5 +57,14 @@ export class AuthService {
     salt: string,
   ): Promise<string> {
     return await bcrypt.hash(myPlaintextPassword, salt);
+  }
+
+  private makeSessionDataByUser(user: AppUser): SessionData {
+    return {
+      email: user.email,
+      status: user.status,
+      role: user.role,
+      id: user.id,
+    };
   }
 }

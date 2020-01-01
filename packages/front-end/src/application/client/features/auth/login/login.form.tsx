@@ -55,6 +55,7 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
           history.push('/');
           actions.setSubmitting(false);
         } catch (e) {
+          debugger;
           // TODO
           console.warn(e);
         }

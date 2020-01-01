@@ -1,7 +1,8 @@
 import { AppError } from './app.error';
+import { HttpException } from '@nestjs/common';
 
 export class DatabaseError extends AppError {
-  constructor(sourceError: Error, msg?: string) {
-    super(msg, sourceError);
+  constructor(msg: string, sourceError: Error, clientError: HttpException) {
+    super(msg, sourceError, clientError);
   }
 }

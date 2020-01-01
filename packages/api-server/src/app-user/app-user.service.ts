@@ -14,12 +14,14 @@ export class AppUserService {
   ) {}
 
   public async findByEmail(email: string): Promise<AppUserEntity> {
-    return (await this.appUserRepository.find({
-      email,
-    }))[0];
+    return (
+      await this.appUserRepository.find({
+        email,
+      })
+    )[0];
   }
 
-  public async create(email: string, password: string): Promise<any> {
+  public async create(email: string, password: string): Promise<AppUserEntity> {
     const salt = await this.generateSalt();
     const hashedPassword = await this.hashText(password, salt);
     const role = 'customer'; // TODO move to enums

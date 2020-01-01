@@ -10,7 +10,6 @@ type OptionsBuildConfig = {
 
 export const buildOptions = ({ isLoggedIn }: OptionsBuildConfig) => {
   const cache = new InMemoryCache();
-  debugger;
   const link = createHttpLink({
     uri: 'http://localhost:3000/graphql',
     fetch: fetch as any,

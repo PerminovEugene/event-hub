@@ -2,15 +2,23 @@ import {
   Catch,
   ArgumentsHost,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
-import { GqlExceptionFilter } from '@nestjs/graphql';
+import { GqlExceptionFilter, GqlArgumentsHost } from '@nestjs/graphql';
 import { AppError } from '../errors/app.error';
 
 @Catch()
 export class AllExceptionsFilter implements GqlExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
+    const gqlHost = GqlArgumentsHost.create(host);
+    const response = gqlHost.getContext().res;
+
     if (this.isAppError(exception)) {
-      return (exception as AppError).clientError;
+      const clientError = (exception as AppError).clientError;
+      // return response.status(clientError.getStatus()).json({
+      //   errors: clientError.message,
+      // });
+      return;
     }
     console.log('unhandled exception: ', exception);
     return new InternalServerErrorException();

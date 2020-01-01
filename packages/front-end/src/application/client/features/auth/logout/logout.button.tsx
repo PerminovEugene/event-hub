@@ -19,10 +19,9 @@ const LogoutButton = ({ history }: LogoutButtonProps) => {
 
   return (
     <ThemeButton
-      variant="contained"
       color="secondary"
       type="button"
-      fullWidth
+      size="small"
       onClick={async () => {
         const result = await logout();
         client.cache.reset();

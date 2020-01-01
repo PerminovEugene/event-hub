@@ -22,7 +22,6 @@ export class GqlLoginGuard extends GqlGuard {
       it expects username and password in body or query, but body is busy by gql data,
       so, we add these fields in req.query
     */
-    debugger;
     const req = ctx.getContext().req;
     req.query = ctx.getArgs().loginInput;
     return req;

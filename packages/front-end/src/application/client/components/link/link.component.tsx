@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link, LinkProps, withRouter } from 'react-router-dom';
 import { palette } from './../../styles/theme/colors';
+import { ButtonProps } from '@material-ui/core';
 
 const StyledLink: React.ComponentType<any> = styled(Link)`
   white-space: nowrap;
@@ -11,4 +12,6 @@ const StyledLink: React.ComponentType<any> = styled(Link)`
   }
 `;
 
-export const ThemeLink = (props: LinkProps) => <StyledLink {...props} />;
+type ThemeLinkProps = LinkProps & ButtonProps;
+
+export const ThemeLink = (props: ThemeLinkProps) => <StyledLink {...props} />;

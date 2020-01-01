@@ -14,36 +14,40 @@ export class AuthResolver {
   @Mutation('registration')
   async registration(
     @Args('registrationInput')
-    registrationInput: RegistrationInput,
+    input: RegistrationInput,
     @Context()
-    context,
+    context: any,
   ): Promise<any> {
-    console.log(registrationInput);
-    const saved = await this.authService.registration(registrationInput);
-    // context.req.session = saved;
-    return saved;
+    const sessionData: SessionData = await this.authService.registration(input);
+    await this.createSession(context, sessionData);
+    return sessionData;
   }
+
+  private createSession = (context: any, sessionData: SessionData) => {
+    return new Promise((resolve, reject) => {
+      // passport have no login through Promise :(
+      context.req.login(sessionData, (error: Error) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve();
+      });
+    });
+  };
 
   @UseGuards(GqlLoginGuard)
   @Mutation('login')
   async login(
     @Args('loginInput')
     loginInput: LoginInput,
-    @Context() ctx: any,
+    @Context() context: any,
   ): Promise<any> {
-    return ctx.req.user;
+    return context.req.user;
   }
 
   @Mutation('logout')
-  async logout(@Context() ctx: any): Promise<boolean> {
-    const req: any = ctx.req;
-    // const res: any = ctx.res;
-    await req.logout();
-    // req.session = null;
-    // res.clearCookie('test');
-    // res.clearCookie('test.sig');
-    // debugger;
-    // console.log(ctx.req);
+  async logout(@Context() context: any): Promise<boolean> {
+    context.req.logout();
     return true;
   }
 
