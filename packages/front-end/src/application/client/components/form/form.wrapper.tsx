@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeButton } from '../button/button.component';
 import { Formik, FormikActions, FormikProps, Form } from 'formik';
 import { ElementView, FormElement, TextInput } from './form.elements';
-
+import * as Yup from 'yup';
 // type FormFields = { [fieldName: string]: string };
 type FormFields = any;
 
@@ -23,8 +23,8 @@ export const FormWrapper = ({ validationSchema, initialValues, onSubmit, element
       render={(props: FormikProps<any>) => {
         return (
           <Form>
-            {elements.map((element: FormElement) => (
-              <React.Fragment>
+            {elements.map((element: FormElement, index) => (
+              <React.Fragment key={index}>
                 {element.view === ElementView.textInput && <TextInput element={element} {...props} />}
               </React.Fragment>
             ))}

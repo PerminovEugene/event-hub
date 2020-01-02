@@ -1,6 +1,6 @@
 import * as React from 'react';
-import schema from './validation.schema';
 import gql from 'graphql-tag';
+import getRegistrationValidationSchema from './validation.schema';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
@@ -34,10 +34,9 @@ const initialValues: RegistrationInput = {
 const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
   const [registration] = useMutation<{ sessionData: SessionData }>(REGISTRATION);
   const client = useApolloClient();
-
   return (
     <FormWrapper
-      validationSchema={schema}
+      validationSchema={getRegistrationValidationSchema()}
       initialValues={initialValues}
       elements={config}
       submitText="sign in" // TODO i18n

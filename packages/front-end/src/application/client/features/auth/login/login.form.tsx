@@ -32,7 +32,6 @@ const initialValues: LoginInput = {
 const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
   const [login] = useMutation<{ sessionData: SessionData }>(LOGIN);
   const client = useApolloClient();
-
   return (
     <FormWrapper
       validationSchema={schema}

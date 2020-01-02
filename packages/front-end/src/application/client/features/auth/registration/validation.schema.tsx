@@ -1,12 +1,15 @@
 import { getValidationSchema } from '../../../../../framework/validation/index';
 import {
-  passwordValidation,
-  passwordRepeatValidation,
   emailValidation,
+  passwordValidation,
+  passwordConfirmValidation,
 } from '../../../../../framework/validation/fields-rules';
 
-export default getValidationSchema({
-  email: emailValidation,
-  password: passwordValidation,
-  passwordRepeat: passwordRepeatValidation,
-});
+const getRegistrationValidationSchema = () =>
+  getValidationSchema({
+    email: emailValidation,
+    password: passwordValidation,
+    passwordConfirm: passwordConfirmValidation,
+  });
+
+export default getRegistrationValidationSchema;

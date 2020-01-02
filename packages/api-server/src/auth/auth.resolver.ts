@@ -2,7 +2,7 @@ import { Args, Mutation, Query, Resolver, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { GqlLoginGuard } from './guards/gql.login.guard';
 import { GqlAuthenticationGuard } from './guards/gql.authentification.guard';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UsePipes } from '@nestjs/common';
 // import { CurrentUser } from '../auth/user.decorator';
 import { CurrentUser } from './user.decorator';
 import { SessionData, LoginInput, RegistrationInput } from '@calendar/shared';
