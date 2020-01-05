@@ -5,8 +5,9 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { FormWrapper, FormActions } from './../../../components/form/form.wrapper';
-import { ElementView } from './../../../components/form/form.elements';
+import { ElementView, FormElement } from './../../../components/form/form.elements';
 import { LoginInput, SessionData } from '@calendar/shared';
+import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
 
 const LOGIN = gql`
   mutation login($loginInput: LoginInput!) {
@@ -19,9 +20,25 @@ const LOGIN = gql`
   }
 `;
 
-const config = [
-  { type: 'text', label: 'Email', view: ElementView.textInput, name: 'email' },
-  { type: 'password', label: 'Password', view: ElementView.textInput, name: 'password' },
+const config: Array<FormElement> = [
+  {
+    label: 'Email',
+    view: ElementView.textInput,
+    attributes: {
+      type: 'text',
+      name: 'email',
+      autocomplete: 'off',
+    },
+  },
+  {
+    label: 'Password',
+    view: ElementView.textInput,
+    attributes: {
+      type: 'password',
+      name: 'password',
+      autocomplete: 'off',
+    },
+  },
 ];
 
 const initialValues: LoginInput = {
@@ -40,21 +57,20 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
       submitText="sign in" // TODO i18n'
       onSubmit={async (values: LoginInput, actions: FormActions<LoginInput>) => {
         try {
-          const result = await login({
+          await login({
             variables: {
               loginInput: { email: values.email, password: values.password },
             },
           });
-          // TODO facade
           client.writeData({
             data: {
               isLoggedIn: true,
             },
           });
+          actions.setStatus(null);
           history.push('/');
         } catch (e) {
-          const errorMessage = e.graphQLErrors[0].message.message;
-          actions.setStatus(errorMessage);
+          actions.setStatus(getServerErrorData(e));
         } finally {
           actions.setSubmitting(false);
         }

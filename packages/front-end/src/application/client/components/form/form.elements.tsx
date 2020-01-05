@@ -9,29 +9,39 @@ export enum ElementView {
 }
 
 export interface FormElement {
-  type: string;
   label: string;
-  name: string;
   view: ElementView;
+  attributes: {
+    name: string;
+    type: string;
+    autocomplete?: 'on' | 'off';
+  };
 }
 
 // TODO
 interface TextInputProps {
   element: FormElement;
-  formProps: FormikProps<any>;
+  handleChange: any;
+  handleBlur: any;
+  values: any;
+  touched: any;
+  errors: any;
+  // formProps: FormikProps<any>;
 }
 
-export const TextInput = ({ element, handleChange, handleBlur, values, touched, errors }: any) => {
+export const TextInput = ({ element, handleChange, handleBlur, values, touched, errors }: TextInputProps) => {
   return (
     <ThemeTextField
       label={element.label}
-      name={element.name}
+      name={element.attributes.name}
+      type={element.attributes.type}
+      autoComplete={element.attributes.autocomplete || 'on'}
       fullWidth
       onChange={handleChange}
       onBlur={handleBlur}
-      value={values[element.name]}
-      touched={touched[element.name] as any}
-      errorText={errors[element.name] as any}
+      value={values[element.attributes.name]}
+      touched={touched[element.attributes.name] as any}
+      errorText={errors[element.attributes.name] as any}
     />
   );
 };

@@ -18,7 +18,6 @@ const AppRender = ({ url, context, client }: any) => (
   </Application>
 );
 
-// TODO remove store
 export const renderPageContent = async (url: string, context: any, client: any): Promise<Content> => {
   const sheet = new ServerStyleSheet(); // styled components
   try {

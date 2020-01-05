@@ -18,7 +18,7 @@ export class AllExceptionsFilter implements GqlExceptionFilter {
       // return response.status(clientError.getStatus()).json({
       //   errors: clientError.message,
       // });
-      return;
+      return clientError;
     }
     console.log('unhandled exception: ', exception);
     return new InternalServerErrorException();

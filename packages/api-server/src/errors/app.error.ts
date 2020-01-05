@@ -3,8 +3,8 @@ import { HttpException } from '@nestjs/common';
 type SourceError = Error | any[];
 
 export abstract class AppError extends Error {
-  protected _clientError: HttpException;
   protected _sourceError: SourceError;
+  protected _clientError: HttpException;
 
   constructor(
     msg?: string,

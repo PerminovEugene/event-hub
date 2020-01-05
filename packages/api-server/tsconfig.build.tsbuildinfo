@@ -3590,8 +3590,8 @@
         "signature": "e50f9ae34bb92232533e3a32848970dd04f874a8f64d3ae48980e062b6489f26"
       },
       "./src/errors/app.error.ts": {
-        "version": "92706e2ffcf7aba9370d81f047db58c07b1b3a0e6da70a509ac1c662763b738f",
-        "signature": "a36505f9434dbac180d0d9be945162a44e23a27726b4a87641872272f9e2437f"
+        "version": "949f594d983befadb0f2c79c3a52da7227b4fdc5b335c6564e0ac50b1c5d332e",
+        "signature": "58317e153c1615a2128a9c6e4998a0f675253cd915c5d23a39722ef3c4ba26c5"
       },
       "./src/auth/auth.errors.ts": {
         "version": "93dd42b068dddaafea68936bc381b3643461e9c9d2ca1fd37dbca2255d37109f",
@@ -3686,8 +3686,8 @@
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644"
       },
       "./src/exceptions-filters/all-exceptions.filter.ts": {
-        "version": "32bcff850c92e6f7e4131f9ff6682c151eaa477211f199c2dded4463f0761c32",
-        "signature": "d134151a7a4c7bef20d2466ccbb442b9d42bc7cc57dbc37c144227c74d06fd06"
+        "version": "932fa15c30ee96bc0fb53138c4ff45b06e406c0d82a697318fe66784b7c15e5a",
+        "signature": "95f6351edef35c76216566e8e9b0d14df3d6ecfba23ef9efdb4e73f1cb061843"
       },
       "./node_modules/@types/cookie-parser/index.d.ts": {
         "version": "8d77ed4e39114c32edc2e35b683b6f54a6b3292ecdf392e4bfc5f726734955d8",
@@ -20218,6 +20218,7 @@
       "./src/auth/guards/gql.login.guard.ts",
       "./src/auth/guards/gql.authentification.guard.ts",
       "./src/auth/user.decorator.ts",
+      "./src/auth/auth.resolver.ts",
       "./src/auth/session.serializer.ts",
       "./src/auth/auth.module.ts",
       "./src/adapters/class-validator-error.to.client-error.ts",
@@ -20234,12 +20235,11 @@
       "./src/config/cors.ts",
       "./src/config/app/graphql.config.ts",
       "./src/app.module.ts",
-      "./src/exceptions-filters/all-exceptions.filter.ts",
       "./node_modules/@types/cookie-parser/index.d.ts",
       "./node_modules/@types/express-session/index.d.ts",
-      "./src/main.ts",
       "./src/scripts/generate-graphql-definitions.ts",
-      "./src/auth/auth.resolver.ts"
+      "./src/exceptions-filters/all-exceptions.filter.ts",
+      "./src/main.ts"
     ]
   },
   "version": "3.7.4"

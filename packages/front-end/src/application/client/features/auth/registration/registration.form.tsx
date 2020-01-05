@@ -5,8 +5,9 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { FormWrapper, FormActions } from './../../../components/form/form.wrapper';
-import { ElementView } from './../../../components/form/form.elements';
+import { ElementView, FormElement } from './../../../components/form/form.elements';
 import { LoginInput, SessionData, RegistrationInput } from '@calendar/shared';
+import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
 
 const REGISTRATION = gql`
   mutation registration($registrationInput: RegistrationInput!) {
@@ -19,10 +20,34 @@ const REGISTRATION = gql`
   }
 `;
 
-const config = [
-  { type: 'text', label: 'Email', view: ElementView.textInput, name: 'email' },
-  { type: 'password', label: 'Password', view: ElementView.textInput, name: 'password' },
-  { type: 'password', label: 'Password Confirm', view: ElementView.textInput, name: 'passwordConfirm' },
+const config: Array<FormElement> = [
+  {
+    label: 'Email',
+    view: ElementView.textInput,
+    attributes: {
+      type: 'text',
+      name: 'email',
+      autocomplete: 'off',
+    },
+  },
+  {
+    label: 'Password',
+    view: ElementView.textInput,
+    attributes: {
+      autocomplete: 'off',
+      type: 'password',
+      name: 'password',
+    },
+  },
+  {
+    label: 'Password Confirm',
+    view: ElementView.textInput,
+    attributes: {
+      autocomplete: 'off',
+      type: 'password',
+      name: 'passwordConfirm',
+    },
+  },
 ];
 
 const initialValues: RegistrationInput = {
@@ -39,10 +64,10 @@ const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
       validationSchema={getRegistrationValidationSchema()}
       initialValues={initialValues}
       elements={config}
-      submitText="sign in" // TODO i18n
+      submitText="sign up" // TODO i18n
       onSubmit={async (values: RegistrationInput, actions: FormActions<LoginInput>) => {
         try {
-          const result = await registration({
+          await registration({
             variables: {
               registrationInput: {
                 email: values.email,
@@ -51,18 +76,17 @@ const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
               },
             },
           });
-          // TODO facade
           client.writeData({
             data: {
               isLoggedIn: true,
             },
           });
+          actions.setStatus(null);
           history.push('/');
-          actions.setSubmitting(false);
         } catch (e) {
-          debugger;
-          // TODO
-          console.warn(e);
+          actions.setStatus(getServerErrorData(e));
+        } finally {
+          actions.setSubmitting(false);
         }
       }}
     />

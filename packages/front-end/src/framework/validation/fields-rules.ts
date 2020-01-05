@@ -7,7 +7,7 @@ const PASSWORD_MAX_LENGTH = 18;
 export const emailValidation = yup
   .string()
   .required()
-  .email(`email must be valid`)
+  .email(`Email must be valid`)
   .label('Email');
 
 export const passwordValidation = yup
