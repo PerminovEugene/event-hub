@@ -37,7 +37,7 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
       validationSchema={schema}
       initialValues={initialValues}
       elements={config}
-      submitText="sign in" // TODO i18n
+      submitText="sign in" // TODO i18n'
       onSubmit={async (values: LoginInput, actions: FormActions<LoginInput>) => {
         try {
           const result = await login({
@@ -52,11 +52,11 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
             },
           });
           history.push('/');
-          actions.setSubmitting(false);
         } catch (e) {
-          debugger;
-          // TODO
-          console.warn(e);
+          const errorMessage = e.graphQLErrors[0].message.message;
+          actions.setStatus(errorMessage);
+        } finally {
+          actions.setSubmitting(false);
         }
       }}
     />

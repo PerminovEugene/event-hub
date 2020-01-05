@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { ThemeButton } from '../button/button.component';
 import { Formik, FormikActions, FormikProps, Form } from 'formik';
-import { ElementView, FormElement, TextInput } from './form.elements';
-import * as Yup from 'yup';
+import { ElementView, FormElement, TextInput, StyledBaseError } from './form.elements';
 // type FormFields = { [fieldName: string]: string };
 type FormFields = any;
 
@@ -29,8 +28,14 @@ export const FormWrapper = ({ validationSchema, initialValues, onSubmit, element
               </React.Fragment>
             ))}
 
-            {/* {props.errors.email && <div id="feedback">{props.errors.email}</div>} */}
-            <ThemeButton variant="contained" color="secondary" type="submit" disabled={!props.isValid} fullWidth>
+            {props.status && <StyledBaseError error={props.status} />}
+            <ThemeButton
+              variant="contained"
+              color="secondary"
+              type="submit"
+              disabled={!props.isValid || props.isSubmitting}
+              fullWidth
+            >
               {submitText}
             </ThemeButton>
           </Form>
