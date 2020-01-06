@@ -1,8 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { AppUser as AppUserEntity, Status } from './app-user.entity';
-// import { AppUserInput, AppUser } from '../graphql';
 import * as bcrypt from 'bcrypt';
+import { AppUser as AppUserEntity, Status } from './app-user.entity';
+import { wrapDbError } from 'src/database/helpers/database-errors.hander';
+import { getInsertResult } from 'src/database/helpers/query-result.manager';
 
 const SALT_ROUNDS = 10;
 
@@ -26,15 +27,30 @@ export class AppUserService {
     const hashedPassword = await this.hashText(password, salt);
     const role = 'customer'; // TODO move to enums
     const status = Status.active;
-    const result = await this.appUserRepository.insert({
+    const parameters = {
       email,
       password: hashedPassword,
       salt,
       role,
       status,
-    });
-    // TODO check email unique
-    return { email, status, id: result.raw[0].id, role } as any;
+    };
+    try {
+      const insertResult = await this.appUserRepository.insert({
+        email,
+        password: hashedPassword,
+        salt,
+        role,
+        status,
+      });
+      return {
+        email,
+        status,
+        id: getInsertResult(insertResult).id,
+        role,
+      } as AppUserEntity;
+    } catch (e) {
+      throw wrapDbError(e, parameters);
+    }
   }
 
   public async generateSalt(): Promise<string> {

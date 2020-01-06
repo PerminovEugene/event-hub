@@ -48,13 +48,11 @@ export const TextInput = ({ element, handleChange, handleBlur, values, touched, 
 
 const MyButton = withStyles({
   root: {
-    error: {
-      textAlign: 'center',
-      marginBottom: '10px',
-    },
+    textAlign: 'center',
+    marginBottom: '10px',
   },
 })(FormHelperText);
 
 export function StyledBaseError({ error }: { error: string }) {
-  return <MyButton error>{error}</MyButton>;
+  return <MyButton error={true}>{error}</MyButton>;
 }

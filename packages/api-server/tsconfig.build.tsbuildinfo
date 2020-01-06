@@ -3513,8 +3513,24 @@
         "version": "0f7499d26ea56131e783ee8c6702e261a11ba898996db6cc88994069172ee5db",
         "signature": "3987d04ca781048de4da332680f0ccb5f0da2093de191426921fa3c165793b4f"
       },
+      "./src/errors/app.error.ts": {
+        "version": "949f594d983befadb0f2c79c3a52da7227b4fdc5b335c6564e0ac50b1c5d332e",
+        "signature": "58317e153c1615a2128a9c6e4998a0f675253cd915c5d23a39722ef3c4ba26c5"
+      },
+      "./src/errors/database.errors.ts": {
+        "version": "ad8584fa06b7a08a58bde3cbc662352e22ee37b13f91d880f21814f963c74a73",
+        "signature": "f8c226188eed79b0c65ea1a4cb931a4864278910da691ca8d4baf2ddd94e8b19"
+      },
+      "./src/database/helpers/database-errors.hander.ts": {
+        "version": "714eb91590acbada2c5a1968a1c9872d1f2347f19a8704b9b474274ace154571",
+        "signature": "d49edcd27ea93bc569a3b38765333cda8e2ac1997a5d349f00c7d37afcb88774"
+      },
+      "./src/database/helpers/query-result.manager.ts": {
+        "version": "643c952100039956600f379a08df3ae976860f431cf87ddf3977005d04c93223",
+        "signature": "78d29925060f5dded5e8d3212ee5d764db0fc414ee0e8e51774949eceb5ae8e3"
+      },
       "./src/app-user/app-user.service.ts": {
-        "version": "07cab357c998ba79b4658cb93f98a07e13c667a2f8e88b4efad6eab11fa798c4",
+        "version": "1241e25d85430910e9af2db8fb05d943bf95f0878cb244febc4dfe6e2baf5b29",
         "signature": "7f690b27e6e38ca47ba62922b291c4b9246bd5d8b3472fa5af60688e18446512"
       },
       "./src/database/database.provider.ts": {
@@ -3589,10 +3605,6 @@
         "version": "e50f9ae34bb92232533e3a32848970dd04f874a8f64d3ae48980e062b6489f26",
         "signature": "e50f9ae34bb92232533e3a32848970dd04f874a8f64d3ae48980e062b6489f26"
       },
-      "./src/errors/app.error.ts": {
-        "version": "949f594d983befadb0f2c79c3a52da7227b4fdc5b335c6564e0ac50b1c5d332e",
-        "signature": "58317e153c1615a2128a9c6e4998a0f675253cd915c5d23a39722ef3c4ba26c5"
-      },
       "./src/auth/auth.errors.ts": {
         "version": "93dd42b068dddaafea68936bc381b3643461e9c9d2ca1fd37dbca2255d37109f",
         "signature": "eb890f97b8cfe6bdb895f7fbd9cfdb171bd13372ea124b8fbce2ed47084e29af"
@@ -3644,10 +3656,6 @@
       "./src/event/event.entity.ts": {
         "version": "1f130db1ac43a709f2d98f81a82145a4b8ef6fe34d9a6cce89adb28b2ee17f50",
         "signature": "c044bb6e5e7dd68c6a375c26a8d9f1d1255a88535cb01248d4ef054e6b32f574"
-      },
-      "./src/errors/database.errors.ts": {
-        "version": "ad8584fa06b7a08a58bde3cbc662352e22ee37b13f91d880f21814f963c74a73",
-        "signature": "f8c226188eed79b0c65ea1a4cb931a4864278910da691ca8d4baf2ddd94e8b19"
       },
       "./src/errors/save-event.error.ts": {
         "version": "cf4a85fbe69a71450c6e71a7872cfa8db1bc763c1ce106a9d28aa3d0666a058e",
@@ -11212,10 +11220,43 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./src/errors/app.error.ts": [
+        "./node_modules/@nestjs/common/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/errors/database.errors.ts": [
+        "./src/errors/app.error.ts",
+        "./node_modules/@nestjs/common/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/helpers/database-errors.hander.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./node_modules/@nestjs/common/index.d.ts",
+        "./src/errors/database.errors.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/helpers/query-result.manager.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./src/app-user/app-user.service.ts": [
         "./node_modules/@nestjs/common/index.d.ts",
         "./node_modules/typeorm/index.d.ts",
         "./src/app-user/app-user.entity.ts",
+        "./src/database/helpers/database-errors.hander.ts",
+        "./src/database/helpers/query-result.manager.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -11363,13 +11404,6 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./src/errors/app.error.ts": [
-        "./node_modules/@nestjs/common/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/auth/auth.errors.ts": [
         "./node_modules/@nestjs/common/index.d.ts",
         "./src/errors/app.error.ts",
@@ -11485,14 +11519,6 @@
         "./node_modules/typeorm/index.d.ts",
         "./src/core/base.entity.ts",
         "./node_modules/class-validator/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/errors/database.errors.ts": [
-        "./src/errors/app.error.ts",
-        "./node_modules/@nestjs/common/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -19110,6 +19136,19 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./src/errors/app.error.ts": [
+        "./node_modules/@nestjs/common/index.d.ts"
+      ],
+      "./src/errors/database.errors.ts": [
+        "./node_modules/@nestjs/common/index.d.ts",
+        "./src/errors/app.error.ts"
+      ],
+      "./src/database/helpers/database-errors.hander.ts": [
+        "./src/errors/database.errors.ts"
+      ],
+      "./src/database/helpers/query-result.manager.ts": [
+        "./node_modules/typeorm/index.d.ts"
+      ],
       "./src/app-user/app-user.service.ts": [
         "./node_modules/typeorm/index.d.ts",
         "./src/app-user/app-user.entity.ts"
@@ -19227,9 +19266,6 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./src/errors/app.error.ts": [
-        "./node_modules/@nestjs/common/index.d.ts"
-      ],
       "./src/auth/auth.errors.ts": [
         "./src/errors/app.error.ts"
       ],
@@ -19264,10 +19300,6 @@
       ],
       "./src/event/event.entity.ts": [
         "./src/core/base.entity.ts"
-      ],
-      "./src/errors/database.errors.ts": [
-        "./node_modules/@nestjs/common/index.d.ts",
-        "./src/errors/app.error.ts"
       ],
       "./src/errors/save-event.error.ts": [
         "./src/errors/database.errors.ts"
@@ -20192,7 +20224,10 @@
       "./node_modules/class-validator/metadata/MetadataStorage.d.ts",
       "./node_modules/class-validator/index.d.ts",
       "./src/app-user/app-user.entity.ts",
-      "./src/app-user/app-user.service.ts",
+      "./src/errors/app.error.ts",
+      "./src/errors/database.errors.ts",
+      "./src/database/helpers/database-errors.hander.ts",
+      "./src/database/helpers/query-result.manager.ts",
       "./src/database/database.provider.ts",
       "./src/database/database.module.ts",
       "./src/app-user/app-user.module.ts",
@@ -20211,7 +20246,6 @@
       "./node_modules/@types/passport/index.d.ts",
       "./node_modules/@types/passport-strategy/index.d.ts",
       "./node_modules/@types/passport-local/index.d.ts",
-      "./src/errors/app.error.ts",
       "./src/auth/auth.errors.ts",
       "./src/auth/local.strategy.ts",
       "./src/auth/guards/gql.guard.ts",
@@ -20225,7 +20259,6 @@
       "./src/errors/validation-entity.error.ts",
       "./src/core/base.entity.ts",
       "./src/event/event.entity.ts",
-      "./src/errors/database.errors.ts",
       "./src/errors/save-event.error.ts",
       "./src/event/event.service.ts",
       "./src/event/event.resolver.ts",
@@ -20235,11 +20268,12 @@
       "./src/config/cors.ts",
       "./src/config/app/graphql.config.ts",
       "./src/app.module.ts",
+      "./src/exceptions-filters/all-exceptions.filter.ts",
       "./node_modules/@types/cookie-parser/index.d.ts",
       "./node_modules/@types/express-session/index.d.ts",
+      "./src/main.ts",
       "./src/scripts/generate-graphql-definitions.ts",
-      "./src/exceptions-filters/all-exceptions.filter.ts",
-      "./src/main.ts"
+      "./src/app-user/app-user.service.ts"
     ]
   },
   "version": "3.7.4"
