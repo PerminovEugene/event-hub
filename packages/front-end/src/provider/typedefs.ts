@@ -1,8 +1,16 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
+  extend type Me {
+    role: String!
+    id: ID
+    status: String!
+    email: String!
+  }
+
   extend type Query {
     isLoggedIn: Boolean!
+    getMyself: Me
   }
 
   extend type Mutation {

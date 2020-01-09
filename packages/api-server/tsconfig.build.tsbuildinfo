@@ -3533,8 +3533,16 @@
         "version": "1241e25d85430910e9af2db8fb05d943bf95f0878cb244febc4dfe6e2baf5b29",
         "signature": "7f690b27e6e38ca47ba62922b291c4b9246bd5d8b3472fa5af60688e18446512"
       },
+      "./node_modules/dotenv/types/index.d.ts": {
+        "version": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528",
+        "signature": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528"
+      },
+      "./src/config/environment/service.ts": {
+        "version": "b936dcf3b0da531b63774ebe1b2d1fb813160ce019dfb78d6bb8da8dc7bd9908",
+        "signature": "aa1748fb91fd93663acebfc97a2a71b0086d1b5ede6cd424aa252a49cf513487"
+      },
       "./src/database/database.provider.ts": {
-        "version": "478822e47bbb5c654eaee854281448ecf27eb40186a4fa8b6333ff2bbca4df37",
+        "version": "d4fab0c9fb0959c8d7f08a93c6c49917897f1f062d4c931ac6e8da1bce4c84ed",
         "signature": "bf6bc37b5bd69df23b7a437c9a74bfd078a9d5410331346d476d71e567f246d2"
       },
       "./src/database/database.module.ts": {
@@ -3545,9 +3553,17 @@
         "version": "bff70242cea33c44c86ae755bf7c26f95de9c0db167798207a68947800447239",
         "signature": "5df67abb746f2613464fccaf164ce3bcfc947e6f7a91acbeef36f501dde4e9b5"
       },
+      "../shared/dist/transport/graphql.definitions.d.ts": {
+        "version": "8bec38746bde8439ea89af3cf7f6fa49971e51842eb4f89baa3ba96e1ba2fdb2",
+        "signature": "8bec38746bde8439ea89af3cf7f6fa49971e51842eb4f89baa3ba96e1ba2fdb2"
+      },
+      "../shared/dist/domain/auth.d.ts": {
+        "version": "d4e2003e7c3ea4ab8a47dd9b7e21a201cdb686a856435564f5b29518b349173e",
+        "signature": "d4e2003e7c3ea4ab8a47dd9b7e21a201cdb686a856435564f5b29518b349173e"
+      },
       "../shared/dist/index.d.ts": {
-        "version": "7e08b5ce451f2d8accc87b8199282704f67c651c3a75a5b136636daa861ed938",
-        "signature": "7e08b5ce451f2d8accc87b8199282704f67c651c3a75a5b136636daa861ed938"
+        "version": "362eef1bc3ca371afc977565e18fbddd40c515ec83abcd66822974f2d2dc4a6d",
+        "signature": "362eef1bc3ca371afc977565e18fbddd40c515ec83abcd66822974f2d2dc4a6d"
       },
       "./src/auth/auth.service.ts": {
         "version": "79da6c31865a06c62db2498a2409188aa8297166bc0355f9bfd45ea85d0418d7",
@@ -3654,8 +3670,8 @@
         "signature": "b69c0950d7d3c339fa8bd544a2f5cca74d1352ec45a769d9a8aa0383fcbc0faa"
       },
       "./src/event/event.entity.ts": {
-        "version": "1f130db1ac43a709f2d98f81a82145a4b8ef6fe34d9a6cce89adb28b2ee17f50",
-        "signature": "c044bb6e5e7dd68c6a375c26a8d9f1d1255a88535cb01248d4ef054e6b32f574"
+        "version": "4577cf125e805f6a8d1de26230da7805511692bbd54c3e3e169f6db06ee4f709",
+        "signature": "cdb10f91ac65d996a93aabc635ba516096fa5d5c33543f5a4700ed6f2b22ad62"
       },
       "./src/errors/save-event.error.ts": {
         "version": "cf4a85fbe69a71450c6e71a7872cfa8db1bc763c1ce106a9d28aa3d0666a058e",
@@ -3672,14 +3688,6 @@
       "./src/event/event.module.ts": {
         "version": "f1da90a6a3c276a0d5fbea2b1cb4f014f7833037acc39c9a665bcfb0fea4bbd9",
         "signature": "d2161b4958427240fd5c1876e243e6e7f170db5cb48df3889d4e91f107c454aa"
-      },
-      "./node_modules/dotenv/types/index.d.ts": {
-        "version": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528",
-        "signature": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528"
-      },
-      "./src/config/environment/service.ts": {
-        "version": "9292bfd050f3c82099694266fbe891bf4ec7ae414cda5d669030a3ed27808e96",
-        "signature": "651e562f4ee1db3ab2a5bd0c6e7ef4b25c73ffb4e66b5dd9fe0280ea639e3784"
       },
       "./src/config/cors.ts": {
         "version": "0ec844d354ab20a6c2a535f7bb67aeb6e58c14837de3522008799ac491ab3545",
@@ -3706,11 +3714,11 @@
         "signature": "903153d18b0365f1b99d9698f1feda333a65864fac218542f128536b9081c7fe"
       },
       "./src/main.ts": {
-        "version": "72d9f7f5497ac643f979a3b39ce14a26163cbc6e2b2c68ad7569c8cf949c4355",
+        "version": "a20e9cec8b0aa6f73e6a8005b110993c321314f0054fe5531475500b990fbfe1",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
       },
       "./src/scripts/generate-graphql-definitions.ts": {
-        "version": "b4c630faa3fa43104c045f66be0330fcff4f5de2219299e9a350071bbf744ba5",
+        "version": "8ad62895d2b0df60be946f61e366aeb0112217a100da078a0969ca43d79d9b01",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
       }
     },
@@ -11262,8 +11270,24 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/dotenv/types/index.d.ts": [
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/config/environment/service.ts": [
+        "./node_modules/dotenv/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./src/database/database.provider.ts": [
         "./node_modules/typeorm/index.d.ts",
+        "./src/config/environment/service.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -11288,7 +11312,21 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../shared/dist/transport/graphql.definitions.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../shared/dist/domain/auth.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../shared/dist/index.d.ts": [
+        "../shared/dist/transport/graphql.definitions.d.ts",
+        "../shared/dist/domain/auth.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -11560,21 +11598,6 @@
         "./src/database/database.module.ts",
         "./src/event/event.resolver.ts",
         "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/dotenv/types/index.d.ts": [
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/config/environment/service.ts": [
-        "./node_modules/dotenv/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/path.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -19153,14 +19176,15 @@
         "./node_modules/typeorm/index.d.ts",
         "./src/app-user/app-user.entity.ts"
       ],
-      "./src/database/database.provider.ts": [
-        "./node_modules/typeorm/index.d.ts"
-      ],
-      "../shared/dist/index.d.ts": [
+      "./node_modules/dotenv/types/index.d.ts": [
+        "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/database.provider.ts": [
+        "./node_modules/typeorm/index.d.ts"
       ],
       "./src/auth/auth.service.ts": [
         "./src/app-user/app-user.service.ts",
@@ -19314,13 +19338,6 @@
         "./src/event/event.service.ts",
         "../shared/dist/index.d.ts"
       ],
-      "./node_modules/dotenv/types/index.d.ts": [
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/config/app/graphql.config.ts": [
         "./node_modules/@nestjs/graphql/index.d.ts"
       ],
@@ -19339,6 +19356,26 @@
         "./node_modules/@types/express/index.d.ts",
         "./node_modules/@types/node/events.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../shared/dist/transport/graphql.definitions.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../shared/dist/index.d.ts": [
+        "../shared/dist/transport/graphql.definitions.d.ts",
+        "../shared/dist/domain/auth.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../shared/dist/domain/auth.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -20228,11 +20265,12 @@
       "./src/errors/database.errors.ts",
       "./src/database/helpers/database-errors.hander.ts",
       "./src/database/helpers/query-result.manager.ts",
+      "./src/app-user/app-user.service.ts",
+      "./node_modules/dotenv/types/index.d.ts",
+      "./src/config/environment/service.ts",
       "./src/database/database.provider.ts",
       "./src/database/database.module.ts",
       "./src/app-user/app-user.module.ts",
-      "../shared/dist/index.d.ts",
-      "./src/auth/auth.service.ts",
       "./node_modules/@nestjs/passport/dist/abstract.strategy.d.ts",
       "./node_modules/@nestjs/passport/dist/interfaces/auth-module.options.d.ts",
       "./node_modules/@nestjs/passport/dist/interfaces/type.interface.d.ts",
@@ -20247,33 +20285,34 @@
       "./node_modules/@types/passport-strategy/index.d.ts",
       "./node_modules/@types/passport-local/index.d.ts",
       "./src/auth/auth.errors.ts",
-      "./src/auth/local.strategy.ts",
       "./src/auth/guards/gql.guard.ts",
       "./src/auth/guards/gql.login.guard.ts",
       "./src/auth/guards/gql.authentification.guard.ts",
       "./src/auth/user.decorator.ts",
-      "./src/auth/auth.resolver.ts",
       "./src/auth/session.serializer.ts",
-      "./src/auth/auth.module.ts",
       "./src/adapters/class-validator-error.to.client-error.ts",
       "./src/errors/validation-entity.error.ts",
       "./src/core/base.entity.ts",
       "./src/event/event.entity.ts",
       "./src/errors/save-event.error.ts",
-      "./src/event/event.service.ts",
-      "./src/event/event.resolver.ts",
-      "./src/event/event.module.ts",
-      "./node_modules/dotenv/types/index.d.ts",
-      "./src/config/environment/service.ts",
       "./src/config/cors.ts",
-      "./src/config/app/graphql.config.ts",
-      "./src/app.module.ts",
       "./src/exceptions-filters/all-exceptions.filter.ts",
       "./node_modules/@types/cookie-parser/index.d.ts",
       "./node_modules/@types/express-session/index.d.ts",
       "./src/main.ts",
       "./src/scripts/generate-graphql-definitions.ts",
-      "./src/app-user/app-user.service.ts"
+      "../shared/dist/transport/graphql.definitions.d.ts",
+      "../shared/dist/index.d.ts",
+      "../shared/dist/domain/auth.d.ts",
+      "./src/auth/auth.service.ts",
+      "./src/auth/local.strategy.ts",
+      "./src/auth/auth.resolver.ts",
+      "./src/auth/auth.module.ts",
+      "./src/event/event.service.ts",
+      "./src/event/event.resolver.ts",
+      "./src/event/event.module.ts",
+      "./src/config/app/graphql.config.ts",
+      "./src/app.module.ts"
     ]
   },
   "version": "3.7.4"

@@ -21,10 +21,16 @@ const AppRender = ({ url, context, client }: any) => (
 export const renderPageContent = async (url: string, context: any, client: any): Promise<Content> => {
   const sheet = new ServerStyleSheet(); // styled components
   try {
+    console.log('render1 ');
     const App = AppRender({ url, context, client });
+    console.log('render2 ');
+
     await getDataFromTree(App);
+    console.log('render3 ');
+
     const sheets = new ServerStyleSheets(); // material UI styles
 
+    console.log('render4 ');
     const html = renderToString(sheet.collectStyles(sheets.collect(App)));
 
     return {

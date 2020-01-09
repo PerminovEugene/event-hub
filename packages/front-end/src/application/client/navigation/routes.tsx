@@ -5,56 +5,68 @@ import NotFound from '../features/system/not-found/not-found.page';
 import Registration from '../features/auth/registration/registration.page';
 import Login from '../features/auth/login/login.page';
 import CreateEventPage from '../features/domain/event-managment/create-event/create-event.page';
+import { Action, Resource } from '@calendar/shared';
+import Dashboard from '../layout/dashboard/dashboard.component';
 
-type Route = {
+export type Route = {
   component: React.ComponentType;
   path: PagePath;
   exact?: true;
+
+  action: Action;
+  resource: Resource;
 };
 
-enum UserRole { //TODO mock, later should be in core
-  guest = 'guest',
-  authorised = 'authorised',
-  admin = 'admin',
-}
-
-export type PrivateRoute = Route & {
-  accessRights: Array<UserRole>; // TODO
+export type LayoutRoutes = {
+  routes: Array<Route>;
+  layoutComponent: React.ComponentType;
+  layoutName: string;
 };
 
 type NotFoundRoute = {
   component: React.ComponentType;
 };
 
-export type PublicRoute = Route;
-
-type Routes = {
-  publicRoutes: Array<PublicRoute>;
-  privateRoutes: Array<PrivateRoute>;
+export type Routes = {
+  withLayout: Array<LayoutRoutes>;
+  noLayout: Array<Route>;
   notFound: NotFoundRoute;
 };
 
 const routes: Routes = {
-  publicRoutes: [
+  withLayout: [
     {
-      component: Calendar,
-      path: PagePath.root,
-      exact: true,
+      layoutName: 'Dashboard',
+      layoutComponent: Dashboard,
+      routes: [
+        {
+          component: Calendar,
+          path: PagePath.root,
+          exact: true,
+          action: Action.read,
+          resource: Resource.event,
+        },
+        {
+          component: CreateEventPage,
+          path: PagePath.createEvent,
+          action: Action.create,
+          resource: Resource.event,
+        },
+      ],
     },
+  ],
+  noLayout: [
     {
       component: Registration,
       path: PagePath.registration,
+      action: Action.registration,
+      resource: Resource.auth,
     },
     {
       component: Login,
       path: PagePath.login,
-    },
-  ],
-  privateRoutes: [
-    {
-      component: CreateEventPage,
-      path: PagePath.createEvent,
-      accessRights: [UserRole.authorised],
+      action: Action.login,
+      resource: Resource.auth,
     },
   ],
   notFound: {

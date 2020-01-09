@@ -1,18 +1,20 @@
 import { createConnection } from 'typeorm';
+import { configService, EnvField } from './../config/environment/service';
 
 export const databaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',
-    useFactory: async () =>
-      await createConnection({
+    useFactory: async () => {
+      return await createConnection({
         type: 'postgres',
         host: 'localhost',
-        port: 5432,
-        username: 'hipe',
-        password: 'qwerty',
-        database: 'hipedb',
+        port: parseInt(configService.get(EnvField.DB_PORT)),
+        username: configService.get(EnvField.DB_USERNAME),
+        password: configService.get(EnvField.DB_PASSWORD),
+        database: configService.get(EnvField.DB_NAME),
+        synchronize: configService.get(EnvField.DB_SYNC) === 'true',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: true, // TODO
-      }),
+      });
+    },
   },
 ];

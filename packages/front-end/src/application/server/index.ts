@@ -18,12 +18,13 @@ const start = async () => {
 
   app.use('/assets', express.static('assets'));
   app.use('/assets/images/*', (req, res, next) => {
-    // TODO
+    // TODO add images handling
     res.send(404);
     res.end();
   });
   app.get('*', async (req: any, res, next) => {
     const context = {};
+    // TODO connect sid
     const transportOptions = buildOptions({ isLoggedIn: !!(req.cookies && req.cookies['connect.sid']) });
     const client = getTransport(transportOptions);
 

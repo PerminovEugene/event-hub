@@ -33,5 +33,6 @@ async function bootstrap() {
 
   await app.listen(configService.get(EnvField.PORT));
 }
-setTimeout(bootstrap, 100)
-// bootstrap();
+// TODO make ellegant logic.
+// We need delay because of .env loading
+setTimeout(bootstrap, 100);

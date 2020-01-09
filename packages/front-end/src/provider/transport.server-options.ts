@@ -2,7 +2,8 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'node-fetch';
 import { typeDefs } from './typedefs';
-import { resolvers } from './resolvers';
+// import { resolvers } from './resolvers';
+import { Role } from '@calendar/shared';
 
 type OptionsBuildConfig = {
   isLoggedIn: boolean;
@@ -18,6 +19,13 @@ export const buildOptions = ({ isLoggedIn }: OptionsBuildConfig) => {
   cache.writeData({
     data: {
       isLoggedIn: isLoggedIn,
+      me: {
+        __typename: 'Me',
+        role: Role.guest,
+        user_id: null,
+        email: null,
+        status: null,
+      },
     },
   });
   return {
@@ -25,6 +33,6 @@ export const buildOptions = ({ isLoggedIn }: OptionsBuildConfig) => {
     ssrMode: true,
     cache: cache,
     typeDefs,
-    resolvers,
+    // resolvers,
   };
 };

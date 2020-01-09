@@ -26,36 +26,6 @@ export class EntryPoint {
   };
 }
 
-//   public initStore = (client: any) => (
-//     // let store = createStore(
-//       // reducer,
-//       // (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
-//     // );
-//     createStore(
-//     combineReducers({
-//       reducer: reducer,
-//       apollo: client.reducer(),
-//     }),
-//     clientRestoreData(),
-//     compose(
-//         applyMiddleware(client.middleware()),
-//         (typeof (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined') ? (window as any).__REDUX_DEVTOOLS_EXTENSION__() : (f: any) => f,
-//     ))
-//   )
-// }
-
 const entryPoint = new EntryPoint();
-
-// export function reducer(state: any, action: any) {
-//   if (!action) {
-//     return state;
-//   }
-
-//   if (action.type === 'UPDATE_STORE') {
-//     return action.payload;
-//   }
-
-//   return state;
-// }
 
 entryPoint.start();

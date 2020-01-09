@@ -2,7 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../core/base.entity';
 import { IsOptional, IsString, IsDate } from 'class-validator';
 
-export enum Type {
+// TODO Move to db
+export enum EventType {
   conference = 'conference',
   meetup = 'meetup',
   workshop = 'workshop',
@@ -26,7 +27,7 @@ export class Event extends BaseEntity {
   description: string;
 
   @Column('text')
-  type: Type;
+  type: EventType;
 
   @IsDate({
     message: 'Invalid date',

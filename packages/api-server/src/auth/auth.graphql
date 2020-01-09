@@ -1,5 +1,6 @@
 type SessionData {
   id: Int
+  user_id: Int
   email: String
   role: String
   status: String

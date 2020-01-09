@@ -10,6 +10,12 @@ export enum EnvField {
   PORT = 'PORT',
   FRONT_END_DOMAIN = 'FRONT_END_DOMAIN',
   COOKIE_SECRET = 'COOKIE_SECRET',
+  DB_HOST = 'DB_HOST',
+  DB_PORT = 'DB_PORT',
+  DB_USERNAME = 'DB_USERNAME',
+  DB_PASSWORD = 'DB_PASSWORD',
+  DB_NAME = 'DB_NAME',
+  DB_SYNC = 'DB_SYNC',
 }
 
 export class ConfigService {
@@ -36,6 +42,13 @@ export class ConfigService {
       PORT: Joi.number().default(3000),
       FRONT_END_DOMAIN: Joi.string().required(),
       COOKIE_SECRET: Joi.string().required(),
+
+      DB_HOST: Joi.string().required(),
+      DB_PORT: Joi.number().required(),
+      DB_USERNAME: Joi.string().required(),
+      DB_PASSWORD: Joi.string().required(),
+      DB_NAME: Joi.string().required(),
+      DB_SYNC: Joi.boolean().required(),
     });
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
