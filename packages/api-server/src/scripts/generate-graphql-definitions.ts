@@ -11,8 +11,6 @@ const placeToSave = join(
   '../../../shared/src/transport/graphql.definitions.ts',
 );
 
-console.log('place to save: ', placeToSave);
-
 definitionsFactory
   .generate({
     typePaths: ['./src/**/*.graphql'],

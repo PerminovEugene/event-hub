@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { PagePath } from '../../navigation/pathes';
 import { ThemeLink } from '../../components/link/link.component';
 import LogoutButton from '../../features/auth/logout/logout.button';
+import { AuthContext } from './../../contexts/auth.context';
 
 const drawerWidth = 240;
 
@@ -42,35 +43,41 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = ({ handleDrawerOpen, open, isLoggedIn }: any) => {
+const Header = ({ handleDrawerOpen, open }: any) => {
   const classes = useStyles({});
   return (
     <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-      <Toolbar className={classes.toolbar}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-          Dashboard
-        </Typography>
-        {/* <IconButton color="inherit">
+      <AuthContext.Consumer>
+        {({ isLoggedIn }) => {
+          return (
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                Dashboard
+              </Typography>
+              {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton> */}
-        {isLoggedIn && <LogoutButton />}
-        {!isLoggedIn && (
-          <ThemeLink to={PagePath.login} size="small">
-            Sign in
-          </ThemeLink>
-        )}
-      </Toolbar>
+              {isLoggedIn && <LogoutButton />}
+              {!isLoggedIn && (
+                <ThemeLink to={PagePath.login} size="small">
+                  Sign in
+                </ThemeLink>
+              )}
+            </Toolbar>
+          );
+        }}
+      </AuthContext.Consumer>
     </AppBar>
   );
 };

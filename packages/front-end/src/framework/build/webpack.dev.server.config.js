@@ -21,7 +21,8 @@ module.exports = {
   },
   mode: 'development',
   target: 'node',
-  devtool: 'source-map',
+  // devtool: 'source-map',
+  devtool: 'eval-source-map',
   resolve: {
     ...config.resolve,
   },

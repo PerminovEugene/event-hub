@@ -8,6 +8,7 @@ import { FormWrapper, FormActions } from './../../../components/form/form.wrappe
 import { ElementView, FormElement } from './../../../components/form/form.elements';
 import { LoginInput, SessionData } from '@calendar/shared';
 import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
+import { createMe } from '../../../../../provider/store.actions/me';
 
 const LOGIN = gql`
   mutation login($loginInput: LoginInput!) {
@@ -47,7 +48,7 @@ const initialValues: LoginInput = {
 };
 
 const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
-  const [login] = useMutation<{ sessionData: SessionData }>(LOGIN);
+  const [login] = useMutation<{ login: SessionData }>(LOGIN);
   const client = useApolloClient();
   return (
     <FormWrapper
@@ -57,15 +58,14 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
       submitText="sign in" // TODO i18n'
       onSubmit={async (values: LoginInput, actions: FormActions<LoginInput>) => {
         try {
-          await login({
+          const result = await login({
             variables: {
               loginInput: { email: values.email, password: values.password },
             },
           });
+          debugger;
           client.writeData({
-            data: {
-              isLoggedIn: true,
-            },
+            data: createMe(result.data.login),
           });
           actions.setStatus(null);
           history.push('/');

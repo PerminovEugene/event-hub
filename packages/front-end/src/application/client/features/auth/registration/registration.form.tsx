@@ -8,6 +8,7 @@ import { FormWrapper, FormActions } from './../../../components/form/form.wrappe
 import { ElementView, FormElement } from './../../../components/form/form.elements';
 import { LoginInput, SessionData, RegistrationInput } from '@calendar/shared';
 import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
+import { createMe } from '../../../../../provider/store.actions/me';
 
 const REGISTRATION = gql`
   mutation registration($registrationInput: RegistrationInput!) {
@@ -57,7 +58,7 @@ const initialValues: RegistrationInput = {
 };
 
 const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
-  const [registration] = useMutation<{ sessionData: SessionData }>(REGISTRATION);
+  const [registration] = useMutation<{ registration: SessionData }>(REGISTRATION);
   const client = useApolloClient();
   return (
     <FormWrapper
@@ -67,7 +68,7 @@ const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
       submitText="sign up" // TODO i18n
       onSubmit={async (values: RegistrationInput, actions: FormActions<LoginInput>) => {
         try {
-          await registration({
+          const result = await registration({
             variables: {
               registrationInput: {
                 email: values.email,
@@ -76,10 +77,9 @@ const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
               },
             },
           });
+          debugger;
           client.writeData({
-            data: {
-              isLoggedIn: true,
-            },
+            data: createMe(result.data.registration),
           });
           actions.setStatus(null);
           history.push('/');

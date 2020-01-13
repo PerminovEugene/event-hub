@@ -3,36 +3,30 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'node-fetch';
 import { typeDefs } from './typedefs';
 // import { resolvers } from './resolvers';
-import { Role } from '@calendar/shared';
+import { SessionData } from '@calendar/shared';
+import { createMe } from './store.actions/me';
 
 type OptionsBuildConfig = {
-  isLoggedIn: boolean;
+  user: SessionData;
 };
 
-export const buildOptions = ({ isLoggedIn }: OptionsBuildConfig) => {
+export const buildOptions = ({ user }: OptionsBuildConfig) => {
   const cache = new InMemoryCache();
   const link = createHttpLink({
     uri: 'http://localhost:3000/graphql',
     fetch: fetch as any,
     credentials: 'include',
   });
+  console.log('user: ', user);
   cache.writeData({
-    data: {
-      isLoggedIn: isLoggedIn,
-      me: {
-        __typename: 'Me',
-        role: Role.guest,
-        user_id: null,
-        email: null,
-        status: null,
-      },
-    },
+    data: createMe(user),
   });
   return {
-    link: link,
+    link,
     ssrMode: true,
-    cache: cache,
+    cache,
     typeDefs,
-    // resolvers,
+    resolvers: {},
+    // ssrForceFetchDelay: 5,
   };
 };

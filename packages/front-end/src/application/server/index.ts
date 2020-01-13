@@ -22,10 +22,14 @@ const start = async () => {
     res.send(404);
     res.end();
   });
+
+  const isSessionCookieExist = (req: any) => !!(req.cookies && req.cookies['connect.sid']);
+  const getUserCookie = (req: any) => (isSessionCookieExist(req) ? req.cookies['user'] : null);
+
   app.get('*', async (req: any, res, next) => {
     const context = {};
-    // TODO connect sid
-    const transportOptions = buildOptions({ isLoggedIn: !!(req.cookies && req.cookies['connect.sid']) });
+    console.log('USER', JSON.parse(getUserCookie(req)));
+    const transportOptions = buildOptions({ user: JSON.parse(getUserCookie(req)) });
     const client = getTransport(transportOptions);
 
     const content: Content = await renderPageContent(req.url, context, client);

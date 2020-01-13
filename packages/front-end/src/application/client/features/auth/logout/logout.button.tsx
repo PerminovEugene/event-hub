@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+import { createMe } from '../../../../../provider/store.actions/me';
 
 const LOGOUT = gql`
   mutation Logout {
@@ -26,9 +27,7 @@ const LogoutButton = ({ history }: LogoutButtonProps) => {
         const result = await logout();
         client.cache.reset();
         client.writeData({
-          data: {
-            isLoggedIn: false,
-          },
+          data: createMe(),
         });
         history.push('/login');
       }}

@@ -3,9 +3,9 @@ import gql from 'graphql-tag';
 export const typeDefs = gql`
   extend type Me {
     role: String!
-    id: ID
-    status: String!
-    email: String!
+    user_id: ID
+    status: String
+    email: String
   }
 
   extend type Query {

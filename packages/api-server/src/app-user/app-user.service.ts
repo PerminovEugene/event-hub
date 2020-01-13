@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { AppUser as AppUserEntity, Status } from './app-user.entity';
 import { wrapDbError } from 'src/database/helpers/database-errors.hander';
 import { getInsertResult } from 'src/database/helpers/query-result.manager';
+import { Role } from '@calendar/shared';
 
 const SALT_ROUNDS = 10;
 
@@ -22,10 +23,14 @@ export class AppUserService {
     )[0];
   }
 
-  public async create(email: string, password: string): Promise<AppUserEntity> {
+  public async create(
+    email: string,
+    password: string,
+    role?: Role,
+  ): Promise<AppUserEntity> {
     const salt = await this.generateSalt();
     const hashedPassword = await this.hashText(password, salt);
-    const role = 'customer'; // TODO move to enums
+    role = role || Role.client;
     const status = Status.active;
     const parameters = {
       email,
@@ -35,13 +40,7 @@ export class AppUserService {
       status,
     };
     try {
-      const insertResult = await this.appUserRepository.insert({
-        email,
-        password: hashedPassword,
-        salt,
-        role,
-        status,
-      });
+      const insertResult = await this.appUserRepository.insert(parameters);
       return {
         email,
         status,

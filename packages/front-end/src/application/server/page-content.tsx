@@ -4,7 +4,7 @@ import Application from '../client/application';
 import { ServerStyleSheet } from 'styled-components';
 import { ServerStyleSheets } from '@material-ui/styles';
 import { ServerRouter } from '../client/navigation/server-router';
-import { getDataFromTree } from '@apollo/react-ssr';
+import { getMarkupFromTree } from '@apollo/react-ssr';
 
 export type Content = {
   html: string;
@@ -21,17 +21,15 @@ const AppRender = ({ url, context, client }: any) => (
 export const renderPageContent = async (url: string, context: any, client: any): Promise<Content> => {
   const sheet = new ServerStyleSheet(); // styled components
   try {
-    console.log('render1 ');
     const App = AppRender({ url, context, client });
-    console.log('render2 ');
-
-    await getDataFromTree(App);
-    console.log('render3 ');
-
     const sheets = new ServerStyleSheets(); // material UI styles
 
-    console.log('render4 ');
-    const html = renderToString(sheet.collectStyles(sheets.collect(App)));
+    const content = await getMarkupFromTree({
+      tree: sheet.collectStyles(sheets.collect(App)),
+      renderFunction: renderToString,
+    });
+
+    const html = content;
 
     return {
       html: html,

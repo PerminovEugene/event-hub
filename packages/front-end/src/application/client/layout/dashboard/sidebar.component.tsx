@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { makeStyles } from '@material-ui/core';
+import { SidebarList } from './list-items';
 
 const drawerWidth = 240;
 
@@ -56,8 +57,8 @@ const Sidebar = ({ open, handleDrawerClose }: any) => {
           <ChevronLeftIcon />
         </IconButton>
       </div>
+      <SidebarList />;
       <Divider />
-      {/* <List>{mainListItems}</List> */}
       <Divider />
       {/* <List>{secondaryListItems}</List> */}
     </Drawer>

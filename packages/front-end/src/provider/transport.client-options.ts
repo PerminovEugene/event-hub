@@ -10,6 +10,6 @@ export const getOptions = () => {
     }),
     cache: new InMemoryCache().restore((window as any).__APOLLO_STATE__),
     typeDefs,
-    // resolvers: resolvers,
+    resolvers: {},
   };
 };

@@ -7,18 +7,16 @@ import Login from '../features/auth/login/login.page';
 import CreateEventPage from '../features/domain/event-managment/create-event/create-event.page';
 import { Action, Resource } from '@calendar/shared';
 import Dashboard from '../layout/dashboard/dashboard.component';
+import { allEventsRoute, createEventRoute, Route } from './routes';
 
-export type Route = {
+export type ViewRoute = Route & {
   component: React.ComponentType;
+  exact?: boolean;
   path: PagePath;
-  exact?: true;
-
-  action: Action;
-  resource: Resource;
 };
 
 export type LayoutRoutes = {
-  routes: Array<Route>;
+  routes: Array<ViewRoute>;
   layoutComponent: React.ComponentType;
   layoutName: string;
 };
@@ -29,7 +27,7 @@ type NotFoundRoute = {
 
 export type Routes = {
   withLayout: Array<LayoutRoutes>;
-  noLayout: Array<Route>;
+  noLayout: Array<ViewRoute>;
   notFound: NotFoundRoute;
 };
 
@@ -41,16 +39,12 @@ const routes: Routes = {
       routes: [
         {
           component: Calendar,
-          path: PagePath.root,
           exact: true,
-          action: Action.read,
-          resource: Resource.event,
+          ...allEventsRoute,
         },
         {
           component: CreateEventPage,
-          path: PagePath.createEvent,
-          action: Action.create,
-          resource: Resource.event,
+          ...createEventRoute,
         },
       ],
     },
@@ -73,4 +67,5 @@ const routes: Routes = {
     component: NotFound,
   },
 };
+
 export default routes;
