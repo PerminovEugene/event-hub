@@ -1,0 +1,13 @@
+fixtures:
+  - name: 'New year party'
+    type: 'meetup'
+    description: 'New year party with vodka and juice'
+    date: '01/01/2020'
+  - name: 'Just a day'
+    type: 'conference'
+    description: 'Last day of january'
+    date: '06/01/2020'
+  - name: '7 jan'
+    type: 'article'
+    description: 'The end of acation'
+    date: '01/10/2020'

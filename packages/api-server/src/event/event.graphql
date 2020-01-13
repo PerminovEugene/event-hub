@@ -6,8 +6,14 @@ type Event {
   date: String!
 }
 
+input FiltersInput {
+  fromDate: String
+  toDate: String
+  tags: [String]
+}
+
 type Query {
-  getEvents(month: String): [Event]
+  getEvents(filtersInput: FiltersInput): [Event]
 }
 
 input EventInput {
@@ -19,5 +25,5 @@ input EventInput {
 }
 
 type Mutation {
-  createEvent(event: EventInput): Event
+  createEvent(eventInput: EventInput): Event
 }

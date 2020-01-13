@@ -5,6 +5,12 @@
  */
 
 /* tslint:disable */
+export class EventFilters {
+    fromDate?: string;
+    toDate?: string;
+    tags?: string[];
+}
+
 export class EventInput {
     id?: number;
     name?: string;
@@ -45,11 +51,12 @@ export abstract class IMutation {
 export abstract class IQuery {
     abstract whoAmI(): SessionData | Promise<SessionData>;
 
-    abstract getEvents(month?: string): Event[] | Promise<Event[]>;
+    abstract getEvents(eventFilters?: EventFilters): Event[] | Promise<Event[]>;
 }
 
 export class SessionData {
     id?: number;
+    user_id?: number;
     email?: string;
     role?: string;
     status?: string;

@@ -3530,8 +3530,8 @@
         "signature": "78d29925060f5dded5e8d3212ee5d764db0fc414ee0e8e51774949eceb5ae8e3"
       },
       "../shared/dist/transport/graphql.definitions.d.ts": {
-        "version": "8bec38746bde8439ea89af3cf7f6fa49971e51842eb4f89baa3ba96e1ba2fdb2",
-        "signature": "8bec38746bde8439ea89af3cf7f6fa49971e51842eb4f89baa3ba96e1ba2fdb2"
+        "version": "6298daa004649e1af95d7fb649bd8399706b10e1b9889cb405a11c35e6fcafbd",
+        "signature": "6298daa004649e1af95d7fb649bd8399706b10e1b9889cb405a11c35e6fcafbd"
       },
       "../shared/dist/domain/auth.d.ts": {
         "version": "d4e2003e7c3ea4ab8a47dd9b7e21a201cdb686a856435564f5b29518b349173e",
@@ -3542,7 +3542,7 @@
         "signature": "362eef1bc3ca371afc977565e18fbddd40c515ec83abcd66822974f2d2dc4a6d"
       },
       "./src/app-user/app-user.service.ts": {
-        "version": "7cc6855a896e99c499489f8a35ec9fc74393abce053cf2d1912a3cdb3ff4ec47",
+        "version": "3d7725a0b9ae511942dd82d6a5e8b770cce5d1b4793081295732b43eef821180",
         "signature": "1a8c7f55cc68db260ff0b07019ef40a8c00e59cd94162d9feb55ecd08ba67e33"
       },
       "./node_modules/dotenv/types/index.d.ts": {
@@ -3550,12 +3550,12 @@
         "signature": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528"
       },
       "./src/config/environment/service.ts": {
-        "version": "b936dcf3b0da531b63774ebe1b2d1fb813160ce019dfb78d6bb8da8dc7bd9908",
+        "version": "88ff843e7df1ad7a689bcc14de7ab69746814ec3ae6db237578d45b6ba33c716",
         "signature": "aa1748fb91fd93663acebfc97a2a71b0086d1b5ede6cd424aa252a49cf513487"
       },
       "./src/database/database.provider.ts": {
-        "version": "d4fab0c9fb0959c8d7f08a93c6c49917897f1f062d4c931ac6e8da1bce4c84ed",
-        "signature": "bf6bc37b5bd69df23b7a437c9a74bfd078a9d5410331346d476d71e567f246d2"
+        "version": "04425f971ac225e03f721fb512c00545bc3057b1e8b7cd20f8b5ae4d319019c7",
+        "signature": "24274ae74d614751c4eb2c38fb259a6d5ce41c76cc4004f2e12aa9f4070b9170"
       },
       "./src/database/database.module.ts": {
         "version": "f959ef08d7a34bb95abc8fa98f24d81c41b0f22643be4f9ffc0ec85517c22aaa",
@@ -3666,11 +3666,11 @@
         "signature": "fbbb923d7cb680fa19006b88d4534ebaf650c23fea41ce7f5cc9f16064da734a"
       },
       "./src/core/base.entity.ts": {
-        "version": "ddc83fae597de798c4f29723eae08022fe8b4b0d18778939e25f8aa17c43f0e0",
+        "version": "eb53238a03bb6e5b68aa9a50f9e84185cb02c099def018aeb3cee5e22c952a65",
         "signature": "b69c0950d7d3c339fa8bd544a2f5cca74d1352ec45a769d9a8aa0383fcbc0faa"
       },
       "./src/event/event.entity.ts": {
-        "version": "4577cf125e805f6a8d1de26230da7805511692bbd54c3e3e169f6db06ee4f709",
+        "version": "b730079671e6922db1116cbfdacbc4c18f061f08de016e58071a8baf7a7bd6de",
         "signature": "cdb10f91ac65d996a93aabc635ba516096fa5d5c33543f5a4700ed6f2b22ad62"
       },
       "./src/errors/save-event.error.ts": {
@@ -3678,12 +3678,12 @@
         "signature": "ee747a8be63f7f652650459ae1c92a6223fbc67304da4629753c6f80c13b2a53"
       },
       "./src/event/event.service.ts": {
-        "version": "2e7369c6519c4dc5b88eef6c3512ff7b6789334608b1267d8b62f3f1535f0b6a",
-        "signature": "0acfab24bf51847e6f26a4a9299eadd27e20dcaf43a26bcf77f5a398ea5c76c6"
+        "version": "3a030fde45ec2a58dfc2a48e31db8c864cae1f310312b6ce157a605e2be1c81d",
+        "signature": "6cbb19eaa219ec1b1a47ca1ca04d977f0bb5187a67449bd9577f0d3420a670bd"
       },
       "./src/event/event.resolver.ts": {
-        "version": "ac0401d74350d8368192f4303b13d4bf4be7dcbf0abd75bda9693401b3d6e5ec",
-        "signature": "a827dcf0a4409af52cfefb70ca7db9b4486d89714b39d1a02a04e994777cc337"
+        "version": "4045a73727a2d069064aee5c5a38ae6eebc669dbf69c5dbfe889e8f89b56701a",
+        "signature": "8cdb501dff95f8f3a3b2e9aa75e88b5bbe467d37123248b16a6b993a655c6240"
       },
       "./src/event/event.module.ts": {
         "version": "f1da90a6a3c276a0d5fbea2b1cb4f014f7833037acc39c9a665bcfb0fea4bbd9",
@@ -3716,6 +3716,30 @@
       "./src/main.ts": {
         "version": "a20e9cec8b0aa6f73e6a8005b110993c321314f0054fe5531475500b990fbfe1",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      "./node_modules/@types/js-yaml/index.d.ts": {
+        "version": "a42b7d08df859d5d5774a43c161a70656b7e58c0593f249f5d403a393e0b91c6",
+        "signature": "a42b7d08df859d5d5774a43c161a70656b7e58c0593f249f5d403a393e0b91c6"
+      },
+      "./src/database/fixtures/service.manager.ts": {
+        "version": "42fe35b682f5d6dca544a05ec8cb2c9edbb475d3b59596a3b3f18771bc8f8990",
+        "signature": "25a29ae32c274f7cf0663b8b7d8fdbb32363c436477a28a7d37ba39896227455"
+      },
+      "./src/database/fixtures/executor.ts": {
+        "version": "cb01f699374abe093b174764face7178456b830af1e9402e655dae0513d46472",
+        "signature": "d0c3d846e609597b4c76122ee11dbced5da166037c121963fd56a47fd596fb7a"
+      },
+      "./src/database/fixtures/repository.mock.ts": {
+        "version": "45d3d5e38f627ad32bff9c94780a246bbdf2f3f15a75a55f0e3966ad6fcd8f9e",
+        "signature": "fc9a1720623388e692594866f3932d6e6aa7614395bde4dc332438dab4a24742"
+      },
+      "./src/database/fixtures/entities/app-user/service.manager.ts": {
+        "version": "83aea0279364342276c53e3361eb89b86ced92f85fab01b65483d28e35297956",
+        "signature": "965aeb5def1e058a56630cedc074985d3221b40fe48028d6e2879ad92f8392b0"
+      },
+      "./src/database/fixtures/entities/event/service.manager.ts": {
+        "version": "18067b089ea4559b2e9625402dbbb8d979bcdf6081af04771d9fa0108650dbe1",
+        "signature": "e574f49cb67806171c00d7fb73d95fc75bb5475c16b2ce49dcdbb89be5429e61"
       },
       "./src/scripts/generate-graphql-definitions.ts": {
         "version": "97e631ea51e940a0f333ca17cde5fbbb774bffa47d529adea8a3128ad8628d32",
@@ -11674,6 +11698,58 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/@types/js-yaml/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/fixtures/service.manager.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/fixtures/executor.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./node_modules/@types/js-yaml/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./src/database/database.provider.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./src/database/fixtures/service.manager.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/fixtures/repository.mock.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/fixtures/entities/app-user/service.manager.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./src/database/fixtures/repository.mock.ts",
+        "./src/database/fixtures/service.manager.ts",
+        "./src/app-user/app-user.service.ts",
+        "./src/app-user/app-user.entity.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/fixtures/entities/event/service.manager.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./src/database/fixtures/repository.mock.ts",
+        "./src/database/fixtures/service.manager.ts",
+        "./src/event/event.service.ts",
+        "./src/event/event.entity.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./src/scripts/generate-graphql-definitions.ts": [
         "./node_modules/@nestjs/graphql/index.d.ts",
         "./node_modules/@types/node/path.d.ts",
@@ -19382,6 +19458,28 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/js-yaml/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/database/fixtures/executor.ts": [
+        "./node_modules/typeorm/index.d.ts"
+      ],
+      "./src/database/fixtures/repository.mock.ts": [
+        "./node_modules/typeorm/index.d.ts"
+      ],
+      "./src/database/fixtures/entities/app-user/service.manager.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./src/app-user/app-user.entity.ts",
+        "./src/database/fixtures/service.manager.ts"
+      ],
+      "./src/database/fixtures/entities/event/service.manager.ts": [
+        "./node_modules/typeorm/index.d.ts",
+        "./src/event/event.entity.ts",
+        "./src/database/fixtures/service.manager.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -20314,7 +20412,13 @@
       "./node_modules/@types/cookie-parser/index.d.ts",
       "./node_modules/@types/express-session/index.d.ts",
       "./src/main.ts",
-      "./src/scripts/generate-graphql-definitions.ts"
+      "./node_modules/@types/js-yaml/index.d.ts",
+      "./src/database/fixtures/service.manager.ts",
+      "./src/database/fixtures/executor.ts",
+      "./src/database/fixtures/repository.mock.ts",
+      "./src/database/fixtures/entities/app-user/service.manager.ts",
+      "./src/scripts/generate-graphql-definitions.ts",
+      "./src/database/fixtures/entities/event/service.manager.ts"
     ]
   },
   "version": "3.7.4"

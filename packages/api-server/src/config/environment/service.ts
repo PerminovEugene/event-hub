@@ -61,6 +61,7 @@ export class ConfigService {
   }
 }
 
+// TODO Move file name to params
 export const configService = new ConfigService(
   resolve(process.cwd(), `env/.env`),
 );

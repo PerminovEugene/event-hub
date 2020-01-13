@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../core/base.entity';
-import { IsOptional, IsString, IsDate } from 'class-validator';
+import { IsString, IsDate } from 'class-validator';
 
 // TODO Move to db
 export enum EventType {
@@ -21,7 +21,6 @@ export class Event extends BaseEntity {
   @Column('text')
   name: string;
 
-  @IsOptional()
   @IsString()
   @Column('text')
   description: string;

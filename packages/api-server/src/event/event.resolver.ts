@@ -8,17 +8,17 @@ export class EventResolver {
 
   @Query()
   async getEvents(
-    @Args('filters')
-    filters: any,
+    @Args('FiltersInput')
+    filtersInput: any,
   ) {
-    return await this.eventService.getEvents(filters);
+    return await this.eventService.getEvents(filtersInput);
   }
 
   @Mutation()
   async createEvent(
-    @Args('event')
+    @Args('eventInput')
     event: EventInput,
   ) {
-    return await this.eventService.createEvent(event);
+    return await this.eventService.create(event);
   }
 }

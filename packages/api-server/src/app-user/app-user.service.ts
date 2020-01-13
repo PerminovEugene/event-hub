@@ -2,8 +2,8 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { AppUser as AppUserEntity, Status } from './app-user.entity';
-import { wrapDbError } from 'src/database/helpers/database-errors.hander';
-import { getInsertResult } from 'src/database/helpers/query-result.manager';
+import { wrapDbError } from '../database/helpers/database-errors.hander';
+import { getInsertResult } from '../database/helpers/query-result.manager';
 import { Role } from '@calendar/shared';
 
 const SALT_ROUNDS = 10;

@@ -12,13 +12,13 @@ export class EventService {
   ) {}
 
   public async getEvents(filters: any) {
-    console.log(filters);
+    console.log('filters:', filters);
     return this.eventRepository.find();
   }
 
   // CREATE EVENT
 
-  public async createEvent(eventDTO: EventInput): Promise<EventEntity> {
+  public async create(eventDTO: EventInput): Promise<EventEntity> {
     const event: EventEntity = this.createEventEntity(eventDTO);
     await event.validate();
     return await this.saveEventEntity(event);
@@ -27,7 +27,10 @@ export class EventService {
   protected createEventEntity(eventDTO: EventInput): EventEntity {
     try {
       const event: EventEntity = new EventEntity();
-      Object.assign(event, eventDTO);
+      // TODO tricky
+      Object.assign(event, eventDTO, { date: new Date(eventDTO.date) });
+      console.log(event);
+
       return event;
     } catch (e) {
       throw e;

@@ -1,0 +1,13 @@
+fixtures:
+  - email: manager@mail.com
+    password: 'qwerty'
+    role: 'manager'
+  - email: admin@mail.com
+    password: 'qwerty'
+    role: 'admin'
+  - email: superadmin@mail.com
+    password: 'qwerty'
+    role: 'superadmin'
+  - email: client@mail.com
+    password: 'qwerty'
+    role: 'client'

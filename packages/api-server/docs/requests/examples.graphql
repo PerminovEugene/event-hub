@@ -1,0 +1,42 @@
+# Write your query or mutation her
+
+mutation reg {
+  registration(
+    registrationInput: {
+      email: "test@mail.ru"
+      password: "qweqwe"
+      passwordConfirm: "qweqweee"
+    }
+  ) {
+    email
+    role
+  }
+}
+
+mutation login {
+  login(loginInput: { email: "test@mail.ru", password: "qweqwe" }) {
+    email
+    role
+  }
+}
+
+query getEvents {
+  getEvents(filtersInput: {}) {
+    id
+    type
+  }
+}
+
+mutation createEvent {
+  createEvent(
+    eventInput: {
+      type: "flex"
+      name: "Tyca"
+      date: "05/05/1993"
+      description: "takoi pot"
+    }
+  ) {
+    name
+    id
+  }
+}
