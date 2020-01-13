@@ -3,8 +3,9 @@ import { ListItem, ListItemIcon, ListItemText, List } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { AuthContext } from '../../contexts/auth.context';
 import { allEventsRoute, createEventRoute, Route } from './../../navigation/routes';
-import { isUserHasRights } from '@calendar/shared';
+import { isUserHasRights, Role } from '@calendar/shared';
 import { generateNodeKey } from '../../../../framework/generators/string-generator';
+import { Link } from 'react-router-dom';
 
 type ListItemConfig = Route & {
   primary: string;
@@ -24,10 +25,19 @@ export const listItemsConfig: Array<ListItemConfig> = [
   },
 ];
 
-export const SidebarListItem = ({ config, role }: any) => {
-  console.log(config, role);
+type ListItemProps = {
+  config: ListItemConfig;
+  role: Role;
+};
+
+export const SidebarListItem = ({ config, role }: ListItemProps) => {
   return (
-    <ListItem button disabled={isUserHasRights({ role, resource: config.resource, action: config.action })}>
+    <ListItem
+      button
+      component={Link}
+      to={config.path}
+      disabled={!isUserHasRights({ role, resource: config.resource, action: config.action })}
+    >
       <ListItemIcon>
         <config.IconComponent />
       </ListItemIcon>

@@ -59,7 +59,6 @@ const Sidebar = ({ open, handleDrawerClose }: any) => {
       </div>
       <SidebarList />;
       <Divider />
-      <Divider />
       {/* <List>{secondaryListItems}</List> */}
     </Drawer>
   );

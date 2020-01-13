@@ -3,6 +3,6 @@ import * as React from 'react';
 type Props = {};
 
 const CreateEventPage = () => {
-  return <div>Create event page</div>;
+  return <div>All events page</div>;
 };
 export default CreateEventPage;

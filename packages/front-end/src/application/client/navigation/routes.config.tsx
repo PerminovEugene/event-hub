@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { PagePath } from './pathes';
-import Calendar from '../features/domain/calendar/calendar.page';
 import NotFound from '../features/system/not-found/not-found.page';
 import Registration from '../features/auth/registration/registration.page';
 import Login from '../features/auth/login/login.page';
-import CreateEventPage from '../features/domain/event-managment/create-event/create-event.page';
 import { Action, Resource } from '@calendar/shared';
 import Dashboard from '../layout/dashboard/dashboard.component';
-import { allEventsRoute, createEventRoute, Route } from './routes';
+import { allEventsRoute, eventRoute, createEventRoute, editEventRoute, Route } from './routes';
+
+import AllEventsPage from '../features/domain/event-managment/all-events/all-events.page';
+import EventPage from '../features/domain/event-managment/read-event/read-event.page';
+import CreateEventPage from '../features/domain/event-managment/create-event/create-event.page';
+import EditEventPage from '../features/domain/event-managment/edit-event/edit.event.page';
 
 export type ViewRoute = Route & {
   component: React.ComponentType;
@@ -38,13 +41,21 @@ const routes: Routes = {
       layoutComponent: Dashboard,
       routes: [
         {
-          component: Calendar,
+          component: AllEventsPage,
           exact: true,
           ...allEventsRoute,
         },
         {
+          component: EventPage,
+          ...eventRoute,
+        },
+        {
           component: CreateEventPage,
           ...createEventRoute,
+        },
+        {
+          component: EditEventPage,
+          ...editEventRoute,
         },
       ],
     },

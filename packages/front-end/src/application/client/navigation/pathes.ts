@@ -4,5 +4,7 @@ export enum PagePath {
   restorePassword = '/restore-password',
 
   createEvent = '/event/create',
+  editEvent = 'event/:id/edit',
+  event = 'event/:id',
   root = '/',
 }
