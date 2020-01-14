@@ -1,12 +1,12 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { EventFilters } from '@calendar/shared';
-import { getEnvManager } from '../../../../../../framework/configuration/environment-manger-keeper';
+import { Event } from '@calendar/shared';
+import { generateNodeKey } from '../../../../../../framework/generators/string-generator';
 
 const GET_EVENTS = gql`
   query getEvents($filtersInput: FiltersInput) {
-    events(filtersInput: $filtersInput) {
+    getEvents(filtersInput: $filtersInput) {
       id
       type
       name
@@ -16,11 +16,28 @@ const GET_EVENTS = gql`
   }
 `;
 
-type Props = {};
+const EventItem = ({ id, type, name, description, date }: any) => (
+  <li>
+    <h3>{type}</h3>
+    <h2>{name}</h2>
+    <p>{date}</p>
+    <p>{description}</p>
+  </li>
+);
 
 const EventsList = () => {
-  const { loading, data, error } = useQuery<{ getEvents: EventFilters }>(GET_EVENTS, { variables: {} });
-  console.log('loading: ', loading, 'data: ', data);
-  return <div>All events</div>;
+  const { loading, data, error } = useQuery<{ getEvents: [Event] }>(GET_EVENTS, {
+    variables: {
+      filtersInput: {},
+    },
+  });
+
+  return loading ? null : (
+    <ul>
+      {data.getEvents.map((event: Event) => (
+        <EventItem key={generateNodeKey(`event-item-${event.id}`)} {...event} />
+      ))}
+    </ul>
+  );
 };
 export default EventsList;

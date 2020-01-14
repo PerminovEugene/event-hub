@@ -12,7 +12,6 @@ export class EventService {
   ) {}
 
   public async getEvents(filters: any) {
-    console.log('filters:', filters);
     return this.eventRepository.find();
   }
 
@@ -29,7 +28,6 @@ export class EventService {
       const event: EventEntity = new EventEntity();
       // TODO tricky
       Object.assign(event, eventDTO, { date: new Date(eventDTO.date) });
-      console.log(event);
 
       return event;
     } catch (e) {

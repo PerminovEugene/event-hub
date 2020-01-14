@@ -20,11 +20,10 @@ const LogoutButton = ({ history }: LogoutButtonProps) => {
 
   return (
     <ThemeButton
-      color="secondary"
       type="button"
       size="small"
       onClick={async () => {
-        const result = await logout();
+        await logout();
         client.cache.reset();
         client.writeData({
           data: createMe(),

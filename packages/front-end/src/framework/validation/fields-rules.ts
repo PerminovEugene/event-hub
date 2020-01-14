@@ -24,3 +24,30 @@ export const passwordConfirmValidation = yup
   .max(PASSWORD_MAX_LENGTH)
   .oneOf([yup.ref('password'), null], 'Passwords must match')
   .label('Password confirm');
+
+const EVENT_NAME_MIN_LENGTH = 2;
+const EVENT_NAME_MAX_LENGTH = 18;
+const EVENT_DESCRIPTION_MIN_LENGTH = 2;
+const EVENT_DESCRIPTION_MAX_LENGTH = 60;
+
+export const eventNameValidation = yup
+  .string()
+  .required()
+  .min(EVENT_NAME_MIN_LENGTH)
+  .max(EVENT_NAME_MAX_LENGTH)
+  .label('Name');
+
+export const eventDescriptionValidation = yup
+  .string()
+  .required()
+  .min(EVENT_DESCRIPTION_MIN_LENGTH)
+  .max(EVENT_DESCRIPTION_MAX_LENGTH)
+  .label('Description');
+
+// TODO
+export const eventTypeValidation = yup
+  .string()
+  .required()
+  .min(1)
+  .max(30)
+  .label('Type');

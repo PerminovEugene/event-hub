@@ -3678,7 +3678,7 @@
         "signature": "ee747a8be63f7f652650459ae1c92a6223fbc67304da4629753c6f80c13b2a53"
       },
       "./src/event/event.service.ts": {
-        "version": "3a030fde45ec2a58dfc2a48e31db8c864cae1f310312b6ce157a605e2be1c81d",
+        "version": "434e3989fadd9885f7c1d54fbb7a04f4b00546cd953c6ec218af9cfff386b716",
         "signature": "6cbb19eaa219ec1b1a47ca1ca04d977f0bb5187a67449bd9577f0d3420a670bd"
       },
       "./src/event/event.resolver.ts": {
@@ -20402,7 +20402,6 @@
       "./src/core/base.entity.ts",
       "./src/event/event.entity.ts",
       "./src/errors/save-event.error.ts",
-      "./src/event/event.service.ts",
       "./src/event/event.resolver.ts",
       "./src/event/event.module.ts",
       "./src/config/cors.ts",
@@ -20417,8 +20416,9 @@
       "./src/database/fixtures/executor.ts",
       "./src/database/fixtures/repository.mock.ts",
       "./src/database/fixtures/entities/app-user/service.manager.ts",
+      "./src/database/fixtures/entities/event/service.manager.ts",
       "./src/scripts/generate-graphql-definitions.ts",
-      "./src/database/fixtures/entities/event/service.manager.ts"
+      "./src/event/event.service.ts"
     ]
   },
   "version": "3.7.4"

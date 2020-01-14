@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { PagePath } from '../../navigation/pathes';
-import { ThemeLink } from '../../components/link/link.component';
+import { HeaderThemeLink } from '../../components/link/link.component';
 import LogoutButton from '../../features/auth/logout/logout.button';
 import { AuthContext } from './../../contexts/auth.context';
 
@@ -46,11 +46,11 @@ const useStyles = makeStyles(theme => ({
 const Header = ({ handleDrawerOpen, open }: any) => {
   const classes = useStyles({});
   return (
-    <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+    <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)} color="secondary">
       <AuthContext.Consumer>
         {({ isLoggedIn }) => {
           return (
-            <Toolbar className={classes.toolbar}>
+            <Toolbar className={classes.toolbar} color="secondary">
               <IconButton
                 edge="start"
                 color="inherit"
@@ -70,9 +70,9 @@ const Header = ({ handleDrawerOpen, open }: any) => {
           </IconButton> */}
               {isLoggedIn && <LogoutButton />}
               {!isLoggedIn && (
-                <ThemeLink to={PagePath.login} size="small">
+                <HeaderThemeLink to={PagePath.login} size="small" color="primary">
                   Sign in
-                </ThemeLink>
+                </HeaderThemeLink>
               )}
             </Toolbar>
           );

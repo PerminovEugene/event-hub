@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { ListItem, ListItemIcon, ListItemText, List } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 import { AuthContext } from '../../contexts/auth.context';
 import { allEventsRoute, createEventRoute, Route } from './../../navigation/routes';
 import { isUserHasRights, Role } from '@calendar/shared';
@@ -15,12 +17,12 @@ type ListItemConfig = Route & {
 export const listItemsConfig: Array<ListItemConfig> = [
   {
     primary: 'Events calendar',
-    IconComponent: DashboardIcon,
+    IconComponent: CalendarTodayIcon,
     ...allEventsRoute,
   },
   {
     primary: 'Create event',
-    IconComponent: DashboardIcon,
+    IconComponent: AddCircleOutlineIcon,
     ...createEventRoute,
   },
 ];

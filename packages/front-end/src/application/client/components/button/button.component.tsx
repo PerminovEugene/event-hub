@@ -1,13 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Button, { ButtonProps } from '@material-ui/core/Button';
+import { red } from '@material-ui/core/colors';
 
-const StyledButton: React.ComponentType<any> = styled(Button)({
-  // EXAMPLE
-  // div: {
-  //   padding: '10px',
-  //   input: { color: 'red', marginTop: '10px' },
-  // },
-});
+const StyledButton: React.ComponentType<any> = styled(Button)`
+  & .MuiButton-label {
+    color: white;
+  }
+`;
+// EXAMPLE
+// div: {
+//   input: { color: props.customColor },
+// },
 
-export const ThemeButton = (props: ButtonProps) => <StyledButton {...props} />;
+type StyledButtonProps = ButtonProps & {
+  customColor?: string;
+};
+
+export const ThemeButton = (props: StyledButtonProps) => <StyledButton {...props} />;
