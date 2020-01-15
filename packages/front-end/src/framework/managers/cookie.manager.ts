@@ -1,19 +1,33 @@
-import { SessionData } from '@calendar/shared';
-// import { getEnvManager } from '../configuration/environment-manger-keeper';
+import { getEnvManager } from '../configuration/environment-manger-keeper';
 
-// export const setUserCookie = (user: SessionData) => {
-//   const amanger = getEnvManager();
-//   if (amanger.isServerSide()) {
-//     return;
-//   }
-//   (document.cookie as any) = `user=${JSON.stringify(user)}`;
-// };
+export const setCookie = (name: string, value: any, options: any = {}) => {
+  const manger = getEnvManager();
+  if (manger.isServerSide()) {
+    return;
+  }
+  options = {
+    path: '/',
+    ...options,
+  };
 
-// export const getUserCookie = (): SessionData => {
-//   if (getEnvManager().isServerSide()) {
-//     return;
-//   }
-//   var result = document.cookie.match(new RegExp('user' + '=([^;]+)'));
-//   result && (result = JSON.parse(result[1]));
-//   return result as SessionData;
-// };
+  if (options.expires?.toUTCString) {
+    options.expires = options.expires.toUTCString();
+  }
+
+  let updatedCookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+
+  for (let optionKey in options) {
+    updatedCookie += '; ' + optionKey;
+    let optionValue = options[optionKey];
+    if (optionValue !== true) {
+      updatedCookie += '=' + optionValue;
+    }
+  }
+  document.cookie = updatedCookie;
+};
+
+export const deleteCookie = (name: string) => {
+  setCookie(name, '', {
+    'max-age': -1,
+  });
+};

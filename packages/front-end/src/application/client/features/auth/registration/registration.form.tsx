@@ -77,7 +77,6 @@ const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
               },
             },
           });
-          debugger;
           client.writeData({
             data: createMe(result.data.registration),
           });

@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom';
 import schema from './validation.schema';
 import { FormWrapper, FormActions } from './../../../../components/form/form.wrapper';
 import { ElementView, FormElement } from './../../../../components/form/form.elements';
-import { LoginInput, SessionData, EventInput } from '@calendar/shared';
+import { EventInput, Event } from '@calendar/shared';
 import { getServerErrorData } from '../../../../../../framework/helpers/graphql.helper';
+import { buildEventPath, PagePath } from '../../../../navigation/pathes';
 
 type Props = {};
 
@@ -15,9 +16,6 @@ const CREATE_EVENT = gql`
   mutation createEvent($eventInput: EventInput!) {
     createEvent(eventInput: $eventInput) {
       id
-      name
-      description
-      type
     }
   }
 `;
@@ -65,12 +63,11 @@ const initialValues: EventInput = {
   name: undefined,
   description: undefined,
   type: 'meetup',
-  date: '21/05/2020',
+  date: '05.21.2020',
 };
 
 const CreateEventPage = ({ history }: Partial<RouteComponentProps>) => {
   const [createEvent] = useMutation<{ createEvent: Event }>(CREATE_EVENT);
-  const client = useApolloClient();
   return (
     <FormWrapper
       validationSchema={schema}
@@ -84,12 +81,10 @@ const CreateEventPage = ({ history }: Partial<RouteComponentProps>) => {
               eventInput: values,
             },
           });
-          // client.writeData({
-          //   data: createMe(result.data.login),
-          // });
           actions.setStatus(null);
-          history.push('/');
+          history.push(buildEventPath(PagePath.event, result.data.createEvent.id));
         } catch (e) {
+          debugger;
           actions.setStatus(getServerErrorData(e));
         } finally {
           actions.setSubmitting(false);

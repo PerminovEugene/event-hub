@@ -8,10 +8,6 @@ const StyledButton: React.ComponentType<any> = styled(Button)`
     color: white;
   }
 `;
-// EXAMPLE
-// div: {
-//   input: { color: props.customColor },
-// },
 
 type StyledButtonProps = ButtonProps & {
   customColor?: string;

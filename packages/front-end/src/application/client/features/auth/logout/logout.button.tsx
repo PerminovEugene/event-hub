@@ -5,6 +5,7 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { createMe } from '../../../../../provider/store.actions/me';
+import { deleteCookie } from '../../../../../framework/managers/cookie.manager';
 
 const LOGOUT = gql`
   mutation Logout {
@@ -28,6 +29,8 @@ const LogoutButton = ({ history }: LogoutButtonProps) => {
         client.writeData({
           data: createMe(),
         });
+        deleteCookie('user');
+        deleteCookie('connect.sid');
         history.push('/login');
       }}
     >

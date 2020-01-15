@@ -46,11 +46,11 @@ const useStyles = makeStyles(theme => ({
 const Header = ({ handleDrawerOpen, open }: any) => {
   const classes = useStyles({});
   return (
-    <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)} color="secondary">
+    <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)} color="primary">
       <AuthContext.Consumer>
         {({ isLoggedIn }) => {
           return (
-            <Toolbar className={classes.toolbar} color="secondary">
+            <Toolbar className={classes.toolbar}>
               <IconButton
                 edge="start"
                 color="inherit"
@@ -70,7 +70,7 @@ const Header = ({ handleDrawerOpen, open }: any) => {
           </IconButton> */}
               {isLoggedIn && <LogoutButton />}
               {!isLoggedIn && (
-                <HeaderThemeLink to={PagePath.login} size="small" color="primary">
+                <HeaderThemeLink to={PagePath.login} size="small">
                   Sign in
                 </HeaderThemeLink>
               )}

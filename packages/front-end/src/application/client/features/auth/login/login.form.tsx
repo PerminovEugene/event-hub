@@ -63,7 +63,6 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
               loginInput: { email: values.email, password: values.password },
             },
           });
-          debugger;
           client.writeData({
             data: createMe(result.data.login),
           });
