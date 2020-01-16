@@ -1,11 +1,11 @@
-import { IEnvironmentManager } from './environment-manager';
+import { EnvironmentManager } from './environment-manager';
 
-let currentEnvManager: IEnvironmentManager;
+let currentEnvManager: EnvironmentManager;
 
-export const saveEnvManager = (mananger: IEnvironmentManager) => {
+export const saveEnvManager = (mananger: EnvironmentManager) => {
   currentEnvManager = mananger;
 };
 
-export const getEnvManager = (): IEnvironmentManager => {
+export const getEnvManager = (): EnvironmentManager => {
   return currentEnvManager;
 };

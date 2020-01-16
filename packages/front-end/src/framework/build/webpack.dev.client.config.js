@@ -6,7 +6,7 @@ const rootPath = path.join(__dirname, '../../../');
 const config = getConfig({
   tsConfigPath: 'client.tsconfig.json',
 });
-
+console.log(path.join(rootPath, 'config/client.env'));
 module.exports = {
   watchOptions: {
     ignored: ['src/**/*.test.*', 'node_modules'],
@@ -29,10 +29,10 @@ module.exports = {
     ...config.module,
   },
   plugins: [
-    new Dotenv({
-      path: './config/client.env',
-      silent: true,
-    }),
     ...config.plugins,
+    new Dotenv({
+      path: path.join(rootPath, 'config/client.env'),
+      silent: false,
+    }),
   ],
 };

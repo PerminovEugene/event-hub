@@ -7,24 +7,14 @@ import { getTransport } from '../../provider/transport';
 import { getOptions } from '../../provider/transport.client-options';
 import { ClientRouter } from './navigation/client-router';
 import { useSSR } from 'react-i18next';
-import { initI18n } from './../server/i18n';
+import { initI18n } from './../../framework/managers/i18n.manager';
 
 const manager = new ClientEnvironmentManager();
 manager.loadEnv();
 saveEnvManager(manager);
 
-const AppWrapper = ({ client }: any) => {
-  useSSR((window as any).initialI18nStore, (window as any).initialLanguage);
-  return (
-    <Application client={client}>
-      <ClientRouter />
-    </Application>
-  );
-};
-
 export function InitSSR({ initialI18nStore, initialLanguage, client }: any) {
   useSSR(initialI18nStore, initialLanguage);
-
   return (
     <Application client={client}>
       <ClientRouter />
