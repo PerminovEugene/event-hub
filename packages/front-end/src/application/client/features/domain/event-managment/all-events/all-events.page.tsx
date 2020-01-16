@@ -6,7 +6,6 @@ type Props = {};
 const CreateEventPage = () => {
   return (
     <div>
-      All events page
       <EventsList />
     </div>
   );

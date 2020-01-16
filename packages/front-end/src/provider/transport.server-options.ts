@@ -17,7 +17,6 @@ export const buildOptions = ({ user }: OptionsBuildConfig) => {
     fetch: fetch as any,
     credentials: 'include',
   });
-  console.log('user: ', user);
   cache.writeData({
     data: createMe(user),
   });

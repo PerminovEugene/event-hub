@@ -4,9 +4,19 @@ export type PageTemplateParams = {
   jsFilePath: string;
   css: any; //string;
   initialState: any;
+  initialI18nStore: any;
+  initialLanguage: any;
 };
 
-export const buildTemplate = ({ title, html, jsFilePath, css, initialState }: PageTemplateParams) =>
+export const buildTemplate = ({
+  title,
+  html,
+  jsFilePath,
+  css,
+  initialState,
+  initialI18nStore,
+  initialLanguage,
+}: PageTemplateParams) =>
   `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -25,6 +35,10 @@ export const buildTemplate = ({ title, html, jsFilePath, css, initialState }: Pa
     </head>
     <body>
       <div id="root">${html}</div>
+      <script>
+        window.initialI18nStore = JSON.parse('${JSON.stringify(initialI18nStore)}');
+        window.initialLanguage = '${initialLanguage}';
+      </script>
       <script>
         window.__APOLLO_STATE__=${JSON.stringify(initialState)};
       </script>

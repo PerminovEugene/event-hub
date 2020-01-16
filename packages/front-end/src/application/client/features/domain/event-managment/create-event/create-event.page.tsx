@@ -9,8 +9,7 @@ import { ElementView, FormElement } from './../../../../components/form/form.ele
 import { EventInput, Event } from '@calendar/shared';
 import { getServerErrorData } from '../../../../../../framework/helpers/graphql.helper';
 import { buildEventPath, PagePath } from '../../../../navigation/pathes';
-
-type Props = {};
+import { useTranslation } from 'react-i18next';
 
 const CREATE_EVENT = gql`
   mutation createEvent($eventInput: EventInput!) {
@@ -68,12 +67,13 @@ const initialValues: EventInput = {
 
 const CreateEventPage = ({ history }: Partial<RouteComponentProps>) => {
   const [createEvent] = useMutation<{ createEvent: Event }>(CREATE_EVENT);
+  const [t] = useTranslation('translations');
   return (
     <FormWrapper
       validationSchema={schema}
       initialValues={initialValues}
       elements={config}
-      submitText="Create event" // TODO i18n'
+      submitText={t('pages.createEvent.submit')}
       onSubmit={async (values: EventInput, actions: FormActions<EventInput>) => {
         try {
           const result = await createEvent({
@@ -84,7 +84,6 @@ const CreateEventPage = ({ history }: Partial<RouteComponentProps>) => {
           actions.setStatus(null);
           history.push(buildEventPath(PagePath.event, result.data.createEvent.id));
         } catch (e) {
-          debugger;
           actions.setStatus(getServerErrorData(e));
         } finally {
           actions.setSubmitting(false);

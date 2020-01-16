@@ -4,11 +4,13 @@ import gql from 'graphql-tag';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { LoginInput, SessionData } from '@calendar/shared';
 import { FormWrapper, FormActions } from './../../../components/form/form.wrapper';
 import { ElementView, FormElement } from './../../../components/form/form.elements';
-import { LoginInput, SessionData } from '@calendar/shared';
 import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
 import { createMe } from '../../../../../provider/store.actions/me';
+import { PagePath } from '../../../navigation/pathes';
 
 const LOGIN = gql`
   mutation login($loginInput: LoginInput!) {
@@ -49,13 +51,14 @@ const initialValues: LoginInput = {
 
 const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
   const [login] = useMutation<{ login: SessionData }>(LOGIN);
+  const [t] = useTranslation('translations');
   const client = useApolloClient();
   return (
     <FormWrapper
       validationSchema={schema}
       initialValues={initialValues}
       elements={config}
-      submitText="sign in" // TODO i18n'
+      submitText={t('pages.login.submit')} // TODO i18n'
       onSubmit={async (values: LoginInput, actions: FormActions<LoginInput>) => {
         try {
           const result = await login({
@@ -67,7 +70,7 @@ const LoginForm = ({ history }: Partial<RouteComponentProps>) => {
             data: createMe(result.data.login),
           });
           actions.setStatus(null);
-          history.push('/');
+          history.push(PagePath.root);
         } catch (e) {
           actions.setStatus(getServerErrorData(e));
         } finally {

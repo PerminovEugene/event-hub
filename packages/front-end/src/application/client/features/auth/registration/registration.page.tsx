@@ -16,11 +16,11 @@ class Registration extends React.Component<WithTranslation, {}> {
         <Paper>
           <FormBox color="primary.contrastText" borderTop={1}>
             <Typography component="h1" variant="h5" color="primary" align="center">
-              {t('sign-up:header')}
+              {t('pages.registration.title')}
             </Typography>
             <RegistrationForm />
             <Typography component="p" color="primary" align="center">
-              <ThemeLink to={PagePath.login}>Already have an account? Sign in</ThemeLink>
+              <ThemeLink to={PagePath.login}>{t('pages.registration.signInLink')}</ThemeLink>
             </Typography>
           </FormBox>
         </Paper>

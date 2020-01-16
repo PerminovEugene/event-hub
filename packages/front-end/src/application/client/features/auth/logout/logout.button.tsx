@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { createMe } from '../../../../../provider/store.actions/me';
 import { deleteCookie } from '../../../../../framework/managers/cookie.manager';
+import { PagePath } from '../../../navigation/pathes';
+import { useTranslation } from 'react-i18next';
 
 const LOGOUT = gql`
   mutation Logout {
@@ -18,7 +20,7 @@ interface LogoutButtonProps extends Partial<RouteComponentProps> {}
 const LogoutButton = ({ history }: LogoutButtonProps) => {
   const [logout] = useMutation(LOGOUT);
   const client = useApolloClient();
-
+  const [t] = useTranslation('translations');
   return (
     <ThemeButton
       type="button"
@@ -31,10 +33,10 @@ const LogoutButton = ({ history }: LogoutButtonProps) => {
         });
         deleteCookie('user');
         deleteCookie('connect.sid');
-        history.push('/login');
+        history.push(PagePath.login);
       }}
     >
-      logout
+      {t('components.logout.submit')}
     </ThemeButton>
   );
 };

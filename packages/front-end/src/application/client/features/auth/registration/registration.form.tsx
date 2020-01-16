@@ -4,11 +4,13 @@ import getRegistrationValidationSchema from './validation.schema';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { FormWrapper, FormActions } from './../../../components/form/form.wrapper';
 import { ElementView, FormElement } from './../../../components/form/form.elements';
 import { LoginInput, SessionData, RegistrationInput } from '@calendar/shared';
 import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
 import { createMe } from '../../../../../provider/store.actions/me';
+import { PagePath } from '../../../navigation/pathes';
 
 const REGISTRATION = gql`
   mutation registration($registrationInput: RegistrationInput!) {
@@ -59,13 +61,14 @@ const initialValues: RegistrationInput = {
 
 const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
   const [registration] = useMutation<{ registration: SessionData }>(REGISTRATION);
+  const [t] = useTranslation('translations');
   const client = useApolloClient();
   return (
     <FormWrapper
       validationSchema={getRegistrationValidationSchema()}
       initialValues={initialValues}
       elements={config}
-      submitText="sign up" // TODO i18n
+      submitText={t('pages.registration.submit')}
       onSubmit={async (values: RegistrationInput, actions: FormActions<LoginInput>) => {
         try {
           const result = await registration({
@@ -81,7 +84,7 @@ const RegistrationForm = ({ history }: Partial<RouteComponentProps>) => {
             data: createMe(result.data.registration),
           });
           actions.setStatus(null);
-          history.push('/');
+          history.push(PagePath.root);
         } catch (e) {
           actions.setStatus(getServerErrorData(e));
         } finally {

@@ -16,14 +16,14 @@ class LoginPage extends React.Component<WithTranslation, {}> {
         <Paper>
           <FormBox color="primary.contrastText" borderTop={1}>
             <Typography component="h1" variant="h5" color="primary" align="center">
-              {t('sign-in:header')}
+              {t('pages.login.title')}
             </Typography>
             <LoginForm />
             <Typography component="p" color="primary" align="center">
-              <ThemeLink to={PagePath.registration}>Have no account yet? Sign up</ThemeLink>
+              <ThemeLink to={PagePath.registration}>{t('pages.login.signUpLink')}</ThemeLink>
             </Typography>
             <Typography component="p" color="primary" align="center">
-              <ThemeLink to={PagePath.restorePassword}>Forgot password?</ThemeLink>
+              <ThemeLink to={PagePath.restorePassword}>{t('pages.login.restorePasswordLink')}</ThemeLink>
             </Typography>
           </FormBox>
         </Paper>

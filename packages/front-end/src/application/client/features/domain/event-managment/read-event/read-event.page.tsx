@@ -16,19 +16,23 @@ const GET_EVENTS = gql`
   }
 `;
 
-type Props = {};
-
 const EventPage = (props: any) => {
-  console.log(props);
-  const { loading, data, error } = useQuery<{ getEvent: Event }>(GET_EVENTS, {
-    variables: {
-      eventIdInput: {},
-    },
-  });
+  // const { loading, data, error } = useQuery<{ getEvent: Event }>(GET_EVENTS, {
+  //   variables: {
+  //     eventIdInput: {},
+  //   },
+  // });
+  const { loading, data, error } = {
+    loading: false,
+    data: false,
+    error: false,
+  };
+
   if (loading) {
     return null;
   }
-  const event = data.getEvent;
+  // const event = data.getEvent;
+  const event: any = {};
   return (
     <div>
       <h2>{event.name}</h2>

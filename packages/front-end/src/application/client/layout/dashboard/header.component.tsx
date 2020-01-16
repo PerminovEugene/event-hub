@@ -10,6 +10,7 @@ import { PagePath } from '../../navigation/pathes';
 import { HeaderThemeLink } from '../../components/link/link.component';
 import LogoutButton from '../../features/auth/logout/logout.button';
 import { AuthContext } from './../../contexts/auth.context';
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -45,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const Header = ({ handleDrawerOpen, open }: any) => {
   const classes = useStyles({});
+  const [t] = useTranslation('translations');
   return (
     <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)} color="primary">
       <AuthContext.Consumer>
@@ -61,17 +63,12 @@ const Header = ({ handleDrawerOpen, open }: any) => {
                 <MenuIcon />
               </IconButton>
               <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                Dashboard
+                {t('components.header.title')}
               </Typography>
-              {/* <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton> */}
               {isLoggedIn && <LogoutButton />}
               {!isLoggedIn && (
                 <HeaderThemeLink to={PagePath.login} size="small">
-                  Sign in
+                  {t('components.header.signIn')}
                 </HeaderThemeLink>
               )}
             </Toolbar>

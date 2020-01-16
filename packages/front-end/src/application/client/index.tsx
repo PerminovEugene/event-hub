@@ -6,20 +6,43 @@ import { saveEnvManager } from '../../framework/configuration/environment-manger
 import { getTransport } from '../../provider/transport';
 import { getOptions } from '../../provider/transport.client-options';
 import { ClientRouter } from './navigation/client-router';
+import { useSSR } from 'react-i18next';
+import { initI18n } from './../server/i18n';
 
 const manager = new ClientEnvironmentManager();
 manager.loadEnv();
 saveEnvManager(manager);
 
+const AppWrapper = ({ client }: any) => {
+  useSSR((window as any).initialI18nStore, (window as any).initialLanguage);
+  return (
+    <Application client={client}>
+      <ClientRouter />
+    </Application>
+  );
+};
+
+export function InitSSR({ initialI18nStore, initialLanguage, client }: any) {
+  useSSR(initialI18nStore, initialLanguage);
+
+  return (
+    <Application client={client}>
+      <ClientRouter />
+    </Application>
+  );
+}
+
 export class EntryPoint {
-  public start = () => {
+  public start = async () => {
+    await initI18n();
     const rootElement = document.getElementById('root');
     const client = getTransport(getOptions());
     if (rootElement) {
+      const initialI18nStore = (window as any).initialI18nStore;
+      const initialLanguage = (window as any).initialLanguage;
+
       ReactDOM.hydrate(
-        <Application client={client}>
-          <ClientRouter />
-        </Application>,
+        <InitSSR client={client} initialI18nStore={initialI18nStore} initialLanguage={initialLanguage} />,
         rootElement,
       );
     }
