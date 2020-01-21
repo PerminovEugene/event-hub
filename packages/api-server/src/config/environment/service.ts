@@ -1,5 +1,5 @@
-import * as dotenv from 'dotenv';
 import * as Joi from '@hapi/joi';
+import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import { resolve } from 'path';
 
@@ -61,7 +61,25 @@ export class ConfigService {
   }
 }
 
-// TODO Move file name to params
-export const configService = new ConfigService(
-  resolve(process.cwd(), `env/.env`),
-);
+const buildConfigFilePath = (filePrefix: string = '') =>
+  resolve(__dirname, `../../../env/${filePrefix}.env`);
+
+let instance: ConfigService = null;
+
+type ConfigSericeOptions = {
+  filePrefix?: string;
+};
+
+export const initConfigService = (
+  options?: ConfigSericeOptions,
+): ConfigService => {
+  if (instance) return instance;
+  instance = new ConfigService(
+    resolve(buildConfigFilePath(options?.filePrefix)),
+  );
+  return instance;
+};
+
+export const getConfigService = (): ConfigService => {
+  return instance;
+};

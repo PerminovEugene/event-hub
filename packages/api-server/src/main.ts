@@ -1,23 +1,28 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { AllExceptionsFilter } from './exceptions-filters/all-exceptions.filter';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
-
 import * as passport from 'passport';
-import { corsOptions } from './config/cors';
-import { configService, EnvField } from './config/environment/service';
+import { AppModule } from './app.module';
+import { getCorsOptions } from './config/cors';
+import {
+  EnvField,
+  getConfigService,
+  initConfigService,
+} from './config/environment/service';
+import { AllExceptionsFilter } from './exceptions-filters/all-exceptions.filter';
 
 async function bootstrap() {
+  initConfigService();
+
   const app = await NestFactory.create(AppModule);
-  app.enableCors(corsOptions);
+  app.enableCors(getCorsOptions());
   app.use(cookieParser());
   app.useGlobalFilters(new AllExceptionsFilter());
 
   app.use(
     session({
       // store: new RedisStore({client: redisClient}),
-      secret: configService.get(EnvField.COOKIE_SECRET),
+      secret: getConfigService().get(EnvField.COOKIE_SECRET),
       resave: true,
       rolling: true,
       saveUninitialized: false,
@@ -31,8 +36,6 @@ async function bootstrap() {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  await app.listen(configService.get(EnvField.PORT));
+  await app.listen(getConfigService().get(EnvField.PORT));
 }
-// TODO make ellegant logic.
-// We need delay because of .env loading
-setTimeout(bootstrap, 100);
+bootstrap();

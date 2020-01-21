@@ -7,3 +7,5 @@ node_modules
 
 packages/*/node_modules
 packages/*/dist
+packages/*/config/.env
+packages/*/config/test-e2e.env

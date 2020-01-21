@@ -1,5 +1,5 @@
-import { createConnection, ConnectionOptions } from 'typeorm';
-import { configService, EnvField } from './../config/environment/service';
+import { ConnectionOptions, createConnection } from 'typeorm';
+import { EnvField, getConfigService } from './../config/environment/service';
 
 export const databaseProviders = [
   {
@@ -11,6 +11,7 @@ export const databaseProviders = [
 ];
 
 export const getConnectionOptions = (): ConnectionOptions => {
+  const configService = getConfigService();
   return {
     type: 'postgres',
     host: 'localhost',

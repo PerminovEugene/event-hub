@@ -1,10 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Role } from '@calendar/shared';
+import { Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { AppUser as AppUserEntity, Status } from './app-user.entity';
+import { Repository } from 'typeorm';
 import { wrapDbError } from '../database/helpers/database-errors.hander';
 import { getInsertResult } from '../database/helpers/query-result.manager';
-import { Role } from '@calendar/shared';
+import { AppUser as AppUserEntity, Status } from './app-user.entity';
 
 const SALT_ROUNDS = 10;
 

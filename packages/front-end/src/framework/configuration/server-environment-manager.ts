@@ -1,5 +1,5 @@
+import { config, DotenvConfigOptions } from 'dotenv';
 import { EnvironmentManager } from './environment-manager';
-import { DotenvConfigOptions, config } from 'dotenv';
 
 export class ServerEnvironmentManager extends EnvironmentManager {
   public loadEnv = (options: DotenvConfigOptions) => {
@@ -7,7 +7,6 @@ export class ServerEnvironmentManager extends EnvironmentManager {
     if (envSource.error) {
       throw envSource.error;
     }
-    console.log(envSource);
     this.fillEnv(envSource.parsed);
   };
 

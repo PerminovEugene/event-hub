@@ -1,11 +1,10 @@
-import { join } from 'path';
+import { GqlModuleOptions } from '@nestjs/graphql';
 import { AppUserModule } from './../../app-user/app-user.module';
 import { AuthModule } from './../../auth/auth.module';
 import { EventModule } from './../../event/event.module';
-import { corsOptions } from './../cors';
-import { GqlModuleOptions } from '@nestjs/graphql';
+import { getCorsOptions } from './../cors';
 
-export const graphqlConfig: GqlModuleOptions = {
+export const getGraphqlConfig = (): GqlModuleOptions => ({
   context: (req, res) => {
     return req;
   },
@@ -14,7 +13,6 @@ export const graphqlConfig: GqlModuleOptions = {
   // typePaths: [`${__dirname}/src/**/*.graphql`],
   typePaths: ['./**/*.graphql'],
 
-
   // definitions: {
   //   // dist/src/../../shared
   //   // path: join(__dirname, '../../graphql.ts'),
@@ -22,5 +20,5 @@ export const graphqlConfig: GqlModuleOptions = {
   //   outputAs: 'class',
   // },
   include: [AppUserModule, AuthModule, EventModule],
-  cors: corsOptions,
-};
+  cors: getCorsOptions(),
+});

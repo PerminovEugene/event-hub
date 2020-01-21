@@ -1,8 +1,8 @@
+import { RegistrationInput, SessionData } from '@calendar/shared';
 import { Injectable } from '@nestjs/common';
-import { AppUserService } from '../app-user/app-user.service';
 import * as bcrypt from 'bcrypt';
-import { Status, AppUser } from '../app-user/app-user.entity';
-import { SessionData, RegistrationInput } from '@calendar/shared';
+import { AppUser, Status } from '../app-user/app-user.entity';
+import { AppUserService } from '../app-user/app-user.service';
 
 @Injectable()
 export class AuthService {
