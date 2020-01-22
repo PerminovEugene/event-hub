@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { AppUserModule } from './app-user/app-user.module';
-import { AuthModule } from './auth/auth.module';
-import { getGraphqlConfig } from './config/app/graphql.config';
+import { AppUserModule } from './../../app-user/app-user.module';
+import { AuthModule } from './../../auth/auth.module';
+import { getGraphqlConfig } from './../../config/app/graphql.config';
 import {
   // ConfigService, configService
   getConfigService,
-} from './config/environment/service';
-import { EventModule } from './event/event.module';
+} from './../../config/environment/service';
+import { EventModule } from './../../event/event.module';
 
 const configServiceFactory = {
   provide: 'CONFIG_SERVICE',

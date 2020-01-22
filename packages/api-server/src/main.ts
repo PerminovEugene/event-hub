@@ -1,40 +1,41 @@
-import { NestFactory } from '@nestjs/core';
-import * as cookieParser from 'cookie-parser';
-import * as session from 'express-session';
-import * as passport from 'passport';
-import { AppModule } from './app.module';
-import { getCorsOptions } from './config/cors';
 import {
   EnvField,
   getConfigService,
   initConfigService,
 } from './config/environment/service';
-import { AllExceptionsFilter } from './exceptions-filters/all-exceptions.filter';
+import { AppBuilder } from './core/app/app.builder';
+import { AppType, Director } from './core/app/app.director';
+import { AppModule } from './core/app/app.module';
 
 async function bootstrap() {
   initConfigService();
 
-  const app = await NestFactory.create(AppModule);
-  app.enableCors(getCorsOptions());
-  app.use(cookieParser());
-  app.useGlobalFilters(new AllExceptionsFilter());
+  const builder = new AppBuilder(AppModule);
+  const director = new Director(builder);
+  await director.make(AppType.simple);
+  const app = builder.getApp();
 
-  app.use(
-    session({
-      // store: new RedisStore({client: redisClient}),
-      secret: getConfigService().get(EnvField.COOKIE_SECRET),
-      resave: true,
-      rolling: true,
-      saveUninitialized: false,
-      cookie: {
-        maxAge: 10 * 60 * 1000,
-        httpOnly: false,
-      },
-    }),
-  );
+  // const app = await NestFactory.create(AppModule);
+  // app.enableCors(getCorsOptions());
+  // app.use(cookieParser());
+  // app.useGlobalFilters(new AllExceptionsFilter());
 
-  app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(
+  //   session({
+  //     // store: new RedisStore({client: redisClient}),
+  //     secret: getConfigService().get(EnvField.COOKIE_SECRET),
+  //     resave: true,
+  //     rolling: true,
+  //     saveUninitialized: false,
+  //     cookie: {
+  //       maxAge: 10 * 60 * 1000,
+  //       httpOnly: false,
+  //     },
+  //   }),
+  // );
+
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   await app.listen(getConfigService().get(EnvField.PORT));
 }

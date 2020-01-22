@@ -1,12 +1,10 @@
 import { Role } from '@calendar/shared';
 import { Inject, Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { wrapDbError } from '../database/helpers/database-errors.hander';
 import { getInsertResult } from '../database/helpers/query-result.manager';
+import { generateSalt, hashText } from '../facades/crypto';
 import { AppUser as AppUserEntity, Status } from './app-user.entity';
-
-const SALT_ROUNDS = 10;
 
 @Injectable()
 export class AppUserService {
@@ -28,8 +26,8 @@ export class AppUserService {
     password: string,
     role?: Role,
   ): Promise<AppUserEntity> {
-    const salt = await this.generateSalt();
-    const hashedPassword = await this.hashText(password, salt);
+    const salt = await generateSalt();
+    const hashedPassword = await hashText(password, salt);
     role = role || Role.client;
     const status = Status.active;
     const parameters = {
@@ -50,16 +48,5 @@ export class AppUserService {
     } catch (e) {
       throw wrapDbError(e, parameters);
     }
-  }
-
-  public async generateSalt(): Promise<string> {
-    return await bcrypt.genSalt(SALT_ROUNDS);
-  }
-
-  public async hashText(
-    myPlaintextPassword: string,
-    salt: string,
-  ): Promise<string> {
-    return await bcrypt.hash(myPlaintextPassword, salt);
   }
 }

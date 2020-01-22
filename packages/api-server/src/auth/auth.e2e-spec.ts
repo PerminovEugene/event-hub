@@ -1,59 +1,59 @@
+import { Role } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { Test } from '@nestjs/testing';
-import * as cookieParser from 'cookie-parser';
-import * as session from 'express-session';
-import * as passport from 'passport';
-import * as supertest from 'supertest';
+import { Connection, getConnection } from 'typeorm';
+import { AppUser, Status } from '../app-user/app-user.entity';
 import { getGraphqlConfig } from '../config/app/graphql.config';
-import { EnvField, initConfigService } from '../config/environment/service';
+import { initConfigService } from '../config/environment/service';
+import { AppType, Director } from '../core/app/app.director';
+import { TestE2eAppBuilder } from '../core/app/teste2e.app.builder';
+import { generateSalt, hashText } from '../facades/crypto';
+import { testRequest } from '../facades/tests';
 import { AuthModule } from './auth.module';
 
 describe('Auth e2e', () => {
   let app: INestApplication;
+  let connection: Connection;
 
-  beforeAll(async done => {
-    const config = initConfigService({ filePrefix: 'test-e2e' });
-    const moduleFixture = await Test.createTestingModule({
+  beforeAll(async () => {
+    jest.setTimeout(300000);
+    initConfigService({ filePrefix: 'test-e2e' });
+    const builder = new TestE2eAppBuilder({
       imports: [
         AuthModule,
         GraphQLModule.forRootAsync({
           useFactory: () => getGraphqlConfig(),
         }),
       ],
-    }).compile();
-    app = moduleFixture.createNestApplication();
-
-    app.use(cookieParser());
-    // app.useGlobalFilters(new AllExceptionsFilter());
-
-    app.use(
-      session({
-        // store: new RedisStore({client: redisClient}),
-        secret: config.get(EnvField.COOKIE_SECRET),
-        resave: true,
-        rolling: true,
-        saveUninitialized: false,
-        cookie: {
-          maxAge: 10 * 60 * 1000,
-          httpOnly: false,
-        },
-      }),
-    );
-
-    app.use(passport.initialize());
-    app.use(passport.session());
+    });
+    const director = new Director(builder);
+    await director.make(AppType.testE2e);
+    app = builder.getApp();
     await app.init();
-    done();
+    connection = getConnection('default');
   });
 
-  it('should send login input', async done => {
-    supertest(app.getHttpServer())
-      .post('/graphql')
-      .send({
+  it('should send login input', async () => {
+    const email = 'logintest@mail.com',
+      sourcePassword = 'foobarbazz',
+      salt = await generateSalt(),
+      role = Role.client,
+      status = Status.active,
+      password = await hashText(sourcePassword, salt);
+
+    const result = await connection
+      .createQueryBuilder()
+      .insert()
+      .into(AppUser)
+      .values([{ email, password, salt, status, role }])
+      .execute();
+
+    const { err, res } = await testRequest({
+      app,
+      params: {
         operationName: 'login',
         variables: {
-          loginInput: { email: 'client@mail.com', password: 'qwerty' },
+          loginInput: { email, password: sourcePassword },
         },
         query: `mutation login($loginInput: LoginInput!) {
               login(loginInput: $loginInput) {
@@ -63,20 +63,26 @@ describe('Auth e2e', () => {
                 __typename
               }
             }`,
-      })
-      .expect(200)
-      .end(function(err, res) {
-        const error = err || res.body.errors;
-        if (error) return done(error);
-        expect(res.body.data.login).toEqual({
-          email: 'client@mail.com',
-          role: 'client',
-          id: 67,
-          status: 'active',
-          __typename: 'SessionData',
-        });
-        done();
-      });
+      },
+      status: 200,
+    });
+
+    const error = err || res.body.errors;
+    const id = result.raw[0].id;
+    await connection
+      .createQueryBuilder()
+      .delete()
+      .from(AppUser)
+      .where('id = :id', { id })
+      .execute();
+    expect(error).not.toBeDefined();
+    expect(res.body.data.login).toEqual({
+      email,
+      role,
+      id,
+      status,
+      __typename: 'SessionData',
+    });
   });
 
   afterAll(async () => {

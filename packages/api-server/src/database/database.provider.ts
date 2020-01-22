@@ -19,7 +19,9 @@ export const getConnectionOptions = (): ConnectionOptions => {
     username: configService.get(EnvField.DB_USERNAME),
     password: configService.get(EnvField.DB_PASSWORD),
     database: configService.get(EnvField.DB_NAME),
-    synchronize: configService.get(EnvField.DB_SYNC) === 'true',
+    synchronize: configService.get(EnvField.DB_SYNC),
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+    dropSchema: configService.get(EnvField.DB_DROP_SCHEMA),
+    logging: configService.get(EnvField.DB_LOGGING),
   };
 };

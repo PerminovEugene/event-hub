@@ -16,6 +16,8 @@ export enum EnvField {
   DB_PASSWORD = 'DB_PASSWORD',
   DB_NAME = 'DB_NAME',
   DB_SYNC = 'DB_SYNC',
+  DB_DROP_SCHEMA = 'DB_DROP_SCHEMA',
+  DB_LOGGING = 'DB_LOGGING',
 }
 
 export class ConfigService {
@@ -26,7 +28,7 @@ export class ConfigService {
     this.envConfig = this.validateInput(config);
   }
 
-  get(key: EnvField): string {
+  get(key: EnvField): any {
     return this.envConfig[key];
   }
 
@@ -49,6 +51,8 @@ export class ConfigService {
       DB_PASSWORD: Joi.string().required(),
       DB_NAME: Joi.string().required(),
       DB_SYNC: Joi.boolean().required(),
+      DB_DROP_SCHEMA: Joi.boolean().required(),
+      DB_LOGGING: Joi.boolean().required(),
     });
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(

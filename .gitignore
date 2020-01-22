@@ -9,3 +9,7 @@ packages/*/node_modules
 packages/*/dist
 packages/*/config/.env
 packages/*/config/test-e2e.env
+
+packages/api-server/env/.env
+packages/api-server/env/test-e2e.env
+packages/api-server/tsconfig.build.tsbuildinfo
