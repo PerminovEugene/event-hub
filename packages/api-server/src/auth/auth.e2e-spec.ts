@@ -3,11 +3,11 @@ import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Connection, getConnection } from 'typeorm';
 import { AppUser, Status } from '../app-user/app-user.entity';
+import { defineAppUser } from '../app-user/app-user.factory';
 import { getGraphqlConfig } from '../config/app/graphql.config';
 import { initConfigService } from '../config/environment/service';
 import { AppType, Director } from '../core/app/app.director';
 import { TestE2eAppBuilder } from '../core/app/teste2e.app.builder';
-import { generateSalt, hashText } from '../facades/crypto';
 import { testRequest } from '../facades/tests';
 import { AuthModule } from './auth.module';
 
@@ -35,78 +35,80 @@ describe('Auth e2e', () => {
     connection = getConnection('default');
   });
 
-  it('should make positive login request', async () => {
-    const email = 'logintest@mail.com',
-      sourcePassword = 'foobarbazz',
-      salt = await generateSalt(),
-      role = Role.client,
-      status = Status.active,
-      password = await hashText(sourcePassword, salt);
+  describe('Login', () => {
+    it('When no email & password are correct, then returns user data and cookie', async () => {
+      const appUser = await defineAppUser({ email: 'login-positive@mail.com' });
 
-    const result = await connection
-      .createQueryBuilder()
-      .insert()
-      .into(AppUser)
-      .values([{ email, password, salt, status, role }])
-      .execute();
+      const result = await connection
+        .createQueryBuilder()
+        .insert()
+        .into(AppUser)
+        .values([appUser])
+        .execute();
 
-    const loginInput: LoginInput = { email, password: sourcePassword };
-    const { err, res } = await testRequest({
-      app,
-      params: {
-        operationName: 'login',
-        variables: {
-          loginInput,
-        },
-        query: `mutation login($loginInput: LoginInput!) {
+      const loginInput: LoginInput = {
+        email: appUser.email,
+        password: appUser.sourcePassword,
+      };
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'login',
+          variables: {
+            loginInput,
+          },
+          query: `mutation login($loginInput: LoginInput!) {
               login(loginInput: $loginInput) {
                 email
-                role id
+                role
+                id
                 status
                 __typename
               }
             }`,
-      },
-      status: 200,
-    });
+        },
+        status: 200,
+      });
 
-    const error = err || res.body.errors;
-    const id = result.raw[0].id;
-    await connection
-      .createQueryBuilder()
-      .delete()
-      .from(AppUser)
-      .where('id = :id', { id })
-      .execute();
-    expect(error).not.toBeDefined();
-    expect(res.body.data.login).toEqual({
-      email,
-      role,
-      id,
-      status,
-      __typename: 'SessionData',
+      const error = err || res.body.errors;
+      const id = result.raw[0].id;
+      await connection
+        .createQueryBuilder()
+        .delete()
+        .from(AppUser)
+        .where('id = :id', { id })
+        .execute();
+      expect(error).not.toBeDefined();
+      expect(res.body.data.login).toEqual({
+        email: appUser.email,
+        role: appUser.role,
+        id,
+        status: appUser.status,
+        __typename: 'SessionData',
+      });
     });
   });
 
-  it('should make positive registration request', async () => {
-    const email = 'registrationtest@mail.com',
-      sourcePassword = 'regpassword',
-      role = Role.client,
-      status = Status.active;
+  describe('Registration', () => {
+    it('When email, password and passwordConfirm are correct, then user is created and returned, response has correct cookie', async () => {
+      const email = 'registrationtest@mail.com',
+        sourcePassword = 'regpassword',
+        role = Role.client,
+        status = Status.active;
 
-    const registrationInput: RegistrationInput = {
-      email,
-      password: sourcePassword,
-      passwordConfirm: sourcePassword,
-    };
-    const { err, res } = await testRequest({
-      app,
-      params: {
-        operationName: 'registration',
-        variables: {
-          registrationInput,
-        },
-        query: `mutation registration($registrationInput: RegistrationInput!) {
+      const registrationInput: RegistrationInput = {
+        email,
+        password: sourcePassword,
+        passwordConfirm: sourcePassword,
+      };
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'registration',
+          variables: {
+            registrationInput,
+          },
+          query: `mutation registration($registrationInput: RegistrationInput!) {
                   registration(registrationInput: $registrationInput) {
                     email
                     role id
@@ -114,26 +116,27 @@ describe('Auth e2e', () => {
                     __typename
                   }
                 }`,
-      },
-      status: 200,
-    });
+        },
+        status: 200,
+      });
 
-    const error = err || res.body.errors;
-    expect(error).not.toBeDefined();
+      const error = err || res.body.errors;
+      expect(error).not.toBeDefined();
 
-    const result = await connection
-      .createQueryBuilder()
-      .select('app_user')
-      .from(AppUser, 'app_user')
-      .where('app_user.email = :email', { email })
-      .getOne();
-
-    expect(res.body.data.registration).toEqual({
-      email,
-      role,
-      id: result.id,
-      status,
-      __typename: 'SessionData',
+      const result = await connection
+        .createQueryBuilder()
+        .select('app_user')
+        .from(AppUser, 'app_user')
+        .where('app_user.email = :email', { email })
+        .getOne();
+      expect(res.body.data.registration).toEqual({
+        email,
+        role,
+        id: result.id,
+        status,
+        __typename: 'SessionData',
+      });
+      expect(res.headers['set-cookie'][0]).toBeDefined();
     });
   });
 
