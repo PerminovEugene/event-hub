@@ -1,4 +1,4 @@
-import { Role } from '@calendar/shared';
+import { LoginInput, RegistrationInput, Role } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Connection, getConnection } from 'typeorm';
@@ -10,6 +10,8 @@ import { TestE2eAppBuilder } from '../core/app/teste2e.app.builder';
 import { generateSalt, hashText } from '../facades/crypto';
 import { testRequest } from '../facades/tests';
 import { AuthModule } from './auth.module';
+
+// TODO move general things to another file
 
 describe('Auth e2e', () => {
   let app: INestApplication;
@@ -33,7 +35,7 @@ describe('Auth e2e', () => {
     connection = getConnection('default');
   });
 
-  it('should send login input', async () => {
+  it('should make positive login request', async () => {
     const email = 'logintest@mail.com',
       sourcePassword = 'foobarbazz',
       salt = await generateSalt(),
@@ -48,12 +50,13 @@ describe('Auth e2e', () => {
       .values([{ email, password, salt, status, role }])
       .execute();
 
+    const loginInput: LoginInput = { email, password: sourcePassword };
     const { err, res } = await testRequest({
       app,
       params: {
         operationName: 'login',
         variables: {
-          loginInput: { email, password: sourcePassword },
+          loginInput,
         },
         query: `mutation login($loginInput: LoginInput!) {
               login(loginInput: $loginInput) {
@@ -80,6 +83,55 @@ describe('Auth e2e', () => {
       email,
       role,
       id,
+      status,
+      __typename: 'SessionData',
+    });
+  });
+
+  it('should make positive registration request', async () => {
+    const email = 'registrationtest@mail.com',
+      sourcePassword = 'regpassword',
+      role = Role.client,
+      status = Status.active;
+
+    const registrationInput: RegistrationInput = {
+      email,
+      password: sourcePassword,
+      passwordConfirm: sourcePassword,
+    };
+    const { err, res } = await testRequest({
+      app,
+      params: {
+        operationName: 'registration',
+        variables: {
+          registrationInput,
+        },
+        query: `mutation registration($registrationInput: RegistrationInput!) {
+                  registration(registrationInput: $registrationInput) {
+                    email
+                    role id
+                    status
+                    __typename
+                  }
+                }`,
+      },
+      status: 200,
+    });
+
+    const error = err || res.body.errors;
+    expect(error).not.toBeDefined();
+
+    const result = await connection
+      .createQueryBuilder()
+      .select('app_user')
+      .from(AppUser, 'app_user')
+      .where('app_user.email = :email', { email })
+      .getOne();
+
+    expect(res.body.data.registration).toEqual({
+      email,
+      role,
+      id: result.id,
       status,
       __typename: 'SessionData',
     });
