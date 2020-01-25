@@ -1,12 +1,8 @@
 import { EventsFiltersInput } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { Connection, getConnection } from 'typeorm';
-import { getGraphqlConfig } from '../config/app/graphql.config';
-import { initConfigService } from '../config/environment/service';
-import { AppType, Director } from '../core/app/app.director';
-import { TestE2eAppBuilder } from '../core/app/teste2e.app.builder';
+import { Connection } from 'typeorm';
 import { testRequest } from '../facades/tests';
+import { e2eSpecInitalizer } from '../framework/test/e2e/e2e.uitls';
 import { Event } from './event.entity';
 import { defineEvent } from './event.factory';
 import { EventModule } from './event.module';
@@ -16,25 +12,13 @@ describe.only('Event e2e', () => {
   let connection: Connection;
 
   beforeAll(async () => {
-    jest.setTimeout(300000);
-    initConfigService({ filePrefix: 'test-e2e' });
-    const builder = new TestE2eAppBuilder({
-      imports: [
-        EventModule,
-        GraphQLModule.forRootAsync({
-          useFactory: () => getGraphqlConfig(),
-        }),
-      ],
-    });
-    const director = new Director(builder);
-    await director.make(AppType.testE2e);
-    app = builder.getApp();
-    await app.init();
-    connection = getConnection('default');
+    ({ app, connection } = await e2eSpecInitalizer({
+      importedModules: [EventModule],
+    }));
   });
 
   describe('Event list', () => {
-    it.only('When no filters provided, then returns list of events', async () => {
+    it('When no filters provided, then returns list of events', async () => {
       const numberOfEvents = 5;
       const events = [];
       for (let i = 0; i < numberOfEvents; i++) {

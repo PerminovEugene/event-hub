@@ -3817,6 +3817,10 @@
         "version": "b157b0b99284804e3dee6e6bd2e25bfcc8f9ac0de49ae81d0607ad087d2e7913",
         "signature": "61cc3e81a3b197278c495d9203a2a5f47f8053c027229b74015ec6e328aa412f"
       },
+      "./src/framework/test/e2e/e2e.uitls.ts": {
+        "version": "e963576551114d623a0bfed57f395423b9fe9a9d6655287bbc05f8bda54e9cad",
+        "signature": "b01ba25fbf8ae7ab2632b1f524d72178685f5d934eedfb59f21dde5b7e8639a8"
+      },
       "./src/scripts/generate-graphql-definitions.ts": {
         "version": "97e631ea51e940a0f333ca17cde5fbbb774bffa47d529adea8a3128ad8628d32",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
@@ -11996,6 +12000,19 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./src/framework/test/e2e/e2e.uitls.ts": [
+        "./node_modules/@nestjs/common/index.d.ts",
+        "./node_modules/@nestjs/graphql/index.d.ts",
+        "./node_modules/typeorm/index.d.ts",
+        "./src/config/app/graphql.config.ts",
+        "./src/config/environment/service.ts",
+        "./src/core/app/app.director.ts",
+        "./src/core/app/teste2e.app.builder.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./src/scripts/generate-graphql-definitions.ts": [
         "./node_modules/@nestjs/graphql/index.d.ts",
         "./node_modules/@types/node/path.d.ts",
@@ -19860,6 +19877,11 @@
       "./src/facades/tests.ts": [
         "./node_modules/@nestjs/common/index.d.ts"
       ],
+      "./src/framework/test/e2e/e2e.uitls.ts": [
+        "./node_modules/@nestjs/common/index.d.ts",
+        "./node_modules/typeorm/index.d.ts",
+        "./src/core/app/app.director.ts"
+      ],
       "./node_modules/jest-diff/build/types.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -20809,6 +20831,7 @@
       "./src/event/event.entity.ts",
       "./src/errors/save-event.error.ts",
       "./src/event/event.service.ts",
+      "./src/event/event.resolver.ts",
       "./src/event/event.module.ts",
       "./src/config/app/graphql.config.ts",
       "./src/core/app/app.module.ts",
@@ -20839,7 +20862,7 @@
       "./node_modules/jest-diff/build/types.d.ts",
       "./node_modules/jest-diff/build/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
-      "./src/event/event.resolver.ts"
+      "./src/framework/test/e2e/e2e.uitls.ts"
     ]
   },
   "version": "3.7.4"

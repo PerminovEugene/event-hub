@@ -1,14 +1,10 @@
 import { LoginInput, RegistrationInput, Role } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { Connection, getConnection } from 'typeorm';
+import { Connection } from 'typeorm';
 import { AppUser, Status } from '../app-user/app-user.entity';
 import { defineAppUser } from '../app-user/app-user.factory';
-import { getGraphqlConfig } from '../config/app/graphql.config';
-import { initConfigService } from '../config/environment/service';
-import { AppType, Director } from '../core/app/app.director';
-import { TestE2eAppBuilder } from '../core/app/teste2e.app.builder';
 import { testRequest } from '../facades/tests';
+import { e2eSpecInitalizer } from '../framework/test/e2e/e2e.uitls';
 import { AuthModule } from './auth.module';
 
 // TODO move general things to another file
@@ -18,21 +14,9 @@ describe('Auth e2e', () => {
   let connection: Connection;
 
   beforeAll(async () => {
-    jest.setTimeout(300000);
-    initConfigService({ filePrefix: 'test-e2e' });
-    const builder = new TestE2eAppBuilder({
-      imports: [
-        AuthModule,
-        GraphQLModule.forRootAsync({
-          useFactory: () => getGraphqlConfig(),
-        }),
-      ],
-    });
-    const director = new Director(builder);
-    await director.make(AppType.testE2e);
-    app = builder.getApp();
-    await app.init();
-    connection = getConnection('default');
+    ({ app, connection } = await e2eSpecInitalizer({
+      importedModules: [AuthModule],
+    }));
   });
 
   describe('Login', () => {
