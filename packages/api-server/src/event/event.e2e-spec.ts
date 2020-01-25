@@ -75,6 +75,55 @@ describe.only('Event e2e', () => {
     });
   });
 
+  describe('Create event', () => {
+    it('When eventInput is correct, then returns created event', async () => {
+      const event = await defineEvent();
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'createEvent',
+          variables: {
+            eventInput: event,
+          },
+          query: `mutation createEvent($eventInput: EventInput) {
+            createEvent(eventInput: $eventInput) { 
+              id
+              name
+              description
+              type
+            }
+          }`,
+        },
+        status: 200,
+      });
+
+      const error = err || res.body.errors;
+      expect(error).not.toBeDefined();
+
+      const eventRecord: any = await connection
+        .createQueryBuilder()
+        .select('event')
+        .from(Event, 'event')
+        .where('event.name = :name', { name: event.name })
+        .getOne();
+
+      const id = eventRecord.id;
+      await connection
+        .createQueryBuilder()
+        .delete()
+        .from(Event)
+        .where('id = :id', { id })
+        .execute();
+
+      expect(res.body.data.createEvent).toEqual({
+        id,
+        name: event.name,
+        description: event.description,
+        type: event.type,
+      });
+    });
+  });
+
   afterAll(async () => {
     await app.close();
   });

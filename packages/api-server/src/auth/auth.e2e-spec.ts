@@ -113,6 +113,14 @@ describe('Auth e2e', () => {
         .from(AppUser, 'app_user')
         .where('app_user.email = :email', { email })
         .getOne();
+
+      await connection
+        .createQueryBuilder()
+        .delete()
+        .from(AppUser)
+        .where('id = :id', { id: result.id })
+        .execute();
+
       expect(res.body.data.registration).toEqual({
         email,
         role,

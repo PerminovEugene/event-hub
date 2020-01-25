@@ -3710,8 +3710,8 @@
         "signature": "2fd5610ba21dc91eb7e35cfd70da0fe32f8d181a376bd6f4f65eff26a60c7a42"
       },
       "./src/event/event.resolver.ts": {
-        "version": "4b46dc2343811ddb327484c6f7eeb1a27846e6d695d18b1920801f139186d141",
-        "signature": "609fe0a84f34c8dd6cd1e13fd1a5333c1ab9023df93cf71e446216a7ddb08d32"
+        "version": "fa4c3f2063bab727ae52ab2a33528a6155061784882d8b9d1dac8f73be7dc669",
+        "signature": "b34a81a078328ada233e0dd6fffdbe11f3e610f1febb25bce4b4ecb56d5cf99b"
       },
       "./src/event/event.module.ts": {
         "version": "f1da90a6a3c276a0d5fbea2b1cb4f014f7833037acc39c9a665bcfb0fea4bbd9",
@@ -20831,8 +20831,6 @@
       "./src/event/event.entity.ts",
       "./src/errors/save-event.error.ts",
       "./src/event/event.service.ts",
-      "./src/event/event.resolver.ts",
-      "./src/event/event.module.ts",
       "./src/config/app/graphql.config.ts",
       "./src/core/app/app.module.ts",
       "./src/main.ts",
@@ -20858,11 +20856,13 @@
       "./node_modules/@types/superagent/index.d.ts",
       "./node_modules/@types/supertest/index.d.ts",
       "./src/facades/tests.ts",
+      "./src/framework/test/e2e/e2e.uitls.ts",
       "./src/scripts/generate-graphql-definitions.ts",
       "./node_modules/jest-diff/build/types.d.ts",
       "./node_modules/jest-diff/build/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
-      "./src/framework/test/e2e/e2e.uitls.ts"
+      "./src/event/event.resolver.ts",
+      "./src/event/event.module.ts"
     ]
   },
   "version": "3.7.4"

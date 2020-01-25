@@ -1,4 +1,4 @@
-import { EventInput } from '@calendar/shared';
+import { EventInput, EventsFiltersInput } from '@calendar/shared';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { EventService } from './event.service';
 
@@ -9,9 +9,9 @@ export class EventResolver {
   @Query('events')
   async getEvents(
     @Args('eventFiltersInput')
-    filtersInput: any,
+    eventFiltersInput: EventsFiltersInput,
   ) {
-    return await this.eventService.getEvents(filtersInput);
+    return await this.eventService.getEvents(eventFiltersInput);
   }
 
   @Mutation()
