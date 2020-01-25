@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { Event as EventEntity } from './event.entity';
 import { EventInput } from '@calendar/shared';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { SaveEventError } from '../errors/save-event.error';
+import { Event as EventEntity } from './event.entity';
 
 @Injectable()
 export class EventService {

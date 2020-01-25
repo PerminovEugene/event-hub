@@ -6,14 +6,14 @@ type Event {
   date: String!
 }
 
-input FiltersInput {
+input EventsFiltersInput {
   fromDate: String
   toDate: String
   tags: [String]
 }
 
 type Query {
-  getEvents(filtersInput: FiltersInput): [Event]
+  events(eventFiltersInput: EventsFiltersInput): [Event]
 }
 
 input EventInput {

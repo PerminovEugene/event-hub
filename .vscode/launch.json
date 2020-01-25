@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Jest All",
+      "name": "API e2e all",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "args": ["--runInBand", "--config", "packages/api-server/jest-e2e.json"],
       "console": "integratedTerminal",
@@ -13,41 +13,19 @@
       "windows": {
         "program": "${workspaceFolder}/packages/api-server/node_modules/jest/bin/jest"
       }
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Jest Current File",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": ["${fileBasenameNoExtension}", "--config", "jest.config.js"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "disableOptimisticBPs": true,
-      "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
-      }
     }
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "API e2e current file",
+    //   "program": "${workspaceFolder}/node_modules/.bin/jest",
+    //   "args": ["--runInBand", "--config", "packages/api-server/jest-e2e.json"],
+    //   "console": "integratedTerminal",
+    //   "internalConsoleOptions": "neverOpen",
+    //   "disableOptimisticBPs": true,
+    //   "windows": {
+    //     "program": "${workspaceFolder}/packages/api-server/node_modules/jest/bin/jest"
+    //   }
+    // }
   ]
 }
-
-// {
-//   // Use IntelliSense to learn about possible attributes.
-//   // Hover to view descriptions of existing attributes.
-//   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//   "version": "0.2.0",
-//   "configurations": [
-//     {
-//       "type": "node",
-//       "request": "launch",
-//       "name": "jeste2e",
-//       "args": ["--config", "packages/api-server/jest-e2e.json"],
-//       "runtimeArgs": [
-//         "--inspect-brk",
-//         "${workspaceRoot}/packages/api-server/node_modules/.bin/jest"
-//       ],
-//       "sourceMaps": true,
-//       "cwd": "${workspaceRoot}",
-//       "protocol": "inspector"
-//     }
-//   ]
-// }

@@ -9,7 +9,7 @@ type OverridenFields = {
   role?: Role;
 };
 
-export const defineAppUser = async (overridenFields?: OverridenFields) => {
+export const defineAppUser = async (overridenFields: OverridenFields = {}) => {
   const sourcePassword = overridenFields.sourcePassword || 'foobarbazz',
     salt = await generateSalt(),
     password = await hashText(sourcePassword, salt);

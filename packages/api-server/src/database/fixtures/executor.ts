@@ -1,9 +1,9 @@
-import { Connection, Repository, EntitySchema } from 'typeorm';
-import * as yaml from 'js-yaml';
 import * as fs from 'fs';
-import { createConnection } from 'typeorm';
-import { getConnectionOptions } from '../database.provider';
+import * as yaml from 'js-yaml';
 import { resolve } from 'path';
+import { Connection, createConnection } from 'typeorm';
+import { asyncForEach } from '../../framework/utils/async.actions';
+import { getConnectionOptions } from '../database.provider';
 import { ServiceManager } from './service.manager';
 
 type FixtureConfig = {
@@ -89,10 +89,3 @@ const init = async () => {
 };
 
 init();
-
-// TODO do we need move it to framework or use library?
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
-}

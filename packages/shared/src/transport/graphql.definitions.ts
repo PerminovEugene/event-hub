@@ -5,18 +5,18 @@
  */
 
 /* tslint:disable */
-export class EventFilters {
-    fromDate?: string;
-    toDate?: string;
-    tags?: string[];
-}
-
 export class EventInput {
     id?: number;
     name?: string;
     description?: string;
     type?: string;
     date?: string;
+}
+
+export class EventsFiltersInput {
+    fromDate?: string;
+    toDate?: string;
+    tags?: string[];
 }
 
 export class LoginInput {
@@ -45,13 +45,13 @@ export abstract class IMutation {
 
     abstract logout(): boolean | Promise<boolean>;
 
-    abstract createEvent(event?: EventInput): Event | Promise<Event>;
+    abstract createEvent(eventInput?: EventInput): Event | Promise<Event>;
 }
 
 export abstract class IQuery {
     abstract whoAmI(): SessionData | Promise<SessionData>;
 
-    abstract getEvents(eventFilters?: EventFilters): Event[] | Promise<Event[]>;
+    abstract getEvents(eventFiltersInput?: EventsFiltersInput): Event[] | Promise<Event[]>;
 }
 
 export class SessionData {

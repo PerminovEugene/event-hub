@@ -36,7 +36,7 @@ describe('Auth e2e', () => {
   });
 
   describe('Login', () => {
-    it('When no email & password are correct, then returns user data and cookie', async () => {
+    it('When no email and password are correct, then returns user data and cookie', async () => {
       const appUser = await defineAppUser({ email: 'login-positive@mail.com' });
 
       const result = await connection
