@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import { AppError } from '../errors/app.error';
+import { AppError } from '../../errors/app.error';
 
 export class InvalidCredentialsError extends AppError {
   constructor() {

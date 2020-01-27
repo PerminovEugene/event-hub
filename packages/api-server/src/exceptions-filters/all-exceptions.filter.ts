@@ -1,10 +1,9 @@
 import {
-  Catch,
   ArgumentsHost,
+  Catch,
   InternalServerErrorException,
-  UnauthorizedException,
 } from '@nestjs/common';
-import { GqlExceptionFilter, GqlArgumentsHost } from '@nestjs/graphql';
+import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
 import { AppError } from '../errors/app.error';
 
 @Catch()

@@ -1,7 +1,8 @@
 import { GqlModuleOptions } from '@nestjs/graphql';
-import { AppUserModule } from './../../app-user/app-user.module';
-import { AuthModule } from './../../auth/auth.module';
-import { EventModule } from './../../event/event.module';
+import { TagModule } from '../../domain/tag/tag.module';
+import { AppUserModule } from './../../domain/app-user/app-user.module';
+import { AuthModule } from './../../domain/auth/auth.module';
+import { EventModule } from './../../domain/event/event.module';
 import { getCorsOptions } from './../cors';
 
 export const getGraphqlConfig = (): GqlModuleOptions => ({
@@ -19,6 +20,6 @@ export const getGraphqlConfig = (): GqlModuleOptions => ({
   //   path: join(process.cwd(), 'src/graphql.ts'),
   //   outputAs: 'class',
   // },
-  include: [AppUserModule, AuthModule, EventModule],
+  include: [AppUserModule, AuthModule, EventModule, TagModule],
   cors: getCorsOptions(),
 });

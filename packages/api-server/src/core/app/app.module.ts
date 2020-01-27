@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { AppUserModule } from './../../app-user/app-user.module';
-import { AuthModule } from './../../auth/auth.module';
 import { getGraphqlConfig } from './../../config/app/graphql.config';
-import {
-  // ConfigService, configService
-  getConfigService,
-} from './../../config/environment/service';
-import { EventModule } from './../../event/event.module';
+import { getConfigService } from './../../config/environment/service';
+import { AppUserModule } from './../../domain/app-user/app-user.module';
+import { AuthModule } from './../../domain/auth/auth.module';
+import { EventModule } from './../../domain/event/event.module';
+import { TagModule } from './../../domain/tag/tag.module';
 
 const configServiceFactory = {
   provide: 'CONFIG_SERVICE',
@@ -23,14 +21,9 @@ const configServiceFactory = {
     }),
     AppUserModule,
     AuthModule,
+    TagModule,
     EventModule,
   ],
-  providers: [
-    // {
-    //   provide: ConfigService,
-    //   useValue: configService,
-    // },
-    configServiceFactory,
-  ],
+  providers: [configServiceFactory],
 })
 export class AppModule {}

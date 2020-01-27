@@ -5,7 +5,7 @@ import {
 } from '@calendar/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { SaveEventError } from '../errors/save-event.error';
+import { SaveEventError } from '../../errors/save-event.error';
 import { Event as EventEntity } from './event.entity';
 
 @Injectable()

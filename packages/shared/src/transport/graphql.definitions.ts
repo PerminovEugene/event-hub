@@ -37,6 +37,19 @@ export class RegistrationInput {
     passwordConfirm?: string;
 }
 
+export class TagInput {
+    name: string;
+}
+
+export class TagsFiltersInput {
+    theme?: string;
+}
+
+export class TagUpdateInput {
+    id?: number;
+    name?: string;
+}
+
 export class Event {
     id: number;
     type: string;
@@ -55,6 +68,8 @@ export abstract class IMutation {
     abstract createEvent(eventInput?: EventInput): Event | Promise<Event>;
 
     abstract updateEvent(eventUpdateInput?: EventUpdateInput): Event | Promise<Event>;
+
+    abstract createTag(tagInput?: TagInput): Tag | Promise<Tag>;
 }
 
 export abstract class IQuery {
@@ -63,6 +78,10 @@ export abstract class IQuery {
     abstract events(eventFiltersInput?: EventsFiltersInput): Event[] | Promise<Event[]>;
 
     abstract event(id: string): Event | Promise<Event>;
+
+    abstract tags(tagFiltersInput?: TagsFiltersInput): Tag[] | Promise<Tag[]>;
+
+    abstract tag(id?: string): Tag | Promise<Tag>;
 }
 
 export class SessionData {
@@ -71,4 +90,9 @@ export class SessionData {
     email?: string;
     role?: string;
     status?: string;
+}
+
+export class Tag {
+    id?: string;
+    name?: string;
 }

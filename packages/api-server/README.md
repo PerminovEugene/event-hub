@@ -7,6 +7,11 @@
 1. go to src/scripts
 2. `$ ts-node ./generate-graphql-typings.ts`
 
+### Hints
+
+1. If you want to add new entity with resolver, don't forget add module in Graphql Config in /`config/app/graphql.config.ts`
+2. Use snippets and add new
+
 ### Issues
 
 1. Nest.js validation problem will solving in next major release https://github.com/nestjs/nest/pull/3053

@@ -1,5 +1,5 @@
 import { Role } from '@calendar/shared';
-import { generateSalt, hashText } from '../facades/crypto';
+import { generateSalt, hashText } from '../../facades/crypto';
 import { Status } from './app-user.entity';
 
 type OverridenFields = {

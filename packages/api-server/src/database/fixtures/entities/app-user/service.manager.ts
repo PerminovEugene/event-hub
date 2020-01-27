@@ -1,8 +1,8 @@
 import { Connection } from 'typeorm';
+import { AppUserService } from '../../../../domain/app-user/app-user.service';
 import { RepoMock } from '../../repository.mock';
 import { ServiceManager } from '../../service.manager';
-import { AppUserService } from '../../../../app-user/app-user.service';
-import { AppUser } from './../../../../app-user/app-user.entity';
+import { AppUser } from './../../../../domain/app-user/app-user.entity';
 
 export class AppUserServiceManager implements ServiceManager {
   private service: AppUserService = null;

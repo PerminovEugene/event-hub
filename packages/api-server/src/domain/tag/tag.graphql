@@ -1,0 +1,28 @@
+type Tag {
+  id: ID
+  name: String
+}
+
+# mock
+input TagsFiltersInput {
+  theme: String
+}
+
+type Query {
+  tags(tagFiltersInput: TagsFiltersInput): [Tag]
+  tag(id: ID): Tag
+}
+
+input TagInput {
+  name: String!
+}
+
+input TagUpdateInput {
+  id: Int
+  name: String
+}
+
+type Mutation {
+  createTag(tagInput: TagInput): Tag
+  #   updateTag(tagUpdateInput: TagUpdateInput): Tag
+}

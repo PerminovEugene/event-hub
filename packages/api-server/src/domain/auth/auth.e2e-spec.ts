@@ -1,10 +1,10 @@
 import { LoginInput, RegistrationInput, Role } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
 import { Connection } from 'typeorm';
+import { testRequest } from '../../facades/tests';
+import { e2eSpecInitalizer } from '../../framework/test/e2e/e2e.uitls';
 import { AppUser, Status } from '../app-user/app-user.entity';
 import { defineAppUser } from '../app-user/app-user.factory';
-import { testRequest } from '../facades/tests';
-import { e2eSpecInitalizer } from '../framework/test/e2e/e2e.uitls';
 import { AuthModule } from './auth.module';
 
 // TODO move general things to another file

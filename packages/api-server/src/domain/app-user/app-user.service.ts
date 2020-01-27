@@ -1,9 +1,9 @@
 import { Role } from '@calendar/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { wrapDbError } from '../database/helpers/database-errors.hander';
-import { getInsertResult } from '../database/helpers/query-result.manager';
-import { generateSalt, hashText } from '../facades/crypto';
+import { wrapDbError } from '../../database/helpers/database-errors.hander';
+import { getInsertResult } from '../../database/helpers/query-result.manager';
+import { generateSalt, hashText } from '../../facades/crypto';
 import { AppUser as AppUserEntity, Status } from './app-user.entity';
 
 @Injectable()

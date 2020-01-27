@@ -1,8 +1,8 @@
 import { EventsFiltersInput } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
 import { Connection } from 'typeorm';
-import { testRequest } from '../facades/tests';
-import { e2eSpecInitalizer } from '../framework/test/e2e/e2e.uitls';
+import { testRequest } from '../../facades/tests';
+import { e2eSpecInitalizer } from '../../framework/test/e2e/e2e.uitls';
 import { Event } from './event.entity';
 import { defineEvent } from './event.factory';
 import { EventModule } from './event.module';

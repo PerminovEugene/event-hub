@@ -1,6 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { BaseEntity } from '../core/base.entity';
-import { IsString, IsDate } from 'class-validator';
+import { IsDate, IsString } from 'class-validator';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { BaseEntity } from '../../core/base.entity';
+import { Tag } from '../tag/tag.entity';
 
 // TODO Move to db
 export enum EventType {
@@ -33,4 +40,8 @@ export class Event extends BaseEntity {
   })
   @Column('date')
   date: Date;
+
+  @ManyToMany(type => Tag)
+  @JoinTable()
+  tags: Tag[];
 }

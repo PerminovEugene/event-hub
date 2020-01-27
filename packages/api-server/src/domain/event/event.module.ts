@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { Connection } from 'typeorm';
+import { DatabaseModule } from '../../database/database.module';
 import { Event } from './event.entity';
-import { EventService } from './event.service';
-import { DatabaseModule } from '../database/database.module';
 import { EventResolver } from './event.resolver';
+import { EventService } from './event.service';
 
 @Module({
   imports: [DatabaseModule],
