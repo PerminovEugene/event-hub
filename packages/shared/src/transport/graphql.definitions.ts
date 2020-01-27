@@ -6,7 +6,6 @@
 
 /* tslint:disable */
 export class EventInput {
-    id?: number;
     name?: string;
     description?: string;
     type?: string;
@@ -17,6 +16,14 @@ export class EventsFiltersInput {
     fromDate?: string;
     toDate?: string;
     tags?: string[];
+}
+
+export class EventUpdateInput {
+    id: number;
+    name?: string;
+    description?: string;
+    type?: string;
+    date?: string;
 }
 
 export class LoginInput {
@@ -46,12 +53,16 @@ export abstract class IMutation {
     abstract logout(): boolean | Promise<boolean>;
 
     abstract createEvent(eventInput?: EventInput): Event | Promise<Event>;
+
+    abstract updateEvent(eventUpdateInput?: EventUpdateInput): Event | Promise<Event>;
 }
 
 export abstract class IQuery {
     abstract whoAmI(): SessionData | Promise<SessionData>;
 
-    abstract getEvents(eventFiltersInput?: EventsFiltersInput): Event[] | Promise<Event[]>;
+    abstract events(eventFiltersInput?: EventsFiltersInput): Event[] | Promise<Event[]>;
+
+    abstract event(id: string): Event | Promise<Event>;
 }
 
 export class SessionData {

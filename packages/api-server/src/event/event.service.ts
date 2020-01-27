@@ -1,4 +1,8 @@
-import { EventInput } from '@calendar/shared';
+import {
+  EventInput,
+  EventsFiltersInput,
+  EventUpdateInput,
+} from '@calendar/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { SaveEventError } from '../errors/save-event.error';
@@ -11,11 +15,13 @@ export class EventService {
     private readonly eventRepository: Repository<EventEntity>,
   ) {}
 
-  public async getEvents(filters: any) {
+  public async getEvents(filters?: EventsFiltersInput) {
     return this.eventRepository.find();
   }
 
-  // CREATE EVENT
+  public async getEvent(id: number) {
+    return this.eventRepository.findOne(id);
+  }
 
   public async create(eventDTO: EventInput): Promise<EventEntity> {
     const event: EventEntity = this.createEventEntity(eventDTO);
@@ -23,12 +29,21 @@ export class EventService {
     return await this.saveEventEntity(event);
   }
 
+  public async update(event: EventUpdateInput): Promise<EventEntity> {
+    let eventRecord = await this.eventRepository.findOne(event.id);
+    // TODO refactoring tricky date update
+    Object.assign(eventRecord, event, { date: new Date(event.date) });
+    await eventRecord.validate();
+    await this.eventRepository.save(eventRecord);
+    return eventRecord;
+  }
+
+  // TODO move it to factory or something like that?
   protected createEventEntity(eventDTO: EventInput): EventEntity {
     try {
       const event: EventEntity = new EventEntity();
-      // TODO tricky
+      // TODO refactoring tricky date update
       Object.assign(event, eventDTO, { date: new Date(eventDTO.date) });
-
       return event;
     } catch (e) {
       throw e;

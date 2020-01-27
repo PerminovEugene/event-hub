@@ -75,6 +75,57 @@ describe.only('Event e2e', () => {
     });
   });
 
+  describe('Event by id', () => {
+    it('When id is correct, then returns events', async () => {
+      const event = await defineEvent();
+      const result = await connection
+        .createQueryBuilder()
+        .insert()
+        .into(Event)
+        .values([event])
+        .execute();
+
+      const id = result.raw[0].id;
+
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'getEvent',
+          variables: {
+            id,
+          },
+          query: `query getEvent($id: ID!) {
+            event(id: $id) { 
+              id
+              name
+              type
+              description
+            }
+          }`,
+        },
+        status: 200,
+      });
+
+      const error = err || res.body.errors;
+      await connection
+        .createQueryBuilder()
+        .delete()
+        .from(Event)
+        .whereInIds([id])
+        .execute();
+
+      expect(error).not.toBeDefined();
+      expect(res.body.data.event).toEqual({
+        id,
+        name: event.name,
+        description: event.description,
+        type: event.type,
+        // TODO Date will be added later
+        // date: event.date
+      });
+    });
+  });
+
   describe('Create event', () => {
     it('When eventInput is correct, then returns created event', async () => {
       const event = await defineEvent();
@@ -120,6 +171,64 @@ describe.only('Event e2e', () => {
         name: event.name,
         description: event.description,
         type: event.type,
+      });
+    });
+  });
+
+  describe('Update event', () => {
+    it('When eventUpdateInput is correct, then returns updated event', async () => {
+      const event = await defineEvent();
+      const result = await connection
+        .createQueryBuilder()
+        .insert()
+        .into(Event)
+        .values([event])
+        .execute();
+      const id = result.raw[0].id;
+      const updatedEvent: any = await defineEvent();
+      updatedEvent.id = id;
+
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'updateEvent',
+          variables: {
+            eventUpdateInput: updatedEvent,
+          },
+          query: `mutation updateEvent($eventUpdateInput: EventUpdateInput) {
+            updateEvent(eventUpdateInput: $eventUpdateInput) { 
+              id
+              name
+              description
+              type
+            }
+          }`,
+        },
+        status: 200,
+      });
+
+      const error = err || res.body.errors;
+      expect(error).not.toBeDefined();
+
+      // const eventRecord: any = await connection
+      //   .createQueryBuilder()
+      //   .select('event')
+      //   .from(Event, 'event')
+      //   .where('event.name = :name', { name: event.name })
+      //   .getOne();
+
+      await connection
+        .createQueryBuilder()
+        .delete()
+        .from(Event)
+        .where('id = :id', { id })
+        .execute();
+
+      expect(res.body.data.updateEvent).toEqual({
+        id,
+        name: updatedEvent.name,
+        description: updatedEvent.description,
+        type: updatedEvent.type,
       });
     });
   });

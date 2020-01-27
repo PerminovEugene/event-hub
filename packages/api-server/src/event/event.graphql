@@ -14,10 +14,18 @@ input EventsFiltersInput {
 
 type Query {
   events(eventFiltersInput: EventsFiltersInput): [Event]
+  event(id: ID!): Event
 }
 
 input EventInput {
-  id: Int
+  name: String
+  description: String
+  type: String
+  date: String
+}
+
+input EventUpdateInput {
+  id: Int!
   name: String
   description: String
   type: String
@@ -26,4 +34,5 @@ input EventInput {
 
 type Mutation {
   createEvent(eventInput: EventInput): Event
+  updateEvent(eventUpdateInput: EventUpdateInput): Event
 }
