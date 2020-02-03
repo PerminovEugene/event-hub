@@ -1,4 +1,4 @@
-import { IsDate, IsString } from 'class-validator';
+import { IsDate, IsOptional, IsString } from 'class-validator';
 import {
   Column,
   Entity,
@@ -38,10 +38,15 @@ export class Event extends BaseEntity {
   @IsDate({
     message: 'Invalid date',
   })
-  @Column('date')
+  @Column('timestamp with time zone')
   date: Date;
 
-  @ManyToMany(type => Tag)
+  @IsOptional()
+  @ManyToMany(
+    type => Tag,
+    tag => tag.events,
+    { cascade: true },
+  )
   @JoinTable()
   tags: Tag[];
 }

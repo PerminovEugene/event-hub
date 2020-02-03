@@ -1,13 +1,13 @@
 import { EventsFiltersInput } from '@calendar/shared';
 import { INestApplication } from '@nestjs/common';
-import { Connection } from 'typeorm';
+import { Connection, getRepository } from 'typeorm';
 import { testRequest } from '../../facades/tests';
 import { e2eSpecInitalizer } from '../../framework/test/e2e/e2e.uitls';
 import { Event } from './event.entity';
-import { defineEvent } from './event.factory';
+import { defineEvent, defineEventWithTags } from './event.factory';
 import { EventModule } from './event.module';
 
-describe.only('Event e2e', () => {
+describe('Event e2e', () => {
   let app: INestApplication;
   let connection: Connection;
 
@@ -17,8 +17,8 @@ describe.only('Event e2e', () => {
     }));
   });
 
-  describe('Event list', () => {
-    it('When no filters provided, then returns list of events', async () => {
+  describe('Get Event list', () => {
+    it('When no filters provided and events have no tags, then returns list of events', async () => {
       const numberOfEvents = 5;
       const events = [];
       for (let i = 0; i < numberOfEvents; i++) {
@@ -73,10 +73,66 @@ describe.only('Event e2e', () => {
         })),
       );
     });
+
+    it('When no filters provided and events have tags, then returns list of events', async () => {
+      const numberOfEvents = 5;
+      const sourceEvents = [];
+      for (let i = 0; i < numberOfEvents; i++) {
+        const event = await defineEventWithTags();
+        sourceEvents.push(event);
+      }
+      const events = await getRepository(Event).create(sourceEvents);
+      await getRepository(Event).save(events);
+
+      const ids = events.map(o => o.id);
+
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'getEvents',
+          variables: {
+            eventFiltersInput: {},
+          },
+          query: `query getEvents {
+            events { 
+              id
+              name
+              type
+              description
+              tags {
+                id
+                name
+              }
+            }
+          }`,
+        },
+        status: 200,
+      });
+
+      const error = err || res.body.errors;
+      await getRepository(Event).delete(ids);
+      expect(error).not.toBeDefined();
+      expect(res.body.data.events).toEqual(
+        sourceEvents.map((event, i) => ({
+          id: ids[i],
+          name: event.name,
+          description: event.description,
+          type: event.type,
+          tags: expect.arrayContaining(
+            event.tags.map(tag => ({
+              id: expect.any(Number),
+              name: tag.name,
+            })),
+          ),
+          // TODO Date will be added later
+          // date: event.date
+        })),
+      );
+    });
   });
 
-  describe('Event by id', () => {
-    it('When id is correct, then returns events', async () => {
+  describe('Find Event by id', () => {
+    it('When id is correct and event have no tags, then returns events', async () => {
       const event = await defineEvent();
       const result = await connection
         .createQueryBuilder()
@@ -94,12 +150,16 @@ describe.only('Event e2e', () => {
           variables: {
             id,
           },
-          query: `query getEvent($id: ID!) {
+          query: `query getEvent($id: Int!) {
             event(id: $id) { 
               id
               name
               type
               description
+              tags {
+                id
+                name
+              }
             }
           }`,
         },
@@ -120,6 +180,7 @@ describe.only('Event e2e', () => {
         name: event.name,
         description: event.description,
         type: event.type,
+        tags: [],
         // TODO Date will be added later
         // date: event.date
       });
@@ -127,7 +188,7 @@ describe.only('Event e2e', () => {
   });
 
   describe('Create event', () => {
-    it('When eventInput is correct, then returns created event', async () => {
+    it('When eventInput is correct and have not inner entities, then returns created event', async () => {
       const event = await defineEvent();
       const { err, res } = await testRequest({
         app,
@@ -171,6 +232,58 @@ describe.only('Event e2e', () => {
         name: event.name,
         description: event.description,
         type: event.type,
+      });
+    });
+
+    it('When eventInput is correct and has inner tags, then returns created event with tags', async () => {
+      const event = await defineEventWithTags();
+      const { err, res } = await testRequest({
+        app,
+        params: {
+          operationName: 'createEvent',
+          variables: {
+            eventInput: event,
+          },
+          query: `mutation createEvent($eventInput: EventInput) {
+            createEvent(eventInput: $eventInput) { 
+              id
+              name
+              description
+              type
+              tags {
+                id
+                name
+              }
+            }
+          }`,
+        },
+        status: 200,
+      });
+      const error = err || res.body.errors;
+      expect(error).not.toBeDefined();
+
+      const eventRecord = await getRepository(Event).findOne({
+        where: { name: event.name },
+        relations: ['tags'],
+      });
+
+      const id = eventRecord.id;
+      await connection
+        .createQueryBuilder()
+        .delete()
+        .from(Event)
+        .where('id = :id', { id })
+        .execute();
+
+      expect(res.body.data.createEvent).toEqual({
+        id,
+        name: event.name,
+        description: event.description,
+        type: event.type,
+        tags: eventRecord.tags.map(tag => ({
+          id: tag.id,
+          name: tag.name,
+        })),
       });
     });
   });

@@ -10,6 +10,7 @@ export class EventInput {
     description?: string;
     type?: string;
     date?: string;
+    tags?: TagInput[];
 }
 
 export class EventsFiltersInput {
@@ -38,7 +39,8 @@ export class RegistrationInput {
 }
 
 export class TagInput {
-    name: string;
+    name?: string;
+    id?: number;
 }
 
 export class TagsFiltersInput {
@@ -56,6 +58,7 @@ export class Event {
     name: string;
     description?: string;
     date: string;
+    tags?: Tag[];
 }
 
 export abstract class IMutation {

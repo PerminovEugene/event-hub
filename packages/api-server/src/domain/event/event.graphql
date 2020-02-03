@@ -4,6 +4,7 @@ type Event {
   name: String!
   description: String
   date: String!
+  tags: [Tag]
 }
 
 input EventsFiltersInput {
@@ -14,7 +15,7 @@ input EventsFiltersInput {
 
 type Query {
   events(eventFiltersInput: EventsFiltersInput): [Event]
-  event(id: ID!): Event
+  event(id: Int!): Event
 }
 
 input EventInput {
@@ -22,6 +23,7 @@ input EventInput {
   description: String
   type: String
   date: String
+  tags: [TagInput]
 }
 
 input EventUpdateInput {

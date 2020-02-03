@@ -6,9 +6,7 @@ import { AppUserService } from '../app-user/app-user.service';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly appUsersService: AppUserService, // private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly appUsersService: AppUserService) {}
 
   public async validateUser(
     email: string,

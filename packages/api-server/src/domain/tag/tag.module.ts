@@ -14,7 +14,12 @@ import { TagService } from './tag.service';
       inject: ['DATABASE_CONNECTION'],
     },
     TagResolver,
+    // TagLoader,
     TagService,
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: DataLoaderInterceptor,
+    // },
   ],
   exports: [TagService],
 })

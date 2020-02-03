@@ -1,5 +1,10 @@
 # Api-server
 
+### Setup development
+
+1. Create new files in `env` dirrectory - `.env`, `test-e2e.env` and `test-integration.env` in the same dirrectory
+2. fill these files by example in .env.template
+
 ### For regeneration graphql typings
 
 (they are stored in shared repo)

@@ -6,6 +6,7 @@ import {
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { SaveEventError } from '../../errors/save-event.error';
+import { TagService } from '../tag/tag.service';
 import { Event as EventEntity } from './event.entity';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class EventService {
   constructor(
     @Inject('EVENT_REPOSITORY')
     private readonly eventRepository: Repository<EventEntity>,
+    private readonly tagService: TagService,
   ) {}
 
   public async getEvents(filters?: EventsFiltersInput) {
@@ -44,6 +46,11 @@ export class EventService {
       const event: EventEntity = new EventEntity();
       // TODO refactoring tricky date update
       Object.assign(event, eventDTO, { date: new Date(eventDTO.date) });
+      if (event.tags) {
+        event.tags = event.tags.map(tag =>
+          this.tagService.createTagEntity(tag),
+        );
+      }
       return event;
     } catch (e) {
       throw e;
