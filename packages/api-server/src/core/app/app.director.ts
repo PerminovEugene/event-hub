@@ -18,8 +18,8 @@ export class Director {
       this.builder.buildCors();
     }
     this.builder.buildCookie();
-    this.builder.buildSession();
     this.builder.buildPassport();
+    this.builder.buildSession();
     if (appType === AppType.simple) {
       this.builder.buildGlobalFilters();
     }

@@ -20,7 +20,7 @@ describe('Auth e2e', () => {
   });
 
   describe('Login', () => {
-    it('When no email and password are correct, then returns user data and cookie', async () => {
+    it('When email and password are correct, then returns user data and cookie', async () => {
       const appUser = await defineAppUser({ email: 'login-positive@mail.com' });
 
       const result = await connection
@@ -47,14 +47,13 @@ describe('Auth e2e', () => {
                 role
                 id
                 status
-                __typename
               }
             }`,
         },
         status: 200,
       });
+      expect(err).not.toBeDefined();
 
-      const error = err || res.body.errors;
       const id = result.raw[0].id;
       await connection
         .createQueryBuilder()
@@ -62,13 +61,11 @@ describe('Auth e2e', () => {
         .from(AppUser)
         .where('id = :id', { id })
         .execute();
-      expect(error).not.toBeDefined();
       expect(res.body.data.login).toEqual({
         email: appUser.email,
         role: appUser.role,
         id,
         status: appUser.status,
-        __typename: 'SessionData',
       });
     });
   });
@@ -104,8 +101,7 @@ describe('Auth e2e', () => {
         status: 200,
       });
 
-      const error = err || res.body.errors;
-      expect(error).not.toBeDefined();
+      expect(err).not.toBeDefined();
 
       const result = await connection
         .createQueryBuilder()

@@ -54,14 +54,13 @@ describe('Event e2e', () => {
         status: 200,
       });
 
-      const error = err || res.body.errors;
       await connection
         .createQueryBuilder()
         .delete()
         .from(Event)
         .whereInIds(ids)
         .execute();
-      expect(error).not.toBeDefined();
+      expect(err).not.toBeDefined();
       expect(res.body.data.events).toEqual(
         events.map((event, i) => ({
           id: ids[i],
@@ -109,9 +108,8 @@ describe('Event e2e', () => {
         status: 200,
       });
 
-      const error = err || res.body.errors;
       await getRepository(Event).delete(ids);
-      expect(error).not.toBeDefined();
+      expect(err).not.toBeDefined();
       expect(res.body.data.events).toEqual(
         sourceEvents.map((event, i) => ({
           id: ids[i],
@@ -166,7 +164,6 @@ describe('Event e2e', () => {
         status: 200,
       });
 
-      const error = err || res.body.errors;
       await connection
         .createQueryBuilder()
         .delete()
@@ -174,7 +171,7 @@ describe('Event e2e', () => {
         .whereInIds([id])
         .execute();
 
-      expect(error).not.toBeDefined();
+      expect(err).not.toBeDefined();
       expect(res.body.data.event).toEqual({
         id,
         name: event.name,
@@ -209,8 +206,7 @@ describe('Event e2e', () => {
         status: 200,
       });
 
-      const error = err || res.body.errors;
-      expect(error).not.toBeDefined();
+      expect(err).not.toBeDefined();
 
       const eventRecord: any = await connection
         .createQueryBuilder()
@@ -259,8 +255,7 @@ describe('Event e2e', () => {
         },
         status: 200,
       });
-      const error = err || res.body.errors;
-      expect(error).not.toBeDefined();
+      expect(err).not.toBeDefined();
 
       const eventRecord = await getRepository(Event).findOne({
         where: { name: event.name },
@@ -320,16 +315,7 @@ describe('Event e2e', () => {
         status: 200,
       });
 
-      const error = err || res.body.errors;
-      expect(error).not.toBeDefined();
-
-      // const eventRecord: any = await connection
-      //   .createQueryBuilder()
-      //   .select('event')
-      //   .from(Event, 'event')
-      //   .where('event.name = :name', { name: event.name })
-      //   .getOne();
-
+      expect(err).not.toBeDefined();
       await connection
         .createQueryBuilder()
         .delete()

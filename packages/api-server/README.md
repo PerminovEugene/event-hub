@@ -23,4 +23,7 @@
 
 ### TODO
 
-[] move db credentials to .env
+1. edit event with tags
+2. true deletion or archivations for events
+3. guards for events\tags actions,
+4. e2e integration for AUTH module

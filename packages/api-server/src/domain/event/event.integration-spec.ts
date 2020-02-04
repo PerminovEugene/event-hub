@@ -41,10 +41,10 @@ describe('Event Service Integration', () => {
     it('When event has only new tags, then return inserted record with tags', async () => {
       const event = await defineEventWithTags();
       const result = await eventService.create(event);
-      const record = await eventRepository.findOne(result.id, {
+      const expected = await eventRepository.findOne(result.id, {
         relations: ['tags'],
       });
-      expect(result).toEqual(record);
+      expect(result).toEqual(expected);
     });
 
     it('When event has only existed tags, then return inserted record with tags ids', async () => {
@@ -53,17 +53,19 @@ describe('Event Service Integration', () => {
       ).raw;
       const event = await defineEvent();
       event.tags = existedTags.map(tag => ({ id: tag.id }));
+
       const result = await eventService.create(event);
-      const record = await eventRepository.findOne(result.id, {
+
+      const expected = await eventRepository.findOne(result.id, {
         relations: ['tags'],
       });
       // result tags wouldn't include name, if it wasn't send
-      record.tags.forEach((tag, index) => {
+      expected.tags.forEach((tag, index) => {
         expect(tag.id).toEqual(result.tags[index].id);
       });
-      delete record.tags;
+      delete expected.tags;
       delete result.tags;
-      expect(result).toEqual(record);
+      expect(result).toEqual(expected);
     });
 
     it('When event has new and existed tags, then return inserted record with tags', async () => {
@@ -75,16 +77,17 @@ describe('Event Service Integration', () => {
       event.tags.push(await defineTag(), await defineTag());
 
       const result = await eventService.create(event);
-      const record = await eventRepository.findOne(result.id, {
+
+      const expected = await eventRepository.findOne(result.id, {
         relations: ['tags'],
       });
-      expect(record.tags.length).toEqual(result.tags.length);
-      record.tags.forEach((tag, index) => {
+      expect(expected.tags.length).toEqual(result.tags.length);
+      expected.tags.forEach((tag, index) => {
         expect(tag.id).toEqual(result.tags[index].id);
       });
-      delete record.tags;
+      delete expected.tags;
       delete result.tags;
-      expect(result).toEqual(record);
+      expect(result).toEqual(expected);
     });
 
     it('When event has existed tag with right name, then throws error', async () => {

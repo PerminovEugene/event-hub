@@ -1,36 +1,42 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
-import { GqlExecutionContext, GraphQLExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
+import { authenticate } from 'passport';
+import { getRequest, getResponse } from './gql.guard-methods';
 
 @Injectable()
 export class GqlGuard extends AuthGuard('local') {
   async canActivate(context: ExecutionContext) {
-    const result = (await super.canActivate(context)) as boolean;
-    if (result) {
-      const request = this.getRequest(context);
-      await super.logIn(request);
+    try {
+      const result = (await super.canActivate(context)) as boolean;
+      if (result) {
+        const request = this.getRequest(context);
+        await super.logIn(request);
+      }
+      return result;
+    } catch (e) {
+      console.log(e.message);
+      debugger;
     }
-    return result;
   }
 
   getRequest(context: ExecutionContext) {
-    const ctx: GraphQLExecutionContext = GqlExecutionContext.create(context);
-    /*
-      passport couldn't receive username and password from graphql format without tunning,
-      it expects username and password in body or query, but body is busy by gql data,
-      so, we add these fields in req.query
-    */
-    const req = ctx.getContext().req;
-    req.query = ctx.getArgs();
-    return req;
+    return getRequest(context);
   }
 
   getResponse(context: ExecutionContext) {
-    const ctx: GraphQLExecutionContext = GqlExecutionContext.create(context);
-    /*
-      Passport couldn't receive username and password from graphql format, this is small hack
-    */
-    const req = ctx.getContext().req;
-    return req.res;
+    return getResponse(context);
   }
 }
+
+const authentificate = (req, res) => {
+  return new Promise((resolve, reject) => {
+    authenticate('local', {}, (err, user, info) => {
+      try {
+        req.authInfo = info;
+        return resolve({ err, user, info });
+      } catch (err) {
+        reject(err);
+      }
+    })(req, res);
+  });
+};

@@ -27,7 +27,7 @@ export const testRequest = ({
         })
         .expect(status)
         .end((err, res) => {
-          resolve({ err, res });
+          resolve({ err: err || res.body.errors, res });
         });
     } catch (e) {
       reject(e);

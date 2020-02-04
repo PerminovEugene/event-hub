@@ -4,7 +4,6 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { GqlAuthenticationGuard } from './guards/gql.authentification.guard';
 import { GqlLoginGuard } from './guards/gql.login.guard';
-// import { CurrentUser } from '../auth/user.decorator';
 import { CurrentUser } from './user.decorator';
 
 @Resolver('Auth')
