@@ -14,7 +14,7 @@ input EventsFiltersInput {
 }
 
 type Query {
-  events(eventFiltersInput: EventsFiltersInput): [Event]
+  events(eventsFiltersInput: EventsFiltersInput): [Event]
   event(id: Int!): Event
 }
 

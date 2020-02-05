@@ -1,6 +1,7 @@
 import {
   ArgumentsHost,
   Catch,
+  HttpException,
   InternalServerErrorException,
 } from '@nestjs/common';
 import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
@@ -19,12 +20,19 @@ export class AllExceptionsFilter implements GqlExceptionFilter {
       // });
       return clientError;
     }
+    if (this.isHttpException(exception)) {
+      // could appear in guards
+      return exception;
+    }
     console.log('unhandled exception: ', exception);
     return new InternalServerErrorException();
   }
 
   protected isAppError = (exception: Error): boolean =>
     exception instanceof AppError;
+
+  protected isHttpException = (exception: Error): boolean =>
+    exception instanceof HttpException;
 
   // protected getHots = (host: ArgumentsHost) => GqlArgumentsHost.create(host);
 }

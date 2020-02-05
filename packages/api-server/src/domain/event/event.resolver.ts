@@ -1,9 +1,12 @@
 import {
+  Action,
   Event,
   EventInput,
   EventsFiltersInput,
   EventUpdateInput,
+  Resource,
 } from '@calendar/shared';
+import { UseGuards } from '@nestjs/common';
 import {
   Args,
   Mutation,
@@ -12,6 +15,8 @@ import {
   ResolveProperty,
   Resolver,
 } from '@nestjs/graphql';
+import { Permission } from '../../decorators/resolvers/roles.decorator';
+import { GqlAuthenticationGuard } from '../auth/guards/gql.authentification.guard';
 import { Tag } from '../tag/tag.entity';
 import { TagDataLoader } from '../tag/tag.loader';
 import { EventService } from './event.service';
@@ -45,6 +50,8 @@ export class EventResolver {
   }
 
   @Mutation()
+  @Permission(Resource.event, Action.create)
+  @UseGuards(GqlAuthenticationGuard)
   async createEvent(
     @Args('eventInput')
     event: EventInput,
@@ -53,6 +60,8 @@ export class EventResolver {
   }
 
   @Mutation()
+  @Permission(Resource.event, Action.update)
+  @UseGuards(GqlAuthenticationGuard)
   async updateEvent(
     @Args('eventUpdateInput')
     event: EventUpdateInput,

@@ -15,9 +15,6 @@ export const getRequest = (context: ExecutionContext, field?: string) => {
 
 export const getResponse = (context: ExecutionContext) => {
   const ctx: GraphQLExecutionContext = GqlExecutionContext.create(context);
-  /*
-      Passport couldn't receive username and password from graphql format, this is small hack
-    */
   const req = ctx.getContext().req;
   return req.res;
 };

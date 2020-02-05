@@ -39,7 +39,8 @@ groups[GroupName.unauthorised] = new Set([Role.guest]);
 
 export enum Resource {
   event = "event",
-  auth = "auth"
+  auth = "auth",
+  tag = "tag"
 }
 
 export enum Action {
@@ -62,6 +63,12 @@ export const permissions = {
   [Resource.auth]: {
     [Action.registration]: groups[GroupName.unauthorised],
     [Action.login]: groups[GroupName.unauthorised]
+  },
+  [Resource.tag]: {
+    [Action.read]: groups[GroupName.all],
+    [Action.create]: groups[GroupName.staff],
+    [Action.update]: groups[GroupName.staff],
+    [Action.delete]: groups[GroupName.staff]
   }
 };
 

@@ -1,5 +1,8 @@
-import { TagInput, TagsFiltersInput } from '@calendar/shared';
+import { Action, Resource, TagInput, TagsFiltersInput } from '@calendar/shared';
+import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Permission } from '../..//decorators/resolvers/roles.decorator';
+import { GqlAuthenticationGuard } from '../auth/guards/gql.authentification.guard';
 import { TagService } from './tag.service';
 
 @Resolver('Tag')
@@ -23,6 +26,8 @@ export class TagResolver {
   }
 
   @Mutation()
+  @Permission(Resource.tag, Action.update)
+  @UseGuards(GqlAuthenticationGuard)
   async createTag(
     @Args('tagInput')
     tag: TagInput,

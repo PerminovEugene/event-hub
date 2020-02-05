@@ -1,40 +1,51 @@
-import * as React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Event } from '@calendar/shared';
+import { Event, Tag } from '@calendar/shared';
+import gql from 'graphql-tag';
+import * as React from 'react';
 import { generateNodeKey } from '../../../../../../framework/generators/string-generator';
 
 const GET_EVENTS = gql`
-  query getEvents($filtersInput: FiltersInput) {
-    getEvents(filtersInput: $filtersInput) {
+  query getEvents($eventsFiltersInput: EventsFiltersInput) {
+    events(eventsFiltersInput: $eventsFiltersInput) {
       id
       type
       name
       description
       date
+      tags {
+        id
+        name
+      }
     }
   }
 `;
 
-const EventItem = ({ id, type, name, description, date }: any) => (
+const EventItem = ({ id, type, name, description, date, tags }: any) => (
   <li>
     <h3>{type}</h3>
     <h2>{name}</h2>
     <p>{date}</p>
     <p>{description}</p>
+    <ul>
+      {tags.map((tag: Tag) => (
+        <li key={generateNodeKey(`event-tag-${tag.id}`)}>{tag.name}</li>
+      ))}
+    </ul>
   </li>
 );
 
 const EventsList = () => {
-  const { loading, data, error } = useQuery<{ getEvents: [Event] }>(GET_EVENTS, {
+  const { loading, data, error } = useQuery<{ events: [Event] }>(GET_EVENTS, {
     variables: {
-      filtersInput: {},
+      eventsFiltersInput: {},
     },
   });
 
+  console.log(error, data);
+
   return loading ? null : (
     <ul>
-      {data.getEvents.map((event: Event) => (
+      {data.events.map((event: Event) => (
         <EventItem key={generateNodeKey(`event-item-${event.id}`)} {...event} />
       ))}
     </ul>
