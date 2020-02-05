@@ -9,7 +9,7 @@ export const getRequest = (context: ExecutionContext, field?: string) => {
       so, we add these fields in req.query
     */
   const req = ctx.getContext().req;
-  req.query = field ? ctx.getArgs() : ctx.getArgs()[field];
+  req.query = field ? ctx.getArgs()[field] : ctx.getArgs();
   return req;
 };
 

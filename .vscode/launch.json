@@ -1,10 +1,13 @@
 {
   "version": "0.2.0",
   "configurations": [
+    /*
+      TESTING COMMANDS
+    */
     {
       "type": "node",
       "request": "launch",
-      "name": "API e2e all",
+      "name": "API e2e specs",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "args": ["--runInBand", "--config", "packages/api-server/jest-e2e.json"],
       "console": "integratedTerminal",
@@ -17,12 +20,29 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "API integration all",
+      "name": "API integration specs",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "args": [
         "--runInBand",
         "--config",
         "packages/api-server/jest-integration.json"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "windows": {
+        "program": "${workspaceFolder}/packages/api-server/node_modules/jest/bin/jest"
+      }
+    }
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "API all specs",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": [
+        "--runInBand",
+        "--config",
+        "packages/api-server/jest-all.json"
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",

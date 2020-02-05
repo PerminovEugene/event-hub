@@ -15,7 +15,7 @@ export class GqlGuard extends AuthGuard('local') {
       return result;
     } catch (e) {
       console.log(e.message);
-      debugger;
+      // TODO
     }
   }
 
