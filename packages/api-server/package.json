@@ -22,8 +22,9 @@
     "test:integration": "jest --config ./jest-integration.json --runInBand --detectOpenHandles",
     "test:integration:watch": "jest --config ./jest-integration.json --runInBand --detectOpenHandles --watch",
     "clean": "rm -rf ./dist",
-    "generate-gqld": "ts-node ./src/scripts/generate-graphql-definitions.ts",
-    "fixtures": "ts-node src/database/fixtures/executor.ts"
+    "generate:gql:defenitions": "ts-node ./src/scripts/generate-graphql-definitions.ts",
+    "generate:fixtures": "ts-node src/database/fixtures/executor.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "files": [
     "dist"
