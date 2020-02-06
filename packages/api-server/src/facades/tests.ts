@@ -9,17 +9,20 @@ export type TestRequest = {
     query: any;
   };
   status: number;
+  cookies?: string[];
 };
 
 export const testRequest = ({
   app,
   params,
   status,
+  cookies = [],
 }: TestRequest): Promise<{ err: any; res: any }> => {
   return new Promise((resolve, reject) => {
     try {
       supertest(app.getHttpServer())
         .post('/graphql')
+        .set('Cookie', cookies)
         .send({
           operationName: params.operationName,
           variables: params.variables,

@@ -30,7 +30,8 @@ export const e2eSpecInitalizer = async (
 ): Promise<{ app: INestApplication; connection: Connection }> => {
   const mergedOptions = { ...defaultOptions, ...options };
   jest.setTimeout(mergedOptions.setTimeout);
-  initConfigService({ filePrefix: 'test-e2e' });
+  initConfigService({ filePrefix: mergedOptions.envFilePrefix });
+
   const builder = new TestE2eAppBuilder({
     imports: [
       ...mergedOptions.importedModules,

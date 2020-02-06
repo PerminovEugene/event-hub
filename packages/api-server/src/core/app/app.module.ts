@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { passportLocalAuthConfig } from '../../domain/auth/configurations/passport-local.configuration';
 import { getGraphqlConfig } from './../../config/app/graphql.config';
 import { getConfigService } from './../../config/environment/service';
 import { AppUserModule } from './../../domain/app-user/app-user.module';
@@ -20,7 +21,7 @@ const configServiceFactory = {
       useFactory: () => getGraphqlConfig(),
     }),
     AppUserModule,
-    AuthModule,
+    AuthModule.forRoot(passportLocalAuthConfig),
     TagModule,
     EventModule,
   ],

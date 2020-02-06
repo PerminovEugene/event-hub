@@ -1,6 +1,6 @@
 import * as faker from 'faker';
-import { defineTag } from '../tag/tag.factory';
-import { EventType } from './event.entity';
+import { defineTag } from '../../tag/spec/tag.factory';
+import { EventType } from './../event.entity';
 
 type OverridenFields = {
   name?: string;
@@ -25,6 +25,17 @@ export const defineEvent = async (
   };
 };
 
+export const defineEvents = async (
+  numberOfEvents: number = 5,
+): Promise<any> => {
+  const events = [];
+  for (let i = 0; i < numberOfEvents; i++) {
+    const event = await defineEvent();
+    events.push(event);
+  }
+  return events;
+};
+
 export const defineEventWithTags = async (
   overridenFields: OverridenFields = {},
 ) => {
@@ -39,4 +50,13 @@ export const defineEventWithTags = async (
     }
   }
   return event;
+};
+
+export const defineEventsWithTags = async (numberOfEvents: number = 5) => {
+  const events = [];
+  for (let i = 0; i < numberOfEvents; i++) {
+    const event = await defineEventWithTags();
+    events.push(event);
+  }
+  return events;
 };

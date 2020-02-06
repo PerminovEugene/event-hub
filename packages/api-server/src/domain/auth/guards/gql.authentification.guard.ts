@@ -10,9 +10,8 @@ export class GqlAuthenticationGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext) {
     const request = this.getRequest(context);
-    const isAuthenticated = request.isAuthenticated();
 
-    if (!isAuthenticated) {
+    if (!request.isAuthenticated()) {
       // cookies are obsolete
       const response = getResponse(context);
       response.clearCookie('user');

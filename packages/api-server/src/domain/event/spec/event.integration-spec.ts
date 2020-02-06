@@ -4,15 +4,15 @@ import {
   getRepository,
   Repository,
 } from 'typeorm';
-import { initConfigService } from '../../config/environment/service';
-import { Tag } from '../tag/tag.entity';
-import { TagEntityCreationError } from '../tag/tag.errors';
-import { defineTag } from '../tag/tag.factory';
-import { getConnectionOptions } from './../../database/database.provider';
-import { TagService } from './../tag/tag.service';
-import { Event } from './event.entity';
+import { initConfigService } from '../../../config/environment/service';
+import { defineTag } from '../../tag/spec/tag.factory';
+import { Tag } from '../../tag/tag.entity';
+import { TagEntityCreationError } from '../../tag/tag.errors';
+import { getConnectionOptions } from './../../../database/database.provider';
+import { TagService } from './../../tag/tag.service';
+import { Event } from './../event.entity';
+import { EventService } from './../event.service';
 import { defineEvent, defineEventWithTags } from './event.factory';
-import { EventService } from './event.service';
 
 describe('Event Service Integration', () => {
   let eventService: EventService;
@@ -33,18 +33,30 @@ describe('Event Service Integration', () => {
   describe('create', () => {
     it('When event has no tags, then return inserted record', async () => {
       const event = await defineEvent();
-      const result = await eventService.create(event);
-      const record = await eventRepository.findOne(result.id);
-      expect(result).toEqual(record);
+
+      const eventEntity = await eventService.create(event);
+
+      const eventRecord = await eventRepository.findOne(eventEntity.id);
+      expect(eventEntity).toEqual(eventRecord);
+
+      await eventRepository.delete(eventRecord.id);
     });
 
     it('When event has only new tags, then return inserted record with tags', async () => {
       const event = await defineEventWithTags();
-      const result = await eventService.create(event);
-      const expected = await eventRepository.findOne(result.id, {
-        relations: ['tags'],
-      });
-      expect(result).toEqual(expected);
+
+      const eventEntity = await eventService.create(event);
+
+      const eventRecordWithTags = await eventRepository.findOne(
+        eventEntity.id,
+        {
+          relations: ['tags'],
+        },
+      );
+      expect(eventEntity).toEqual(eventRecordWithTags);
+
+      await eventRepository.delete(eventRecordWithTags.id);
+      await tagRepository.delete(eventRecordWithTags.tags.map(tag => tag.id));
     });
 
     it('When event has only existed tags, then return inserted record with tags ids', async () => {
@@ -54,18 +66,21 @@ describe('Event Service Integration', () => {
       const event = await defineEvent();
       event.tags = existedTags.map(tag => ({ id: tag.id }));
 
-      const result = await eventService.create(event);
+      const eventEntity = await eventService.create(event);
 
-      const expected = await eventRepository.findOne(result.id, {
+      const eventRecord = await eventRepository.findOne(eventEntity.id, {
         relations: ['tags'],
       });
       // result tags wouldn't include name, if it wasn't send
-      expected.tags.forEach((tag, index) => {
-        expect(tag.id).toEqual(result.tags[index].id);
+      eventRecord.tags.forEach((tag, index) => {
+        expect(tag.id).toEqual(eventEntity.tags[index].id);
       });
-      delete expected.tags;
-      delete result.tags;
-      expect(result).toEqual(expected);
+      delete eventRecord.tags;
+      delete eventEntity.tags;
+      expect(eventEntity).toEqual(eventRecord);
+
+      await eventRepository.delete(eventRecord.id);
+      await tagRepository.delete(existedTags.map(tag => tag.id));
     });
 
     it('When event has new and existed tags, then return inserted record with tags', async () => {
@@ -76,21 +91,28 @@ describe('Event Service Integration', () => {
       event.tags = existedTags.map(tag => ({ id: tag.id }));
       event.tags.push(await defineTag(), await defineTag());
 
-      const result = await eventService.create(event);
+      const eventEntity = await eventService.create(event);
 
-      const expected = await eventRepository.findOne(result.id, {
-        relations: ['tags'],
+      const eventRecordWithTags = await eventRepository.findOne(
+        eventEntity.id,
+        {
+          relations: ['tags'],
+        },
+      );
+      expect(eventRecordWithTags.tags.length).toEqual(eventEntity.tags.length);
+      eventRecordWithTags.tags.forEach((tag, index) => {
+        expect(tag.id).toEqual(eventEntity.tags[index].id);
       });
-      expect(expected.tags.length).toEqual(result.tags.length);
-      expected.tags.forEach((tag, index) => {
-        expect(tag.id).toEqual(result.tags[index].id);
-      });
-      delete expected.tags;
-      delete result.tags;
-      expect(result).toEqual(expected);
+      const tagsIds = eventRecordWithTags.tags.map(tag => tag.id);
+      delete eventRecordWithTags.tags;
+      delete eventEntity.tags;
+      expect(eventEntity).toEqual(eventRecordWithTags);
+
+      await eventRepository.delete(eventRecordWithTags.id);
+      await tagRepository.delete(tagsIds);
     });
 
-    it('When event has existed tag with right name, then throws error', async () => {
+    it('When event has existed tag with id and name, then throws error', async () => {
       const definedTags = [await defineTag(), await defineTag()];
       const existedTags = (await tagRepository.insert(definedTags)).raw;
       const event = await defineEvent();
@@ -98,6 +120,7 @@ describe('Event Service Integration', () => {
         id: tag.id,
         name: definedTags[index].name,
       }));
+
       try {
         await eventService.create(event);
         fail(
@@ -105,10 +128,12 @@ describe('Event Service Integration', () => {
         );
       } catch (e) {
         expect(e).toBeInstanceOf(TagEntityCreationError);
+      } finally {
+        tagRepository.delete(existedTags.map(tag => tag.id));
       }
     });
 
-    it('When event has existed tag with wrong name, then throws error', async () => {
+    it('When event has existed tag with id and new name, then throws error', async () => {
       const definedTags = [await defineTag(), await defineTag()];
       const existedTags = (await tagRepository.insert(definedTags)).raw;
       const event = await defineEvent();
@@ -124,6 +149,8 @@ describe('Event Service Integration', () => {
         );
       } catch (e) {
         expect(e).toBeInstanceOf(TagEntityCreationError);
+      } finally {
+        await tagRepository.delete(existedTags.map(tag => tag.id));
       }
     });
   });
