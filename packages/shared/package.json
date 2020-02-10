@@ -1,6 +1,6 @@
 {
   "name": "@calendar/shared",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Shared between services data",
   "author": "Eugene Perminov",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "dist"
   ],
   "devDependencies": {
-    "typescript": "^3.7.3",
-    "@types/node": "^12.12.9"
+    "@types/node": "^12.12.9",
+    "typescript": "^3.7.3"
   }
 }

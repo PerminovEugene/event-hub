@@ -1,6 +1,6 @@
 {
   "name": "@calendar/api-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "author": "Eugene Perminov",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "dist"
   ],
   "dependencies": {
-    "@calendar/shared": "^0.0.1",
+    "@calendar/shared": "^0.1.0",
     "@hapi/joi": "^17.1.0",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.10.13",
