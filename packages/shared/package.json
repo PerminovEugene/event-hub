@@ -1,5 +1,5 @@
 {
-  "name": "@calendar/shared",
+  "name": "@event-hub/shared",
   "version": "0.1.0",
   "description": "Shared between services data",
   "author": "Eugene Perminov",
@@ -19,7 +19,7 @@
     "@types/node": "^12.12.9",
     "typescript": "^3.7.3"
   },
-  "gitHead": "bab6e39d074b508251ace89dd0298adfb9e18bbf",
+  "gitHead": "2f5e38c9e0ce4053bdfd98a9a5c07ac64553f821",
   "publishConfig": {
     "access": "public"
   }
