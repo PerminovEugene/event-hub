@@ -1,4 +1,6 @@
-# Calendar
+# Event-hub
+
+Simple events search and managment.
 
 ## Project uses monorepo strategy
 
