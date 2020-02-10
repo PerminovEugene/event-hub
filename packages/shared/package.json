@@ -1,6 +1,6 @@
 {
   "name": "@event-hub/shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared between services data",
   "author": "Eugene Perminov",
   "license": "MIT",

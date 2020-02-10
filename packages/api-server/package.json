@@ -1,6 +1,6 @@
 {
   "name": "@event-hub/api-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "author": "Eugene Perminov",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "dist"
   ],
   "dependencies": {
-    "@event-hub/shared": "^0.1.0",
+    "@event-hub/shared": "^0.1.1",
     "@hapi/joi": "^17.1.0",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.10.13",
