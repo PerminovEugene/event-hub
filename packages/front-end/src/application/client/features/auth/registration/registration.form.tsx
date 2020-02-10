@@ -1,16 +1,16 @@
-import * as React from 'react';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+import { LoginInput, RegistrationInput, SessionData } from '@event-hub/shared';
 import gql from 'graphql-tag';
-import getRegistrationValidationSchema from './validation.schema';
-import { useMutation, useApolloClient } from '@apollo/react-hooks';
-import { withRouter } from 'react-router-dom';
-import { RouteComponentProps } from 'react-router';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormWrapper, FormActions } from './../../../components/form/form.wrapper';
-import { ElementView, FormElement } from './../../../components/form/form.elements';
-import { LoginInput, SessionData, RegistrationInput } from '@calendar/shared';
+import { RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { getServerErrorData } from '../../../../../framework/helpers/graphql.helper';
 import { createMe } from '../../../../../provider/store.actions/me';
 import { PagePath } from '../../../navigation/pathes';
+import { ElementView, FormElement } from './../../../components/form/form.elements';
+import { FormActions, FormWrapper } from './../../../components/form/form.wrapper';
+import getRegistrationValidationSchema from './validation.schema';
 
 const REGISTRATION = gql`
   mutation registration($registrationInput: RegistrationInput!) {

@@ -1,4 +1,4 @@
-import { LoginInput, RegistrationInput, SessionData } from '@calendar/shared';
+import { LoginInput, RegistrationInput, SessionData } from '@event-hub/shared';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';

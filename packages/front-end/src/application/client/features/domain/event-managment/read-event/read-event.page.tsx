@@ -1,7 +1,5 @@
-import * as React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import { Event } from '@calendar/shared';
+import * as React from 'react';
 import { withRouter } from 'react-router';
 
 const GET_EVENTS = gql`

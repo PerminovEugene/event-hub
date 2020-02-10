@@ -1,4 +1,4 @@
-import { Action, Resource } from '@calendar/shared';
+import { Action, Resource } from '@event-hub/shared';
 import { ExecutionContext, SetMetadata } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 

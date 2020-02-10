@@ -1,8 +1,4 @@
-import {
-  EventInput,
-  EventsFiltersInput,
-  EventUpdateInput,
-} from '@calendar/shared';
+import { EventInput, EventsFiltersInput, EventUpdateInput } from '@event-hub/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { SaveEventError } from '../../errors/save-event.error';

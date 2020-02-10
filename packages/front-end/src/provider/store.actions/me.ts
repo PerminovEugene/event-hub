@@ -1,4 +1,4 @@
-import { SessionData, Role } from '@calendar/shared';
+import { Role, SessionData } from '@event-hub/shared';
 
 export const createMe = (user?: SessionData) => ({
   me: {

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { Event, Tag } from '@calendar/shared';
+import { Event, Tag } from '@event-hub/shared';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { generateNodeKey } from '../../../../../../framework/generators/string-generator';

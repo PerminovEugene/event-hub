@@ -1,13 +1,12 @@
-import * as React from 'react';
-import { ListItem, ListItemIcon, ListItemText, List } from '@material-ui/core';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import { isUserHasRights, Role } from '@event-hub/shared';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { generateNodeKey } from '../../../../framework/generators/string-generator';
 import { AuthContext } from '../../contexts/auth.context';
 import { allEventsRoute, createEventRoute, Route } from './../../navigation/routes';
-import { isUserHasRights, Role } from '@calendar/shared';
-import { generateNodeKey } from '../../../../framework/generators/string-generator';
-import { Link } from 'react-router-dom';
 
 type ListItemConfig = Route & {
   primary: string;

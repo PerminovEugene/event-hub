@@ -1,11 +1,10 @@
 {
-    "extends": "./tsconfig.build.json",
-  
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@calendar/*": ["packages/*/src"]
-      }
+  "extends": "./tsconfig.build.json",
+
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@event-hub/*": ["packages/*/src"]
     }
   }
-  
+}

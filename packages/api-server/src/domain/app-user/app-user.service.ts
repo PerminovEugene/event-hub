@@ -1,4 +1,4 @@
-import { Role } from '@calendar/shared';
+import { Role } from '@event-hub/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { wrapDbError } from '../../database/helpers/database-errors.hander';

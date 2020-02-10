@@ -1,4 +1,4 @@
-import { RegistrationInput } from '@calendar/shared';
+import { RegistrationInput } from '@event-hub/shared';
 import { INestApplication } from '@nestjs/common';
 import { Connection, Repository } from 'typeorm';
 import { testRequest } from '../../../facades/tests';
@@ -9,12 +9,7 @@ import { mutationRegistration } from '../../auth/spec/auth.requests';
 import { Tag } from '../../tag/tag.entity';
 import { Event } from './../event.entity';
 import { EventModule } from './../event.module';
-import {
-  defineEvent,
-  defineEvents,
-  defineEventsWithTags,
-  defineEventWithTags,
-} from './event.factory';
+import { defineEvent, defineEvents, defineEventsWithTags, defineEventWithTags } from './event.factory';
 
 describe('Event e2e', () => {
   let app: INestApplication;

@@ -1,4 +1,4 @@
-import { LoginInput, RegistrationInput, Role } from '@calendar/shared';
+import { LoginInput, RegistrationInput, Role } from '@event-hub/shared';
 import { INestApplication } from '@nestjs/common';
 import { Connection, Repository } from 'typeorm';
 import { testRequest } from '../../../facades/tests';

@@ -11,3 +11,7 @@
 1. install lerna
 2. build `shared` project
 3. `$ npm run bootstrap`
+
+## Lerna tips
+
+1. `lerna version --conventional-commits`

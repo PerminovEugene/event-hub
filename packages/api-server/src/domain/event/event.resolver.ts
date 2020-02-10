@@ -1,20 +1,6 @@
-import {
-  Action,
-  Event,
-  EventInput,
-  EventsFiltersInput,
-  EventUpdateInput,
-  Resource,
-} from '@calendar/shared';
+import { Action, Event, EventInput, EventsFiltersInput, EventUpdateInput, Resource } from '@event-hub/shared';
 import { UseGuards } from '@nestjs/common';
-import {
-  Args,
-  Mutation,
-  Parent,
-  Query,
-  ResolveProperty,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Mutation, Parent, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import { Permission } from '../../decorators/resolvers/roles.decorator';
 import { GqlAuthenticationGuard } from '../auth/guards/gql.authentification.guard';
 import { Tag } from '../tag/tag.entity';

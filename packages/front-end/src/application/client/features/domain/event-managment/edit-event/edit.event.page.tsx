@@ -1,7 +1,7 @@
-import * as React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Event } from '@calendar/shared';
+import { Event } from '@event-hub/shared';
+import gql from 'graphql-tag';
+import * as React from 'react';
 
 const GET_EVENTS = gql`
   query getEvent($filtersInput: FiltersInput) {

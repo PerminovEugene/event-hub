@@ -1,4 +1,4 @@
-import { Role } from '@calendar/shared';
+import { Role } from '@event-hub/shared';
 import { generateSalt, hashText } from '../../facades/crypto';
 import { Status } from './app-user.entity';
 

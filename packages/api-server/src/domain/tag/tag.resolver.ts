@@ -1,4 +1,4 @@
-import { Action, Resource, TagInput, TagsFiltersInput } from '@calendar/shared';
+import { Action, Resource, TagInput, TagsFiltersInput } from '@event-hub/shared';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Permission } from '../..//decorators/resolvers/roles.decorator';

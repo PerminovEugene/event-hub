@@ -1,4 +1,4 @@
-import { TagInput } from '@calendar/shared';
+import { TagInput } from '@event-hub/shared';
 import { Injectable } from '@nestjs/common';
 import { TagService } from './tag.service';
 import DataLoader = require('dataloader'); // commonjs module

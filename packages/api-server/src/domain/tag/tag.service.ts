@@ -1,4 +1,4 @@
-import { TagInput, TagsFiltersInput } from '@calendar/shared';
+import { TagInput, TagsFiltersInput } from '@event-hub/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { SaveTagError } from '../../errors/tag.errors';

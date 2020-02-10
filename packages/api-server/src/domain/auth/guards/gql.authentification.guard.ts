@@ -1,4 +1,4 @@
-import { isUserHasRights } from '@calendar/shared';
+import { isUserHasRights } from '@event-hub/shared';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { getRouteInfo } from '../../../decorators/resolvers/roles.decorator';

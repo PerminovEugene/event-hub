@@ -1,5 +1,5 @@
 {
-  "name": "@calendar/api-server",
+  "name": "@event-hub/api-server",
   "version": "0.1.0",
   "description": "",
   "author": "Eugene Perminov",
@@ -31,7 +31,7 @@
     "dist"
   ],
   "dependencies": {
-    "@calendar/shared": "^0.1.0",
+    "@event-hub/shared": "^0.1.0",
     "@hapi/joi": "^17.1.0",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.10.13",

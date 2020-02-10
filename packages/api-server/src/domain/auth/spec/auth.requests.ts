@@ -1,4 +1,4 @@
-import { RegistrationInput } from '@calendar/shared';
+import { RegistrationInput } from '@event-hub/shared';
 
 export const mutationRegistration = (input: RegistrationInput) => ({
   operationName: 'registration',

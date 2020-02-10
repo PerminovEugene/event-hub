@@ -1,16 +1,15 @@
+import { Action, Resource } from '@event-hub/shared';
 import * as React from 'react';
-import { PagePath } from './pathes';
-import NotFound from '../features/system/not-found/not-found.page';
-import Registration from '../features/auth/registration/registration.page';
 import Login from '../features/auth/login/login.page';
-import { Action, Resource } from '@calendar/shared';
-import Dashboard from '../layout/dashboard/dashboard.component';
-import { allEventsRoute, eventRoute, createEventRoute, editEventRoute, Route } from './routes';
-
+import Registration from '../features/auth/registration/registration.page';
 import AllEventsPage from '../features/domain/event-managment/all-events/all-events.page';
-import EventPage from '../features/domain/event-managment/read-event/read-event.page';
 import CreateEventPage from '../features/domain/event-managment/create-event/create-event.page';
 import EditEventPage from '../features/domain/event-managment/edit-event/edit.event.page';
+import EventPage from '../features/domain/event-managment/read-event/read-event.page';
+import NotFound from '../features/system/not-found/not-found.page';
+import Dashboard from '../layout/dashboard/dashboard.component';
+import { PagePath } from './pathes';
+import { allEventsRoute, createEventRoute, editEventRoute, eventRoute, Route } from './routes';
 
 export type ViewRoute = Route & {
   component: React.ComponentType;

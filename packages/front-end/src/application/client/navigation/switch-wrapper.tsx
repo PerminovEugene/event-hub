@@ -1,11 +1,11 @@
-import * as React from 'react';
-import gql from 'graphql-tag';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import routes, { LayoutRoutes, ViewRoute } from './routes.config';
-import { generateNodeKey } from '../../../framework/generators/string-generator';
 import { useQuery } from '@apollo/react-hooks';
-import { isUserHasRights } from '@calendar/shared';
+import { isUserHasRights } from '@event-hub/shared';
+import gql from 'graphql-tag';
+import * as React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { generateNodeKey } from '../../../framework/generators/string-generator';
 import { AuthContext } from '../contexts/auth.context';
+import routes, { LayoutRoutes, ViewRoute } from './routes.config';
 // import NoAccessPage from '../features/system/no-access/no-access.page';
 
 const GET_SESSION_DATA = gql`

@@ -1,5 +1,5 @@
+import { Action, Resource } from '@event-hub/shared';
 import { PagePath } from './pathes';
-import { Action, Resource } from '@calendar/shared';
 
 export type Route = {
   path: PagePath;

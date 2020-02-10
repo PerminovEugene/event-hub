@@ -1,10 +1,10 @@
-import { createHttpLink } from 'apollo-link-http';
+import { SessionData } from '@event-hub/shared';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createHttpLink } from 'apollo-link-http';
 import fetch from 'node-fetch';
-import { typeDefs } from './typedefs';
-import { SessionData } from '@calendar/shared';
-import { createMe } from './store.actions/me';
 import { getEnvManager } from '../framework/configuration/environment-manger-keeper';
+import { createMe } from './store.actions/me';
+import { typeDefs } from './typedefs';
 
 type OptionsBuildConfig = {
   user: SessionData;

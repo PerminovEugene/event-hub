@@ -1,4 +1,4 @@
-import { RegistrationInput, SessionData } from '@calendar/shared';
+import { RegistrationInput, SessionData } from '@event-hub/shared';
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { AppUser, Status } from '../app-user/app-user.entity';

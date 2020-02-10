@@ -47,7 +47,7 @@
       "${1/(.*)/${1:/capitalize}/}Input,",
       "${1/(.*)/${1:/capitalize}/}FiltersInput,",
       "${1/(.*)/${1:/capitalize}/}UpdateInput,",
-      "} from '@calendar/shared';",
+      "} from '@event-hub/shared';",
       "import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';",
       "import { ${1/(.*)/${1:/capitalize}/}Service } from './${1/(.*)/${1:/downcase}/}.service';",
       "",
