@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "types": ["node"],
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es2017",
+    "sourceMap": false,
+    "incremental": true,
+    "allowJs": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "test",
+    "dist",
+    "**/*spec.ts",
+    "*/**/test/**/*",
+    "**/tests.ts",
+    "**/spec/**",
+    "**/teste2e.app.builder.ts"
+  ]
+}

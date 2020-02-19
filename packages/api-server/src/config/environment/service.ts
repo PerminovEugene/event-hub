@@ -24,7 +24,21 @@ export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor(filePath: string) {
-    const config = dotenv.parse(fs.readFileSync(filePath));
+    let config: any;
+    if (process.env.ENV_SOURCE) {
+      console.log('CURRENT ENV SOURCE: ', process.env.ENV_SOURCE);
+      config = Object.keys(EnvField).reduce(
+        (accumulator: any, value: string) => {
+          accumulator[value] = process.env[value];
+          return accumulator;
+        },
+        {},
+      );
+      console.log(Object.keys(EnvField));
+    } else {
+      console.log('CURRENT ENV SOURCE IS NOT DEFINED. READING ENV FROM .env ');
+      config = dotenv.parse(fs.readFileSync(filePath));
+    }
     this.envConfig = this.validateInput(config);
   }
 
@@ -36,6 +50,7 @@ export class ConfigService {
    * Ensures all needed variables are set, and returns the validated JavaScript object
    * including the applied default values.
    */
+
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
