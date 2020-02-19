@@ -1,0 +1,28 @@
+type SessionData {
+  id: Int
+  user_id: Int
+  email: String
+  role: String
+  status: String
+}
+
+input RegistrationInput {
+  email: String
+  password: String
+  passwordConfirm: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  registration(registrationInput: RegistrationInput): SessionData
+  login(loginInput: LoginInput): SessionData
+  logout: Boolean
+}
+
+type Query {
+  whoAmI: SessionData
+}

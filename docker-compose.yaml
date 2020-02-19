@@ -1,0 +1,24 @@
+version: "3"
+services:
+  api:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./packages/api-server/
+    ports:
+      - 3000:3000
+    env_file:
+      - ./packages/domain-db/env/dev.env
+      - ./packages/api-server/env/dev.env
+    depends_on:
+      - domain-db
+
+  domain-db:
+    image: postgres
+    restart: always
+    env_file:
+      - ./packages/domain-db/env/dev.env
+      # ENV initialise order
+# Compose file
+# Shell environment variables
+# Environment file
+# Dockerfile

@@ -1,0 +1,33 @@
+{
+  "name": "event-hub",
+  "description": "Simple events search and managment.",
+  "keywords": [
+    "nest.js",
+    "typescript",
+    "lerna",
+    "monorepo",
+    "events-management"
+  ],
+  "homepage": "https://github.com/PerminovEugene/event-hub",
+  "author": {
+    "email": "perminov.eugene@gmail.com",
+    "name": "Perminov Eugene"
+  },
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
+    "clean": "lerna run clean",
+    "build": "lerna run build",
+    "pub": "lerna publish"
+  },
+  "devDependencies": {
+    "lerna": "^3.18.4",
+    "typescript": "^3.7.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
