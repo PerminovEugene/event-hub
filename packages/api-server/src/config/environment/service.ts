@@ -27,6 +27,7 @@ export class ConfigService {
     let config: any;
     if (process.env.ENV_SOURCE) {
       console.log('CURRENT ENV SOURCE: ', process.env.ENV_SOURCE);
+      console.log('Expected environment variables: ', Object.keys(EnvField));
       config = Object.keys(EnvField).reduce(
         (accumulator: any, value: string) => {
           accumulator[value] = process.env[value];
@@ -34,7 +35,6 @@ export class ConfigService {
         },
         {},
       );
-      console.log(Object.keys(EnvField));
     } else {
       console.log('CURRENT ENV SOURCE IS NOT DEFINED. READING ENV FROM .env ');
       config = dotenv.parse(fs.readFileSync(filePath));
