@@ -1,38 +1,51 @@
 version: 2
 jobs:
-  build:
+  # build:
+  #   docker:
+  #     - image: circleci/node:12.13.0
+  #     # - image: postgres:9.4.1
+  #     - image: circleci/postgres:9.4.12-alpine
+  #   working_directory: ~/project
+  #   steps:
+  #     - checkout
+  ci_api_container:
     docker:
       - image: circleci/node:12.13.0
-      # - image: postgres:9.4.1
       - image: circleci/postgres:9.4.12-alpine
-    working_directory: ~/circleci-demo-workflows
+    working_directory: ~/project
     steps:
       - checkout
-  prepare_api_container:
-    docker:
-      - image: circleci/node:12.13.0
-      - image: circleci/postgres:9.4.12-alpine
-    working_directory: ~/circleci-demo-workflows/packages/api-server
-    steps:
+      - run:
+          name: Update dependencies
+          command: |
+            cd ./packages/api-server
+            npm run install --only=prod
       - run:
           name: Run all migrations
           command: |
-            npm run install --only=prod
+            cd ./packages/api-server
             npm run typeorm migration:run
-  test:
-    docker:
-      - image: circleci/node:12.13.0
-      - image: circleci/postgres:9.4.12-alpine
-    working_directory: ~/circleci-demo-workflows/packages/api-server
-    steps:
       - run:
           name: Run all tests
-          command: npm run test:all
+          command: |
+            cd ./packages/api-server
+            npm run test:all
+  # test:
+  #   docker:
+  #     - image: circleci/node:12.13.0
+  #     - image: circleci/postgres:9.4.12-alpine
+  #   working_directory: ~/project
+  #   steps:
+  #     - run:
+  #         name: Run all tests
+  #         command: |
+  #           cd ./packages/api-server
+  #           npm run test:all
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - prepare_api_container
-      - test
+      # - build
+      - ci_api_container
+      # - test
