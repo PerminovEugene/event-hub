@@ -21,7 +21,7 @@ jobs:
           name: Update dependencies
           command: |
             cd ./packages/api-server
-            npm install --only=prod
+            npm install
       - run:
           name: Run all migrations
           command: |
