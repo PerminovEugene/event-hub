@@ -57,7 +57,7 @@ export class ConfigService {
         .valid('development', 'production', 'test', 'provision')
         .default('development'),
       PORT: Joi.number().default(3000),
-      FRONT_END_DOMAIN: Joi.string().required(),
+      FRONT_END_DOMAIN: Joi.string(), // It doesn't need for tests
       COOKIE_SECRET: Joi.string().required(),
 
       DB_HOST: Joi.string().required(),
