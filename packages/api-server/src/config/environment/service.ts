@@ -57,7 +57,6 @@ export class ConfigService {
         .valid('development', 'production', 'test', 'provision')
         .default('development'),
       PORT: Joi.number().default(3000),
-      FRONT_END_DOMAIN: Joi.string(), // It doesn't need for tests
       COOKIE_SECRET: Joi.string().required(),
 
       DB_HOST: Joi.string().required(),
@@ -65,9 +64,12 @@ export class ConfigService {
       DB_USERNAME: Joi.string().required(),
       DB_PASSWORD: Joi.string().required(),
       DB_NAME: Joi.string().required(),
-      DB_SYNC: Joi.boolean().required(),
-      DB_DROP_SCHEMA: Joi.boolean().required(),
-      DB_LOGGING: Joi.boolean().required(),
+
+      DB_SYNC: Joi.boolean(),
+      DB_DROP_SCHEMA: Joi.boolean(),
+      DB_LOGGING: Joi.boolean(),
+
+      FRONT_END_DOMAIN: Joi.string(), // It doesn't need for tests
     });
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
