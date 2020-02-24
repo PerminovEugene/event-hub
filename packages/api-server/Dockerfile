@@ -19,7 +19,9 @@ COPY src ./src
 RUN npm run build:prod
 RUN ls
 
-# if you want to delete src folder for memory econonmy - don't forget copy entities manually n container  
+RUN npm run typeorm migration:run
+
+# if you want to delete src folder for the memory econonomy - don't forget copy entities manually into container  
 # RUN rm -rf src
 
 CMD [ "npm", "run", "start:prod"]
