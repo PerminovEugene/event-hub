@@ -22,7 +22,7 @@
     "test:e2e:watch": "jest --config ./jest-e2e.json --runInBand --detectOpenHandles --watch",
     "test:integration": "jest --config ./jest-integration.json --runInBand --detectOpenHandles",
     "test:integration:watch": "jest --config ./jest-integration.json --runInBand --detectOpenHandles --watch",
-    "test:all": "node node_modules/.bin/jest --config ./jest-all.json --runInBand --detectOpenHandles",
+    "test:all": "node node_modules/jest/bin/jest.js --config ./jest-all.json --runInBand --detectOpenHandles",
     "clean": "rm -rf ./dist",
     "generate:gql:defenitions": "ts-node ./src/scripts/generate-graphql-definitions.ts",
     "generate:fixtures": "ts-node src/database/fixtures/executor.ts",
