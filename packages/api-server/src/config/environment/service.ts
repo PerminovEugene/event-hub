@@ -36,7 +36,6 @@ export class ConfigService {
         {},
       );
     } else {
-      console.log('CURRENT ENV SOURCE IS NOT DEFINED. READING ENV FROM .env ');
       config = dotenv.parse(fs.readFileSync(filePath));
     }
     this.envConfig = this.validateInput(config);
