@@ -11,7 +11,9 @@ jobs:
   ci_api_container:
     docker:
       - image: circleci/node:12.13.0
+        name: api
       - image: circleci/postgres:9.4.12-alpine
+        name: postgres
     working_directory: ~/project
     steps:
       - checkout
