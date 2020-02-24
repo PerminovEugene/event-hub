@@ -24,10 +24,10 @@ jobs:
       - image: circleci/node:12.13.0
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows/packages/api-server
+    steps:
       - run:
           name: Run all tests
-          command: |
-            npm run test:all
+          command: npm run test:all
 
 workflows:
   version: 2
@@ -36,4 +36,3 @@ workflows:
       - build
       - prepare_api_container
       - test
-     
