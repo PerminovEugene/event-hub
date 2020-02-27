@@ -10,6 +10,9 @@ packages/*/dist
 packages/*/config/.env
 packages/*/config/test-e2e.env
 
-packages/api-server/env/.env
-packages/api-server/env/test-e2e.env
+packages/**/env/.env
+packages/**/env/dev.env
+packages/**/env/test.env
+packages/**/env/production.env
+
 packages/api-server/tsconfig.build.tsbuildinfo
