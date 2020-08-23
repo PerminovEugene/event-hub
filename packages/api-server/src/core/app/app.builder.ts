@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import * as cookieParser from 'cookie-parser';
-import * as session from 'express-session';
-import * as passport from 'passport';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
 import { getCorsOptions } from './../../config/cors';
 import { EnvField, getConfigService } from './../../config/environment/service';
 import { AllExceptionsFilter } from './../../exceptions-filters/all-exceptions.filter';

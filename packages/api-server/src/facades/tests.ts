@@ -1,5 +1,5 @@
 import { INestApplication } from '@nestjs/common';
-import * as supertest from 'supertest';
+import supertest from 'supertest';
 
 export type TestRequest = {
   app: INestApplication;

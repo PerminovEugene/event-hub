@@ -33,7 +33,7 @@
       "windows": {
         "program": "${workspaceFolder}/packages/api-server/node_modules/jest/bin/jest"
       }
-    }
+    },
     {
       "type": "node",
       "request": "launch",
@@ -50,6 +50,27 @@
       "windows": {
         "program": "${workspaceFolder}/packages/api-server/node_modules/jest/bin/jest"
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start API",
+      "args": [
+        "./packages/api-server/dist/main.js"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+    },
+    {
+      "name": "Launch server.js via nodemon",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/packages/api-server/dist/main.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
     // {
     //   "type": "node",

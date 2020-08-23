@@ -11,6 +11,21 @@ services:
       - ./packages/api-server/env/dev.env
     depends_on:
       - domain-db
+    links:
+      - domain-db
+
+  # front:
+  #   build:
+  #     dockerfile: ./Dockerfile
+  #     context: ./packages/front-end/
+  #   ports:
+  #     - 3000:3000
+  #   env_file:
+  #     - ./packages/domain-db/env/dev.env
+  #     - ./packages/api-server/env/dev.env
+  #   depends_on:
+  #     - domain-db
+
 
   domain-db:
     image: postgres
@@ -18,7 +33,44 @@ services:
     env_file:
       - ./packages/domain-db/env/dev.env
       # ENV initialise order
-# Compose file
-# Shell environment variables
-# Environment file
-# Dockerfile
+
+  prometheus:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./packages/prometheus/
+    depends_on:
+      - api
+    networks:
+      - all
+    links:
+      - api
+    ports:
+      - "9090:9090"
+    restart: always
+
+  grafana:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./packages/grafana/
+    ports:
+      - 3030:3000
+    depends_on:
+      - prometheus
+    # volumes:
+      # - grafana-storage:/var/lib/grafana
+    links:
+      - prometheus
+    # secrets: admin_password
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: lalko_tv
+      GF_SECURITY_ADMIN_USER: owner
+
+volumes:
+  grafana-storage:
+
+networks:
+  all:
+
+# secrets:
+#   grafana_secret:
+#     file: ./packages/grafana/admin_password

@@ -18,3 +18,7 @@ async function bootstrap() {
   await app.listen(getConfigService().get(EnvField.PORT));
 }
 bootstrap();
+
+process.on('uncaughtError' as any, (e) => {
+  console.log(e)
+})

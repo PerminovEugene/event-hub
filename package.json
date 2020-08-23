@@ -21,8 +21,9 @@
     "pub": "lerna publish"
   },
   "devDependencies": {
-    "lerna": "^3.18.4",
-    "typescript": "^3.7.3"
+    "lerna": "^3.22.1",
+    "nodemon": "^2.0.4",
+    "typescript": "^3.9.7"
   },
   "workspaces": [
     "packages/*"
