@@ -25,4 +25,6 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-    - targets: ['localhost:3000']
+    - targets: ['api:3000']
+      labels:
+        alias: "api"

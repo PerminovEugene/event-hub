@@ -11,8 +11,11 @@ services:
       - ./packages/api-server/env/dev.env
     depends_on:
       - domain-db
-    links:
-      - domain-db
+    # links:
+      # - domain-db
+    # networks:
+
+      
 
   # front:
   #   build:
@@ -40,8 +43,8 @@ services:
       context: ./packages/prometheus/
     depends_on:
       - api
-    networks:
-      - all
+    # networks:
+      # - all
     links:
       - api
     ports:
@@ -68,8 +71,8 @@ services:
 volumes:
   grafana-storage:
 
-networks:
-  all:
+# networks:
+  # all:
 
 # secrets:
 #   grafana_secret:
