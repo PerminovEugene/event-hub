@@ -35,7 +35,6 @@ services:
     restart: always
     env_file:
       - ./packages/domain-db/env/dev.env
-      # ENV initialise order
 
   prometheus:
     build:
@@ -43,8 +42,6 @@ services:
       context: ./packages/prometheus/
     depends_on:
       - api
-    # networks:
-      # - all
     links:
       - api
     ports:
@@ -59,11 +56,8 @@ services:
       - 3030:3000
     depends_on:
       - prometheus
-    # volumes:
-      # - grafana-storage:/var/lib/grafana
     links:
       - prometheus
-    # secrets: admin_password
     env_file:
       - ./packages/grafana/env/dev.env
 
