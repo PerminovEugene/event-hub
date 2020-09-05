@@ -64,9 +64,8 @@ services:
     links:
       - prometheus
     # secrets: admin_password
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: lalko_tv
-      GF_SECURITY_ADMIN_USER: owner
+    env_file:
+      - ./packages/grafana/env/dev.env
 
 volumes:
   grafana-storage:

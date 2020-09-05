@@ -11,8 +11,9 @@ Simple events search and managment.
 ## Local setup
 
 1. install lerna
-2. build `shared` project
-3. `$ npm run bootstrap`
+2. Manage dev.env files in packages
+3. build `shared` project
+4. `$ npm run bootstrap`
 
 ## Lerna tips
 
