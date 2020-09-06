@@ -1,0 +1,20 @@
+fixtures:
+  - name: 'New year party'
+    type: 'meetup'
+    description: 'New year party with vodka and juice'
+    date: '01/01/2020'
+  - name: 'JS day'
+    type: 'conference'
+    description: 'Last day of january with a lot of JS'
+    date: '01/31/2020'
+    tags:
+      - name: casual
+      - name: front-end
+      - name: IT
+  - name: '7 jan'
+    type: 'article'
+    description: 'The end of vacation'
+    date: '01/10/2020'
+    tags:
+      - name: casual
+      - name: time_for_cry

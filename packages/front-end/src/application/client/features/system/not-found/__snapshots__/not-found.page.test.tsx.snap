@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound page basic render 1`] = `
+<div>
+  <styled.section>
+    Not found page
+  </styled.section>
+</div>
+`;

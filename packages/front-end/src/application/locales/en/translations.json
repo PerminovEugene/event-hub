@@ -1,0 +1,29 @@
+{
+  "message": "login",
+  "pages": {
+    "login": {
+      "title": "Sign In",
+      "signUpLink": "Have no account yet? Sign up",
+      "restorePasswordLink": "Forgot password?",
+      "submit": "Sign in"
+    },
+    "registration": {
+      "title": "Sign Up",
+      "submit": "Sign up",
+      "signInLink": "Already have an account? Sign in"
+    },
+    "createEvent": { "submit": "Create new event" },
+    "notFound": {
+      "title": "Not Found"
+    }
+  },
+  "components": {
+    "logout": {
+      "submit": "Logout"
+    },
+    "header": {
+      "title": "Dashboard",
+      "signIn": "Sign In"
+    }
+  }
+}

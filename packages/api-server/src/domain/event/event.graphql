@@ -1,0 +1,40 @@
+type Event {
+  id: Int!
+  type: String!
+  name: String!
+  description: String
+  date: String!
+  tags: [Tag]
+}
+
+input EventsFiltersInput {
+  fromDate: String
+  toDate: String
+  tags: [String]
+}
+
+type Query {
+  events(eventsFiltersInput: EventsFiltersInput): [Event]
+  event(id: Int!): Event
+}
+
+input EventInput {
+  name: String
+  description: String
+  type: String
+  date: String
+  tags: [TagInput]
+}
+
+input EventUpdateInput {
+  id: Int!
+  name: String
+  description: String
+  type: String
+  date: String
+}
+
+type Mutation {
+  createEvent(eventInput: EventInput): Event
+  updateEvent(eventUpdateInput: EventUpdateInput): Event
+}

@@ -1,0 +1,72 @@
+version: "3"
+services:
+  api:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./packages/api-server/
+    ports:
+      - 3000:3000
+    env_file:
+      - ./packages/domain-db/env/dev.env
+      - ./packages/api-server/env/dev.env
+    depends_on:
+      - domain-db
+    # links:
+      # - domain-db
+    # networks:
+
+      
+
+  # front:
+  #   build:
+  #     dockerfile: ./Dockerfile
+  #     context: ./packages/front-end/
+  #   ports:
+  #     - 3000:3000
+  #   env_file:
+  #     - ./packages/domain-db/env/dev.env
+  #     - ./packages/api-server/env/dev.env
+  #   depends_on:
+  #     - domain-db
+
+
+  domain-db:
+    image: postgres
+    restart: always
+    env_file:
+      - ./packages/domain-db/env/dev.env
+
+  prometheus:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./packages/prometheus/
+    depends_on:
+      - api
+    links:
+      - api
+    ports:
+      - "9090:9090"
+    restart: always
+
+  grafana:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./packages/grafana/
+    ports:
+      - 3030:3000
+    depends_on:
+      - prometheus
+    links:
+      - prometheus
+    env_file:
+      - ./packages/grafana/env/dev.env
+
+volumes:
+  grafana-storage:
+
+# networks:
+  # all:
+
+# secrets:
+#   grafana_secret:
+#     file: ./packages/grafana/admin_password
