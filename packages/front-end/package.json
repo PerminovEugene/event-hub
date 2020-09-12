@@ -8,8 +8,8 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "start:dev": "npm-run-all --parallel nodemon-dev-server bsdw bcdw",
-    "start:debug": "npm-run-all --parallel nodemon-dev-server:debug bsdw bcdw",
+    "start:dev": "npm-run-all --parallel bsdw bcdw nodemon-dev-server ",
+    "start:debug": "npm-run-all --parallel bsdw bcdw nodemon-dev-server:debug ",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "build:server:dev": "webpack --config=./src/framework/build/webpack.dev.server.config.js",
