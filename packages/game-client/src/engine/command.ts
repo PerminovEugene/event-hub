@@ -31,3 +31,26 @@ export class GoDownCommand extends Command {
     }
 }
 
+export class StopGoLeftCommand extends Command {
+    execute() {
+        this.actor.stopGoLeft();
+    }
+}
+
+export class StopGoRightCommand extends Command {
+    execute() {
+        this.actor.stopGoRight();
+    }
+}
+
+export class StopGoTopCommand extends Command {
+    execute() {
+        this.actor.stopGoTop();
+    }
+}
+
+export class StopGoDownCommand extends Command {
+    execute() {
+        this.actor.stopGoDown();
+    }
+}

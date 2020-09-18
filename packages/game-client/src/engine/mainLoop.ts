@@ -1,6 +1,7 @@
 import { world } from './world/storage'
 import { render } from './ui/render';
 import { queue } from './queue';
+import { MovementManager } from './physics/movement';
 
 let i = 0;
 let j = 0;
@@ -23,10 +24,13 @@ export const updateState = () => {
     }
 }
 
+const movementManager = new MovementManager();
+
 export const  main = () => {
     window.requestAnimationFrame( main );
     updateState();
     world.tick();
+    movementManager.updatePosition(world.dynamic) 
     render(world);
     if (j === 10) {
         i++

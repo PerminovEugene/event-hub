@@ -1,9 +1,6 @@
 export abstract class  GameActor {
-    protected view: any;
-    protected logic: any;
-
     protected quant = 0;
-    protected maxQuant = 2;
+    protected maxQuant = 3;
     protected throttleQuant = 0;
     protected throttleLevel = 10;
     public tick() {
@@ -16,6 +13,9 @@ export abstract class  GameActor {
             }
         }
     }
+   
+    public realX: number = 0;
+    public realY: number = 0;
 
     public draw(ctx: any): any {};
 } 

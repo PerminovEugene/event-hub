@@ -5,7 +5,8 @@ import { handleKeyboardEvent } from './engine/userActions';
 
 class Canvas extends React.Component {
     componentDidMount() {
-        window.addEventListener('keydown', this.onKeyPress ,false);
+        window.addEventListener('keydown', this.onKeyboardEvent ,false);
+        window.addEventListener('keyup', this.onKeyboardEvent ,false);
         main();
     }
 
@@ -13,9 +14,10 @@ class Canvas extends React.Component {
         setValue(e)
     }
 
-    onKeyPress = (event: KeyboardEvent) =>{
-        handleKeyboardEvent(event.key);
+    onKeyboardEvent = (event: KeyboardEvent) =>{
+        handleKeyboardEvent(event.key, event.type);
     }
+
 
     render() {
         return ([

@@ -1,8 +1,8 @@
+import { DynamicActor } from './dynamic/dynamicActor';
 import { Player } from './dynamic/player';
-import { GameActor } from './gameActor';
 
 export class WorldStorage {
-    protected _dynamic: Array<GameActor> = [];
+    protected _dynamic: Array<DynamicActor> = [];
     protected _player: Player;
 
     constructor() {
@@ -10,7 +10,7 @@ export class WorldStorage {
         this._dynamic.push(this._player);
     }
 
-    get dynamic(): Array<GameActor> {
+    get dynamic(): Array<DynamicActor> {
         return this._dynamic;
     }
 
