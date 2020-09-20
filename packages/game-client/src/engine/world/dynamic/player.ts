@@ -113,7 +113,6 @@ export class Player extends DynamicActor {
         function drawImageActualSize(this: any): any {
             const { frames } = states[playerThis.state][playerThis.direction];
             const framePosition = frames[playerThis.quant];
-            console.log(framePosition, playerThis.quant, playerThis.state, playerThis.direction)
             ctx.clearRect(playerThis.previousX, playerThis.previousY, 28, 40);
             ctx?.drawImage(this,
                 framePosition[0], framePosition[1], framePosition[2], framePosition[3],
