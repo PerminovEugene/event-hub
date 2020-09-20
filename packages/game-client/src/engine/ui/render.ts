@@ -6,7 +6,6 @@ let canvas: HTMLCanvasElement;
 export const render = (world: WorldStorage) => {
     canvas = canvas || document.getElementById('canvas') as HTMLCanvasElement;
     const ctx = canvas!.getContext('2d');
-    // ctx?.clearRect(0, 0, canvas.width, canvas.height);    
     world.dynamic.forEach((gameActor: GameActor) => {
         gameActor.draw(ctx);
     });

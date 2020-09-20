@@ -12,7 +12,7 @@ export enum State {
     Go = 'Go',
 }
 
-export class DynamicActor extends GameActor {
+export abstract class DynamicActor extends GameActor {
     public speed: number = 0;
     public maxSpeed: number = 0;
     public acceleration: number = 0;
@@ -20,5 +20,4 @@ export class DynamicActor extends GameActor {
     public newState: State | null = State.Stay;
     public direction: Direction = Direction.Down;
     public newDirection: Direction = Direction.Down;
-
 }

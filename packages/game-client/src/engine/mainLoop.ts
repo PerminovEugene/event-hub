@@ -16,7 +16,6 @@ export const setValue = (event: any) => {
     states[curr][0] = num;
 }
 
-
 export const updateState = () => {
     while(!queue.isEmpty()) {
         const command = queue.take(); 

@@ -13,9 +13,12 @@ export abstract class  GameActor {
             }
         }
     }
+    public resetQuant = () => {
+        this.quant = 0;
+    }
    
     public realX: number = 0;
     public realY: number = 0;
 
-    public draw(ctx: any): any {};
+    abstract draw(ctx: any): any;
 } 

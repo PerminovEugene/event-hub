@@ -29,18 +29,8 @@ export class MovementManager {
                 actor.newState = null;
             }
             actor.direction = actor.newDirection;
-            console.log(newDirection, actor.state)
-
-
             
-            // if (actor.state !== newState) {
-            //     if (actor.direction !== newDirection) {
 
-            //     }
-            // }
-            if (actor.acceleration) {
-                
-            }
             // actors.forEach(comparedActor => {
             //     if (this.hasCollision(actor, comparedActor)) {
     
