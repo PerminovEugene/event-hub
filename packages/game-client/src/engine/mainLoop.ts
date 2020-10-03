@@ -25,11 +25,11 @@ export const updateState = () => {
 
 const movementManager = new MovementManager();
 
-export const  main = () => {
+export const main = () => {
     window.requestAnimationFrame( main );
     updateState();
     world.tick();
-    movementManager.updatePosition(world.dynamic) 
+    movementManager.updatePosition(world.dynamic, world.static) 
     render(world);
     if (j === 10) {
         i++

@@ -66,6 +66,15 @@ export class Player extends DynamicActor {
     public maxSpeed= 2;
     public acceleration = 1;
 
+    protected _width: number = 28;
+    protected _height: number = 40;
+
+    // physical
+    protected _pWidth:number = 24;
+    protected _pHeight:number = 34;
+    protected _verticalOffset:number = 2;
+    protected _horisontalOffset:number = 2;
+
     constructor() {
         super();
         this.maxQuant = 0;
@@ -108,15 +117,25 @@ export class Player extends DynamicActor {
     private previousX: number = 0;
     private previousY: number = 0;
 
+    public prev: any = [];
     public draw(ctx: CanvasRenderingContext2D) {
         const playerThis = this;
         function drawImageActualSize(this: any): any {
             const { frames } = states[playerThis.state][playerThis.direction];
+            
+            if (playerThis.prev[0] !== playerThis.state || playerThis.prev[1] !== playerThis.direction) {
+                console.log(playerThis.state, playerThis.direction)
+                playerThis.prev[0] = playerThis.state;
+                playerThis.prev[1] = playerThis.direction;
+            }
+            
+            
+            
             const framePosition = frames[playerThis.quant];
-            ctx.clearRect(playerThis.previousX, playerThis.previousY, 28, 40);
+            ctx.clearRect(playerThis.previousX, playerThis.previousY, playerThis.width, playerThis.height);
             ctx?.drawImage(this,
                 framePosition[0], framePosition[1], framePosition[2], framePosition[3],
-                playerThis.realX, playerThis.realY, 28, 40
+                playerThis.realX, playerThis.realY, playerThis.width, playerThis.height
             );
             playerThis.previousX = playerThis.realX;
             playerThis.previousY = playerThis.realY;

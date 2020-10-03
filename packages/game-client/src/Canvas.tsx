@@ -21,7 +21,7 @@ class Canvas extends React.Component {
 
     render() {
         return ([
-            <canvas id='canvas'/>,
+            <canvas id='canvas' width="888" height="789"/>,
             <div className="development-panel">
                 <input type='number' onChange={this.onchangeHandler}/>
             </div>
