@@ -79,13 +79,13 @@ export class MovementManager {
         collidedActor: GameActor
     ) => {
         if (activeActor.direction === Direction.Top) {
-            activeActor.realY = collidedActor.bottom - activeActor.verticalOffset;
+            activeActor.realY = collidedActor.bottom - activeActor.verticalOffset + 1;
         } else if (activeActor.direction === Direction.Down) {
-            activeActor.realY = collidedActor.top - activeActor.verticalBottomOffset - activeActor.pHeight;
+            activeActor.realY = collidedActor.top - activeActor.verticalOffset - activeActor.pHeight - 1;
         } else  if (activeActor.direction === Direction.Left) {
-            activeActor.realX = collidedActor.right - activeActor.horisontalOffset;
+            activeActor.realX = collidedActor.right - activeActor.horisontalOffset + 1;
         } else if (activeActor.direction === Direction.Right) {
-            activeActor.realX = collidedActor.left - activeActor.horisontalOffset - activeActor.pWidth;
+            activeActor.realX = collidedActor.left - activeActor.horisontalOffset - activeActor.pWidth - 1 ;
         }
         
         // TODO Not swag
@@ -100,7 +100,7 @@ export class MovementManager {
     }
 
     private wholeInterception(x1: number, x2: number, d1: number, d2: number) {
-        return d1 <= x1 && x2 <= d2; 
+        return d1 < x1 && x2 < d2; 
     }
 
 
