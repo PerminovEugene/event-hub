@@ -3,17 +3,6 @@ import { DynamicActor, Direction, State } from '../world/dynamic/dynamicActor';
 import { GameActor } from '../world/gameActor';
 import { StaticActor } from '../world/static/staticActor';
 
-
-enum Pos {
-    realX = 'realX',
-    realY = 'realY',
-}
-enum Side  {
-    right = 'right',
-    left = 'left',
-    bottom = 'bottom',
-    top = 'top'
-}
 type RollbackMovementConfig = Array<string>;
 
 export class MovementManager {
@@ -116,7 +105,6 @@ export class MovementManager {
             this.partialInterception(b.top, b.bottom, a.top, a.bottom) ||
             this.wholeInterception(a.top, a.bottom, b.top, b.bottom) ||
             this.wholeInterception(b.top, b.bottom, a.top, a.bottom);
-        console.log('horisonatal: ', horisonalCollision, 'vertical', verticalCollision);
         return horisonalCollision && verticalCollision;
     }
 

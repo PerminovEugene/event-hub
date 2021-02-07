@@ -2,12 +2,14 @@ import React from 'react';
 import './App.css';
 import { main, setValue } from './engine/mainLoop'
 import { handleKeyboardEvent } from './engine/userActions';
+import { Automate } from './stateAutomate.ts/automate';
 
 class Canvas extends React.Component {
     componentDidMount() {
         window.addEventListener('keydown', this.onKeyboardEvent ,false);
         window.addEventListener('keyup', this.onKeyboardEvent ,false);
-        main();
+        const automate = new Automate();
+        automate.start();
     }
 
     onchangeHandler = (e: any) => {

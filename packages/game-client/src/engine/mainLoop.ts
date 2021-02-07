@@ -1,19 +1,20 @@
-import { world } from './world/storage'
+import { createWorldStorage, world } from './world/storage'
 import { render } from './ui/render';
 import { queue } from './queue';
 import { MovementManager } from './physics/movement';
+import { Transport } from './transport/socket';
 
 let i = 0;
 let j = 0;
-const states = [
-    [10, 100, 28, 40],
-    [36, 100, 28, 40],
-    [62, 100, 28, 40],
-]
+// const states = [
+//     [10, 100, 28, 40],
+//     [36, 100, 28, 40],
+//     [62, 100, 28, 40],
+// ]
 let curr = 2;
 export const setValue = (event: any) => {
-    const num = event.target.value;
-    states[curr][0] = num;
+    // const num = event.target.value;
+    // states[curr][0] = num;
 }
 
 export const updateState = () => {
@@ -24,12 +25,21 @@ export const updateState = () => {
 }
 
 const movementManager = new MovementManager();
+const transport = new Transport();
+transport.connect();
+transport.attachHandlers();
 
-export const main = () => {
+export const main = (loadedData: any) => {
+    createWorldStorage(loadedData);
+    iterate();
+}
+
+const iterate = () => {
     window.requestAnimationFrame( main );
+    // transport.sendUserEvents();
     updateState();
     world.tick();
-    movementManager.updatePosition(world.dynamic, world.static) 
+    movementManager.updatePosition(world.dynamic, world.static);
     render(world);
     if (j === 10) {
         i++

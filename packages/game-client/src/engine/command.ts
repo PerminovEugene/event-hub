@@ -1,10 +1,29 @@
-// import { GameActor } from './world/gameActor';
 import { Player } from './world/dynamic/player';
+import { DynamicActor } from './world/dynamic/dynamicActor';
+
+enum CommandName {
+    goLeft = 'goLeft',
+    goRight = 'goRight',
+    goTop = 'goTop',
+    goDown = 'goDown',
+    stopGoLeft = 'stopGoLeft',
+    stopGoRight = 'stopGoRight',
+    stopGoTop = 'stopGoTop',
+    stopGoDown = 'stopGoDown',
+}
 
 export abstract class Command {
-    constructor(protected actor: Player) {}
+    private _timestamp: Date;
+
+    constructor(protected actor: Player, public name: CommandName) {
+        this._timestamp = new Date();
+    }
 
     public abstract execute(): void;
+
+    get timestamp() {
+        return this._timestamp;
+    }
 }
 
 export class GoLeftCommand extends Command {

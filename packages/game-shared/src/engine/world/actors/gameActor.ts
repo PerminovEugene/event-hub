@@ -1,10 +1,10 @@
 export abstract class  GameActor {
     protected quant = 0;
-    public maxQuant = 3;
+    public maxQuant = 3; // MAKE PROTECTED
     protected throttleQuant = 0;
     protected throttleLevel = 10;
 
-    constructor() {
+    constructor(private _realX: number, private _realY: number) {
         this._verticalBottomOffset = this.height - this.verticalOffset - this.pHeight;
         this._horisontalRightOffset = this.width - this.horisontalOffset - this.pWidth;
     }
@@ -22,9 +22,6 @@ export abstract class  GameActor {
     public resetQuant = () => {
         this.quant = 0;
     }
-   
-    public realX: number = 0;
-    public realY: number = 0;
 
     // for drawing
     protected _width: number = 0;
@@ -39,6 +36,9 @@ export abstract class  GameActor {
     protected _horisontalRightOffset: number = 0;
 
     abstract draw(ctx: any): any;
+
+    get realX() { return this._realX };
+    get realY() { return this._realY };
 
     get left() {
         return this.realX + this.horisontalOffset;

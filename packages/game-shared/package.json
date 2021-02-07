@@ -1,0 +1,26 @@
+{
+  "name": "@event-hub/game-shared",
+  "version": "0.0.1",
+  "description": "Shared game modules",
+  "author": "Eugene Perminov",
+  "license": "MIT",
+  "main": "dist/index",
+  "types": "dist/index",
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^12.12.9",
+    "typescript": "^4.0.2"
+  },
+  "gitHead": "2f5e38c9e0ce4053bdfd98a9a5c07ac64553f821",
+  "publishConfig": {
+    "access": "public"
+  }
+}

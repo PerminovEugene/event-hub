@@ -1,0 +1,5 @@
+alias event_hub="
+   tmux new -s eventhub    
+   tmux split-window -v -t eventhub:0.1 Enter
+   tmux send-keys -t eventhub:0.1 'cd /home/eugeneperminov/Projects/personal/event-hub/packages/game-client' Enter
+"

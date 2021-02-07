@@ -1,17 +1,37 @@
 import { DynamicActor } from './dynamic/dynamicActor';
 import { Player } from './dynamic/player';
 import { StaticActor } from './static/staticActor';
-import { Tree } from './static/tree';
 
 export class WorldStorage {
     protected _dynamic: Array<DynamicActor> = [];
     protected _player: Player;
     protected _static: Array<StaticActor> = [];
  
-    constructor() {
-        this._player = new Player();
+    constructor(loadedData: any) {
+        this._player = new Player({
+            // TODO temporary 0
+            states: loadedData.dynamicObjects.players[0].states,
+            sprite: loadedData.dynamicObjects.players[0].sprite,
+        });
         this._dynamic.push(this._player);
-        this._static.push(new Tree());
+
+        loadedData.staticObjects.forEach(
+            (actorData: { realX: number, realY: number, frames: number[][], sprite: string}) => {
+                this._static.push(this.createStaticActor(actorData));
+            }
+        );
+    }
+
+    createStaticActor(actorData: {
+            realX: number, realY: number, frames: number[][], sprite: string
+        }) {
+        const staticActor = new StaticActor({
+            frames: actorData.frames,
+            sprite: actorData.sprite,
+        });
+        staticActor.realX = actorData.realX;
+        staticActor.realY = actorData.realY;
+        return staticActor;
     }
 
     get dynamic(): Array<DynamicActor> {
@@ -33,4 +53,9 @@ export class WorldStorage {
     }
 }
 
-export const world = new WorldStorage();
+export let world: WorldStorage;
+export const createWorldStorage = (loadedData: any) => {
+    if (!world) {
+        world = new WorldStorage(loadedData);
+    }
+}

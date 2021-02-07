@@ -1,66 +1,5 @@
 import { Direction, DynamicActor, State } from './dynamicActor';
 
-const states = {
-    [State.Go]: {
-        [Direction.Left]: {
-            frames: [
-                [10, 100, 28, 40],
-                [36, 100, 28, 40],
-                [62, 100, 28, 40],
-                [36, 100, 28, 40],
-            ]
-        },
-        [Direction.Right]: {
-            frames: [
-                [11, 54, 28, 40],
-                [37, 54, 28, 40],
-                [63, 54, 28, 40],
-                [37, 54, 28, 40],
-            ]
-        },
-        [Direction.Top]: {
-            frames: [ 
-                [10, 147, 28, 40],
-                [36, 147, 28, 40],
-                [62, 147, 28, 40],
-                [36, 147, 28, 40],
-            ]
-        },
-        [Direction.Down]: {
-            frames: [
-                [10, 10, 28, 40],
-                [36, 10, 28, 40],
-                [62, 10, 28, 40],
-                [36, 10, 28, 40],
-            ]
-        },
-    },
-    [State.Stay]: {
-        [Direction.Left]: {
-            frames: [
-                [36, 100, 28, 40],
-            ]
-        },
-        [Direction.Right]: {
-            frames: [
-                [37, 54, 28, 40],
-            ]
-        },
-        [Direction.Top]: {
-            frames: [ 
-                [36, 147, 28, 40],
-            ]
-        },
-        [Direction.Down]: {
-            frames: [
-                [36, 10, 28, 40],
-            ]
-        },
-    }
-}
-const jakeSprite = 'Adventure%20time%20RPG_%20Jake%20the%20dog%20overworld%20by%20tebited15%20on%20DeviantArt.png';
-
-
 export class Player extends DynamicActor {
     public speed = 0;
     public maxSpeed= 2;
@@ -75,7 +14,7 @@ export class Player extends DynamicActor {
     protected _verticalOffset:number = 2;
     protected _horisontalOffset:number = 2;
 
-    constructor() {
+    constructor(private params: { states: any, sprite: string }) {
         super();
         this.maxQuant = 0;
     }
@@ -121,15 +60,13 @@ export class Player extends DynamicActor {
     public draw(ctx: CanvasRenderingContext2D) {
         const playerThis = this;
         function drawImageActualSize(this: any): any {
-            const { frames } = states[playerThis.state][playerThis.direction];
-            
+            const { frames } = playerThis.params.states[playerThis.state][playerThis.direction];
+            console.log('ss');
             if (playerThis.prev[0] !== playerThis.state || playerThis.prev[1] !== playerThis.direction) {
                 console.log(playerThis.state, playerThis.direction)
                 playerThis.prev[0] = playerThis.state;
                 playerThis.prev[1] = playerThis.direction;
             }
-            
-            
             
             const framePosition = frames[playerThis.quant];
             ctx.clearRect(playerThis.previousX, playerThis.previousY, playerThis.width, playerThis.height);
@@ -140,7 +77,7 @@ export class Player extends DynamicActor {
             playerThis.previousX = playerThis.realX;
             playerThis.previousY = playerThis.realY;
         }
-        this.image.src = jakeSprite;
+        this.image.src = this.params.sprite;
         this.image.onload = drawImageActualSize;
     }
 }
