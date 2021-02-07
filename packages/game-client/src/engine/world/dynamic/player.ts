@@ -1,4 +1,5 @@
-import { Direction, DynamicActor, State } from './dynamicActor';
+import { DynamicActor } from './dynamicActor';
+import { Direction, State } from '../../types';
 
 export class Player extends DynamicActor {
     public speed = 0;
@@ -13,11 +14,6 @@ export class Player extends DynamicActor {
     protected _pHeight:number = 34;
     protected _verticalOffset:number = 2;
     protected _horisontalOffset:number = 2;
-
-    constructor(private params: { states: any, sprite: string }) {
-        super();
-        this.maxQuant = 0;
-    }
 
     public goLeft() { this.go(); this.turnTo(Direction.Left);  }
     public goRight() { this.go(); this.turnTo( Direction.Right); }
@@ -37,17 +33,17 @@ export class Player extends DynamicActor {
 
     private go() {
         if (this.state !== State.Go) {
-            this.resetQuant();
             this.newState = State.Go;
-            this.maxQuant = 3;
+            this.resetQuant();
+            this.updateMaxQuant();
         }
     }
 
     private stop() {
         if (this.state !== State.Stay) {
-            this.maxQuant = 0;
             this.newState = State.Stay;
             this.resetQuant();
+            this.updateMaxQuant();
         }
     }
 
@@ -61,7 +57,6 @@ export class Player extends DynamicActor {
         const playerThis = this;
         function drawImageActualSize(this: any): any {
             const { frames } = playerThis.params.states[playerThis.state][playerThis.direction];
-            console.log('ss');
             if (playerThis.prev[0] !== playerThis.state || playerThis.prev[1] !== playerThis.direction) {
                 console.log(playerThis.state, playerThis.direction)
                 playerThis.prev[0] = playerThis.state;

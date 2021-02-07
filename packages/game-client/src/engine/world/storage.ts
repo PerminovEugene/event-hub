@@ -1,3 +1,4 @@
+import { FrameTuple } from '../types';
 import { DynamicActor } from './dynamic/dynamicActor';
 import { Player } from './dynamic/player';
 import { StaticActor } from './static/staticActor';
@@ -16,14 +17,14 @@ export class WorldStorage {
         this._dynamic.push(this._player);
 
         loadedData.staticObjects.forEach(
-            (actorData: { realX: number, realY: number, frames: number[][], sprite: string}) => {
+            (actorData: { realX: number, realY: number, frames: FrameTuple, sprite: string}) => {
                 this._static.push(this.createStaticActor(actorData));
             }
         );
     }
 
     createStaticActor(actorData: {
-            realX: number, realY: number, frames: number[][], sprite: string
+            realX: number, realY: number, frames: FrameTuple, sprite: string
         }) {
         const staticActor = new StaticActor({
             frames: actorData.frames,

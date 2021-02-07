@@ -1,3 +1,4 @@
+import { FrameTuple } from '../../types';
 import { GameActor } from '../gameActor';
 
 // TODO move all actor params to props
@@ -15,7 +16,7 @@ const width = 600;
 const height = 600;
 
 export class StaticActor extends GameActor {
-    constructor(private params: { sprite: string, frames: number[][] }) {
+    constructor(private params: { sprite: string, frames: FrameTuple }) {
         super();
     }
     

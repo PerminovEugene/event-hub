@@ -1,4 +1,4 @@
-import { Direction, State } from "../engine/world/dynamic/dynamicActor";
+import { Direction, State } from "../engine/types";
 
 export const getStore = () => ({
     dynamicObjects: {

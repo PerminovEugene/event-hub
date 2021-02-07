@@ -1,9 +1,7 @@
-import { act } from '@testing-library/react';
-import { DynamicActor, Direction, State } from '../world/dynamic/dynamicActor';
+import { DynamicActor } from '../world/dynamic/dynamicActor';
+import {  Direction, State } from '../types';
 import { GameActor } from '../world/gameActor';
 import { StaticActor } from '../world/static/staticActor';
-
-type RollbackMovementConfig = Array<string>;
 
 export class MovementManager {
     public updatePosition(
@@ -13,7 +11,7 @@ export class MovementManager {
         dynamicActors.forEach(actor => {
             const { newDirection } = actor;
             if ((actor.newState === State.Go && actor.state === State.Stay) ||
-                (actor.state === State.Go && actor.newState === null)) {
+                (actor.state === State.Go && actor.newState === State.Same)) {
                 this.recountSpeed(actor);
                 if (newDirection === Direction.Top) {
                     actor.realY -= actor.speed;
@@ -29,41 +27,36 @@ export class MovementManager {
                 }
             }
 
-            if (actor.newState !== null) {
+            if (actor.newState !== State.Same) {
                 actor.state = actor.newState;
-                actor.newState = null;
+                actor.newState = State.Same;
             }
             actor.direction = actor.newDirection;
 
             dynamicActors.forEach(comparedActor => {
-                if (actor !== comparedActor && 
+                if (actor !== comparedActor &&
+                    // TODO I suppose there is extra condition
                     actor.state !== State.Stay && comparedActor.state !== State.Stay) {
                     if (this.hasCollision(actor, comparedActor)) {
-                        this.correctPossitionBecauseOfCollision(actor, comparedActor);
+                        this.correctPositionOnCollision(actor, comparedActor);
                     }
                 }
             });
             staticActors.forEach((comparedActor) => {
                 if (actor.state !== State.Stay && this.hasCollision(actor, comparedActor)) {
-                    this.correctPossitionBecauseOfCollision(actor, comparedActor);
+                    this.correctPositionOnCollision(actor, comparedActor);
                 }
             });
 
-            if (actor.newState !== null) {
+            if (actor.newState !== State.Same) {
                 actor.state = actor.newState;
-                actor.newState = null;
+                actor.newState = State.Same;
             }
             actor.direction = actor.newDirection;
         })
     }
 
-    private returnBackMap: {[key in Direction]: RollbackMovementConfig} = {
-        [Direction.Down]: ['realY', 'top', 'pHeight'],
-        [Direction.Top]: ['realY', 'bottom'],
-        [Direction.Left]: ['realX', 'right',],
-        [Direction.Right]: ['realX', 'left', 'pWidth' ],
-    }
-    private correctPossitionBecauseOfCollision = (
+    private correctPositionOnCollision = (
         activeActor: DynamicActor,
         collidedActor: GameActor
     ) => {
@@ -79,8 +72,8 @@ export class MovementManager {
         
         // TODO Not swag
         activeActor.speed = 0;
-        activeActor.maxQuant = 0;
-        activeActor.newState =  State.Stay;
+        activeActor.newState = State.Stay;
+        activeActor.updateMaxQuant();
         activeActor.resetQuant();
     }
 
@@ -91,7 +84,6 @@ export class MovementManager {
     private wholeInterception(x1: number, x2: number, d1: number, d2: number) {
         return d1 < x1 && x2 < d2; 
     }
-
 
     private hasCollision(a: GameActor, b: GameActor) {
         const horisonalCollision = 
