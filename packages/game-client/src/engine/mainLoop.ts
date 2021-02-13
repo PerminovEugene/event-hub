@@ -37,9 +37,9 @@ export const main = (loadedData: any) => {
 const iterate = () => {
     window.requestAnimationFrame( main );
     // transport.sendUserEvents();
-    updateState();
+    // updateState();
     world.tick();
-    movementManager.updatePosition(world.dynamic, world.static);
+    // movementManager.updatePosition(world.dynamic, world.static);
     render(world);
     if (j === 10) {
         i++

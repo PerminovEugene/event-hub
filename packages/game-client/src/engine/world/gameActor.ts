@@ -1,4 +1,4 @@
-export abstract class  GameActor {
+export abstract class GameActor {
     protected throttleQuant = 0;
     protected throttleLevel = 10;
 

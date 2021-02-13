@@ -1,19 +1,41 @@
 import React from 'react';
 import './App.css';
-import { main, setValue } from './engine/mainLoop'
-import { handleKeyboardEvent } from './engine/userActions';
+import { setValue } from './engine/mainLoop'
+import { handleKeyboardEvent, handleMouseEvent, handleMouseMove } from './engine/userActions';
 import { Automate } from './stateAutomate.ts/automate';
+import { uiConfig } from './engine/ui/uiConfig';
 
-class Canvas extends React.Component {
+type State = {
+    width: number;
+    height: number;
+}
+
+class Canvas extends React.Component<{}, State> {
+    state: Readonly<State> = {
+        width: uiConfig.itemWidth * 18 + uiConfig.startX * 2,
+        height: uiConfig.itemHeigth * 18 + uiConfig.startY * 2,
+    };
+
+
     componentDidMount() {
-        window.addEventListener('keydown', this.onKeyboardEvent ,false);
-        window.addEventListener('keyup', this.onKeyboardEvent ,false);
+        // window.addEventListener('keydown', this.onKeyboardEvent ,false);
+        // window.addEventListener('keyup', this.onKeyboardEvent ,false);
+        // window.addEventListener('click', (ev) => this.onMouseClick);
         const automate = new Automate();
+        
         automate.start();
     }
 
+    onMouseClick = (ev: any) => {
+        handleMouseEvent(ev.clientX, ev.clientY);
+    }
+
+    onMouseMove = (ev: any) => {
+        handleMouseMove(ev.clientX - ev.target.offsetLeft, ev.clientY - ev.target.offsetTop);
+    }
+
     onchangeHandler = (e: any) => {
-        setValue(e)
+        setValue(e);
     }
 
     onKeyboardEvent = (event: KeyboardEvent) =>{
@@ -22,12 +44,22 @@ class Canvas extends React.Component {
 
 
     render() {
-        return ([
-            <canvas id='canvas' width="888" height="789"/>,
-            <div className="development-panel">
-                <input type='number' onChange={this.onchangeHandler}/>
+        const { width, height } = this.state;
+        return (
+            <div>
+                <canvas id='canvas'
+                    width={width}
+                    height={height}
+                    onMouseMove={this.onMouseMove}
+                    style={{
+                        margin: 'auto',
+                    }}
+                />
+                <div className="development-panel">
+                    <input type='number' onChange={this.onchangeHandler}/>
+                </div>
             </div>
-        ])
+        )
     };
 }
 

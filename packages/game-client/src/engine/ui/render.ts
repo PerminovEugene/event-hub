@@ -1,5 +1,8 @@
 import { WorldStorage } from '../world/storage'; 
 import { GameActor } from '../world/gameActor';
+import { drawBoard } from './board';
+import { uiConfig } from './uiConfig';
+import { drawUserActiveItem } from './hover';
 
 let canvas: HTMLCanvasElement;
 let dynamicOffscreen: OffscreenCanvas;
@@ -30,6 +33,8 @@ export const render = (world: WorldStorage) => {
         }
     });
 
+    drawBoard(dynamicCtx, 19, uiConfig);
+    drawUserActiveItem(dynamicCtx, uiConfig);
     const bitmapDynamic = dynamicOffscreen.transferToImageBitmap();
     canvas.getContext("bitmaprenderer")?.transferFromImageBitmap(bitmapDynamic);
     

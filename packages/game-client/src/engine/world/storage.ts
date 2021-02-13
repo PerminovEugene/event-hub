@@ -5,22 +5,22 @@ import { StaticActor } from './static/staticActor';
 
 export class WorldStorage {
     protected _dynamic: Array<DynamicActor> = [];
-    protected _player: Player;
+    // protected _player: Player;
     protected _static: Array<StaticActor> = [];
  
     constructor(loadedData: any) {
-        this._player = new Player({
-            // TODO temporary 0
-            states: loadedData.dynamicObjects.players[0].states,
-            sprite: loadedData.dynamicObjects.players[0].sprite,
-        });
-        this._dynamic.push(this._player);
+        // this._player = new Player({
+        //     // TODO temporary 0
+        //     states: loadedData.dynamicObjects.players[0].states,
+        //     sprite: loadedData.dynamicObjects.players[0].sprite,
+        // });
+        // this._dynamic.push(this._player);
 
-        loadedData.staticObjects.forEach(
-            (actorData: { realX: number, realY: number, frames: FrameTuple, sprite: string}) => {
-                this._static.push(this.createStaticActor(actorData));
-            }
-        );
+        // loadedData.staticObjects.forEach(
+        //     (actorData: { realX: number, realY: number, frames: FrameTuple, sprite: string}) => {
+        //         this._static.push(this.createStaticActor(actorData));
+        //     }
+        // );
     }
 
     createStaticActor(actorData: {
@@ -43,9 +43,9 @@ export class WorldStorage {
         return this._static;
     }
 
-    get player(): Player {
-        return this._player;
-    }
+    // get player(): Player {
+        // return this._player;
+    // }
 
     public tick() {
         this._dynamic.forEach(actor => {
