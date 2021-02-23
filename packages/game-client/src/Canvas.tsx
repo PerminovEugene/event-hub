@@ -34,6 +34,14 @@ class Canvas extends React.Component<{}, State> {
         handleMouseMove(ev.clientX - ev.target.offsetLeft, ev.clientY - ev.target.offsetTop);
     }
 
+    onAddBuilding = () => {
+        handleMouseMove();
+    }
+
+    onAddUnit = () => {
+        addUnit();
+    }
+
     onchangeHandler = (e: any) => {
         setValue(e);
     }
@@ -56,7 +64,8 @@ class Canvas extends React.Component<{}, State> {
                     }}
                 />
                 <div className="development-panel">
-                    <input type='number' onChange={this.onchangeHandler}/>
+                    <button onClick={this.onAddUnit}>add unit</button>
+                    <button onClick={this.onAddBuilding}>add unit</button>
                 </div>
             </div>
         )

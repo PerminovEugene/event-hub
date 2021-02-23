@@ -6,12 +6,6 @@ import { Transport } from './transport/socket';
 
 let i = 0;
 let j = 0;
-// const states = [
-//     [10, 100, 28, 40],
-//     [36, 100, 28, 40],
-//     [62, 100, 28, 40],
-// ]
-let curr = 2;
 export const setValue = (event: any) => {
     // const num = event.target.value;
     // states[curr][0] = num;
