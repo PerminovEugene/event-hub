@@ -1,13 +1,27 @@
-import React from 'react';
-import Canvas from './Canvas';
-import './App.css';
+import React, { useEffect } from "react";
+import Canvas from "./Canvas";
+import "./App.css";
+import Buildings from "./gameInterface/buildungs";
+import { observer } from "mobx-react-lite";
+import { rootStore } from "./AppContext";
+import { RootStoreContext } from "./AppContext";
 
-function App() {
+const App = observer(() => {
+  useEffect(() => {
+    // code to run on component mount
+    rootStore.init().catch((e) => {
+      console.log(e);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <Canvas />
+      <RootStoreContext.Provider value={rootStore}>
+        <Canvas />
+        <Buildings />
+      </RootStoreContext.Provider>
     </div>
   );
-}
+});
 
 export default App;
