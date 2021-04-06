@@ -11,9 +11,11 @@ export class UIStore {
 
   public selectBuilding(building: Building) {
     this.selectedGameObject = building;
+    this.selectedGameObjectType = "building";
   }
 
   public unselectBuilding() {
     this.selectedGameObject = null;
+    this.selectedGameObjectType = null;
   }
 }

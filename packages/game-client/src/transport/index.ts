@@ -33,6 +33,14 @@ export class Transport {
           price: {
             [1]: 3, // 1 is id of resource, 3 is a cost
           },
+          physicalParameters: {
+            width: 2,
+            height: 2,
+            defaultShape: [
+              [1, 1],
+              [1, 1],
+            ],
+          },
         },
       ],
       //   units: [],

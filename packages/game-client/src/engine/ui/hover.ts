@@ -1,4 +1,5 @@
 import { rootStore } from "../../AppContext";
+import { Building } from "../../generalTypes/building";
 import { UIConfig } from "./uiConfig";
 
 let crossroad: boolean = false;
@@ -26,31 +27,50 @@ export const drawUserActiveItem = (
   } else {
     if (!(x < 0 || y < 0 || x > 17 || y > 17)) {
       ctx.lineWidth = 1;
-      ctx.fillStyle = uiStore.selectedGameObject ? "green" : "blue";
-      ctx.fillRect(
-        uiConfig.startX + x * uiConfig.itemWidth + 2,
-        uiConfig.startY + y * uiConfig.itemHeigth + 2,
-        uiConfig.itemWidth - 4,
-        uiConfig.itemHeigth - 4
-      );
+      if (
+        uiStore.selectedGameObject &&
+        uiStore.selectedGameObjectType === "building"
+      ) {
+        drawBuilding(ctx, uiConfig, uiStore.selectedGameObject);
+      } else {
+        ctx.fillStyle = "blue";
+        ctx.fillRect(
+          uiConfig.startX + x * uiConfig.itemWidth + 2,
+          uiConfig.startY + y * uiConfig.itemHeigth + 2,
+          uiConfig.itemWidth - 4,
+          uiConfig.itemHeigth - 4
+        );
+      }
     }
   }
 };
 
-const drawPlanndedBuilding = (
+const drawBuilding = (
   ctx: OffscreenCanvasRenderingContext2D,
-  uiConfig: UIConfig
+  uiConfig: UIConfig,
+  building: Building
 ) => {
-  const { uiStore } = rootStore;
-  if (uiStore.selectedGameObject) {
-    ctx.lineWidth = 1;
-    ctx.fillStyle = "green";
-    ctx.fillRect(
-      uiConfig.startX + x * uiConfig.itemWidth + 2,
-      uiConfig.startY + y * uiConfig.itemHeigth + 2,
-      uiConfig.itemWidth - 4,
-      uiConfig.itemHeigth - 4
-    );
+  ctx.lineWidth = 1;
+  ctx.fillStyle =
+    building.physicalParameters.height + y < 19 &&
+    building.physicalParameters.width + x < 19
+      ? "green"
+      : "red";
+  for (let i = 0; i < building.physicalParameters.height; i++) {
+    for (let j = 0; j < building.physicalParameters.width; j++) {
+      const rectX = x + j;
+      const rectY = y + i;
+      if (rectX < 18 && rectY < 18) {
+        if (building.physicalParameters.defaultShape[i][j]) {
+          ctx.fillRect(
+            uiConfig.startX + rectX * uiConfig.itemWidth + 2,
+            uiConfig.startY + rectY * uiConfig.itemHeigth + 2,
+            uiConfig.itemWidth - 4,
+            uiConfig.itemHeigth - 4
+          );
+        }
+      }
+    }
   }
 };
 

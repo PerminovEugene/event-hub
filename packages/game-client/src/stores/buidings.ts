@@ -1,4 +1,4 @@
-import { makeAutoObservable, autorun } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { Building } from "../generalTypes/building";
 import { ResourcesStore } from "./resources";
 
