@@ -1,5 +1,6 @@
 import { Building } from "../generalTypes/building";
 import { Resource } from "../generalTypes/resource";
+import { ServerSocketEvents } from '@event-hub/
 
 type InitialState = {
   resources: Resource[];
@@ -7,9 +8,11 @@ type InitialState = {
 };
 
 export class Transport {
+  private socket: any; // TODO
+
   public connect() {
-    // TODO
-    return this;
+    this.socket = io("http://localhost:8080");
+    this.socket.on(Serve() => {})
   }
 
   public async getInitalState(): Promise<InitialState> {

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Canvas from "./Canvas";
+import Canvas from "./pages/Canvas";
 import "./App.css";
 import Buildings from "./gameInterface/buildungs";
 import { observer } from "mobx-react-lite";

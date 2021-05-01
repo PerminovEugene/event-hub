@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import { setValue } from "./engine/mainLoop";
+import { setValue } from "../engine/mainLoop";
 import {
   handleKeyboardEvent,
   handleMouseEvent,
   handleMouseMove,
-} from "./engine/userActions";
-import { Automate } from "./stateAutomate.ts/automate";
-import { uiConfig } from "./engine/ui/uiConfig";
-import { RootStoreContext } from "./AppContext";
+} from "../engine/userActions";
+import { Automate } from "../stateAutomate.ts/automate";
+import { uiConfig } from "../engine/ui/uiConfig";
+import { RootStoreContext } from "../AppContext";
 
 type State = {
   width: number;

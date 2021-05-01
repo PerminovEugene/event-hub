@@ -1,5 +1,5 @@
 {
-  "name": "gameserver",
+  "name": "game-server",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -19,17 +19,15 @@
     "nodemon": "^1.18.3",
     "ts-node": "^8.10.2",
     "tslint": "^5.11.0",
-    "typescript": "^4.0.1"
+    "typescript": "^4.2.0"
   },
   "dependencies": {
-    "@event-hub/game-shared": "^0.0.1",
+    "@event-hub/shared": "^0.1.1",
     "@types/jest": "^26.0.5",
-    "@types/restify": "^8.4.2",
     "@types/socket.io": "^2.1.11",
     "@types/supertest": "^2.0.10",
     "jest": "^26.1.0",
-    "netcode": "^2.0.4",
-    "restify": "^8.5.1",
+    "rimraf": "^3.0.2",
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.3"

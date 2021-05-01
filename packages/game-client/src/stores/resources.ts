@@ -5,7 +5,6 @@ import {
   Resource,
   ResourceCheck,
   ResourceId,
-  ResourceName,
 } from "../generalTypes/resource";
 
 export class ResourcesStore {

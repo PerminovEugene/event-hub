@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../game-server"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../shared"
+		}
+	]
+}

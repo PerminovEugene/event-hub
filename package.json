@@ -16,6 +16,8 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
+    "prepareShared": "npm run lerna build --scope=shared",
+    "setup": "npm run prepareShared && npm run bootstrap",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "pub": "lerna publish"

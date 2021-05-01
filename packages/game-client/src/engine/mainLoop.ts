@@ -2,7 +2,7 @@ import { createWorldStorage, world } from "./world/storage";
 import { render } from "./ui/render";
 import { queue } from "./queue";
 import { MovementManager } from "./physics/movement";
-import { Transport } from "./transport/socket";
+import { Transport } from "../transport/socket";
 
 let i = 0;
 let j = 0;

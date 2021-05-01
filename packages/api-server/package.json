@@ -73,7 +73,6 @@
     "typeorm": "^0.2.21"
   },
   "devDependencies": {
-    "@nestjs/testing": "^6.7.1",
     "@types/faker": "^4.1.9",
     "@types/jest": "^26.0.13",
     "@types/supertest": "^2.0.8",
