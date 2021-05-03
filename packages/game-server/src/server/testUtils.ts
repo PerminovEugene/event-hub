@@ -1,21 +1,29 @@
 import Client from "socket.io-client";
-import { assert } from "chai";
+import { createAccessTokenJWT } from "../auth";
 
-export const createClientAndConnect = async (port: number): Promise<SocketIOClient.Socket> => {
+export const createClientAndConnect = async (port: number, userId: number): Promise<SocketIOClient.Socket> => {
+  const token = createAccessTokenJWT({
+    userId
+  });
   return new Promise((resolve, reject) => {
-    const clientSocket = Client(`http://localhost:${port}`);
+    const clientSocket = Client(`http://localhost:${port}`, {
+      secure: true,
+      query: `token=${token}`
+    });
     clientSocket.on("connect", 
       () => {
         resolve(clientSocket);
       }
     );
-    clientSocket.on("disconnect", 
-      () => {
-        // console.log('disconnected');
-      }
-    );
   });
 };
+
+export const launchClient = (client: SocketIOClient.Socket) => {
+  setTimeout(() => {
+    client.emit('ready');
+  }, 100)
+}
+
 
 type SequenceItem = {
   client: SocketIOClient.Socket,
@@ -46,7 +54,7 @@ export const checkClientHandlersSequence = async (
           clearTimeout(timer);
         }
       }
-      client.on(eventName, callbackWrapper);
+      client.once(eventName, callbackWrapper);
     });
   };
 

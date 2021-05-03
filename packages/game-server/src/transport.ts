@@ -2,6 +2,7 @@ import io, { Socket } from "socket.io";
 import { Server } from "http";
 import { Bus } from "./bus";
 import { PlayerPublicData, eventsMap, LobbyPublicData } from "@event-hub/shared";
+import { parseJWT } from "./auth";
 
 enum SocketEvent {
   connection = "connection",
@@ -15,26 +16,39 @@ export class ServerTransport {
   private socket: io.Server;
   private clients: Socket[] = [];
 
-
-  private id = 0; // temp
   public init(server: Server) {
     this.socket = io(server);
 
+    this.socket.use(async (socket, next) => {
+      const handshake = socket.handshake;
+      const { token } = handshake.query;
+      const { userId } = parseJWT(token);
+      if (!userId) {
+        return next('fail user');
+      }
+      socket.request.user = { id: userId };
+      next();
+    });
+ 
     this.socket.on(SocketEvent.connection, (socket: Socket) => {
-      this.id += 1;
-      const user = { id: this.id }; // TODO temp, imitate getting user id from handshake
-      this.clients.push(socket);
-      this.bus.addNewPlayer({
-        socket,
-        user,
-      });
-      socket.on(SocketEvent.message, (eventName: string, data: any) => {
-        console.log(eventName, data);
-      });
+      const user = socket.request.user;
+      
       socket.on(SocketEvent.disconnect, () => {
         this.bus.disconnectPlayer(user.id)
         this.clients = this.clients.filter(({id}) => id !== socket.id)
       });
+      socket.on(SocketEvent.message, (eventName: string, data: any) => {
+        console.log(eventName, data);
+      });
+
+      socket.once('ready', () => {
+        this.clients.push(socket);
+        this.bus.addNewPlayer({
+          socket,
+          user,
+        });
+      })
+      
     });
   }
   public destory() {

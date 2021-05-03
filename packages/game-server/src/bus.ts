@@ -28,7 +28,9 @@ export class Bus {
   }
 
   public disconnectPlayer(userId: number) {
-    this.ee.emit(BusEvents.disconnectPlayer, userId);
+    if (this.ee) {
+      this.ee.emit(BusEvents.disconnectPlayer, userId);
+    }
   }
   public subscribeOnPlayerDisconnect(
     callback: (userId: number) => void

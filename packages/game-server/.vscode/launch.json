@@ -31,8 +31,11 @@
           "spec",
           "--exit"
       ],
+      "protocol": "inspector",
       "console": "integratedTerminal",
-      "protocol": "inspector"
+      "env": {
+        "ACCESS_TOKEN_SECRET": "asdas"
+      }
     }
   ]
 }
