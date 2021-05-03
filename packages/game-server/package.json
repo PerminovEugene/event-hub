@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'src/**/*test.ts'",
     "build": "npm run build-ts",
     "serve": "node dist/",
     "watch-node": "nodemon dist/",
     "dev": "npm run watch-ts && npm run serve",
-    "test": "NODE_ENV=test jest --runInBand --forceExit --coverage --verbose --config ./jest.config.js",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "debug": "npm run build && npm run watch-debug"
@@ -16,6 +16,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.2.17",
+    "@types/mocha": "^8.2.2",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
     "nodemon": "^1.18.3",
     "ts-node": "^8.10.2",
     "tslint": "^5.11.0",

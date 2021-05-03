@@ -20,7 +20,7 @@ export class GameOrganizer {
     this.lobby.isFull() && this.lobby.startGameAfterDelay();
   };
 
-  private onPlayerDisconnect(userId: number) {
+  private onPlayerDisconnect = (userId: number) => {
     this.lobby.kickPlayer(userId);
   }
 }

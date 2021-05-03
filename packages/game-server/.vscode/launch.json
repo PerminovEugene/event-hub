@@ -12,6 +12,27 @@
       "program": "${workspaceFolder}/src/index.ts",
       "preLaunchTask": "tsc: build - tsconfig.json",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test all",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+          "-r",
+          "ts-node/register",
+          "--timeout",
+          "999999",
+          "--colors",
+          "${workspaceFolder}/src/**/*.test.ts",
+          "--bail",
+          "--reporter",
+          "spec",
+          "--exit"
+      ],
+      "console": "integratedTerminal",
+      "protocol": "inspector"
     }
   ]
 }

@@ -54,6 +54,26 @@ export class Bus {
     this.ee.on(BusEvents.broadcastToRoomPlayerJoined, callback);
   }
 
+
+  // public broadcastToRoomUpdateLobby(
+  //   roomId: string,
+  //   lobbyPublicData: PlayerPublicData
+  // ) {
+  //   this.ee.emit(BusEvents.broadcastToRoomPlayerJoined, {
+  //     roomId,
+  //     playerPublicData,
+  //   });
+  // }
+  // public subscribeOnBroadcastToRoomUpdateLobby(
+  //   callback: (data: {
+  //     roomId: string;
+  //     playerPublicData: PlayerPublicData;
+  //   }) => void
+  // ) {
+  //   this.ee.on(BusEvents.broadcastToRoomPlayerJoined, callback);
+  // }
+
+
   public broadcastToRoomStartGameAfterDelay(roomId: string) {
     this.ee.emit(BusEvents.broadcastToRoomStartGameAfterDelay, roomId);
   }
@@ -62,6 +82,8 @@ export class Bus {
   ) {
     this.ee.on(BusEvents.broadcastToRoomStartGameAfterDelay, callback);
   }
+
+
   public broadcastToRoomStartGame(roomId: string) {
     this.ee.emit(BusEvents.broadcastToRoomStartGame, roomId);
   }
@@ -83,5 +105,10 @@ export class Bus {
     }) => void
   ) {
     this.ee.on(BusEvents.lobbyInfoUpdated, callback);
+  }
+
+  public destroy() {
+    this.ee.removeAllListeners();
+    this.ee = null;
   }
 }

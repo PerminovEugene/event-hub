@@ -20,6 +20,9 @@ export type LobbyPublicData = {
   size: number;
 };
 
+export type Call<D> = (data: D) => [ServerEventNames, D];
+export type Handler<T extends Function> = (callback: T) => [ServerEventNames, T];
+
 export const eventsMap = {
   lobbyInfoUpdated: {
     call: (lobby: LobbyPublicData): [ServerEventNames, LobbyPublicData] => [

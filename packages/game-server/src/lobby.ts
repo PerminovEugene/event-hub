@@ -23,11 +23,13 @@ export class Lobby {
 
   public joinPlayer(player: Player) {
     if (!this.isFull()) {
+      if (this.players.length) {
+        this.bus.broadcastToRoomPlayerJoined(
+          this.roomId,
+          player.getPublicPlayerData()
+        );
+      }
       this.players.push(player);
-      this.bus.broadcastToRoomPlayerJoined(
-        this.roomId,
-        player.getPublicPlayerData()
-      );
       player.joinRoom(this.roomId);
       player.sendLobbyInfo({
         players: this.players.map((player) => player.getPublicPlayerData()),
@@ -38,9 +40,10 @@ export class Lobby {
     }
   }
 
-  public kickPlayer(userId: number) {
-    this.players = this.players.filter((player) => player.getPublicPlayerData().id === userId);
+  public kickPlayer = (userId: number) => {
+    this.players = this.players.filter((player) => player.getPublicPlayerData().id !== userId);
     // TODO this.bus.send
+    clearTimeout(this.gameStartingTimer);
   }
 
   public isFull() {
