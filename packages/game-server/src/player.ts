@@ -5,18 +5,24 @@ import {
   eventsMap,
   LobbyPublicData,
 } from "@event-hub/shared";
+import { LobbyId } from "./lobby";
 
 type User = {
   id: number;
 };
+type SessionData = {
+  lobbyId: LobbyId
+}
 
 export class Player {
   private socket: Socket;
   private user: User;
+  private sessionData: SessionData;
 
-  constructor(rawPlayer: RawPlayer) {
+  constructor(rawPlayer: RawPlayer, lobbyId: LobbyId) {
     this.socket = rawPlayer.socket;
     this.user = rawPlayer.user;
+    this.sessionData = { lobbyId };
   }
 
   public joinRoom(roomName: string) {

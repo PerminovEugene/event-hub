@@ -1,14 +1,20 @@
 import { Bus, RawPlayer } from "./bus";
-import { Lobby } from "./lobby";
+import { Lobby, LobbyId } from "./lobby";
 import { Player } from "./player";
 
 export class GameOrganizer {
-  constructor(private bus: Bus) {
-    this.lobby = new Lobby(bus);
-  }
+  private lobbies: {[key in LobbyId]: Lobby} = {};
 
-  // TODO later it should array at least
-  private lobby: Lobby;
+  constructor(private bus: Bus) {}
+
+  private createLobby() {
+    const lobby = new Lobby(this.bus);
+    this.lobbies[lobby.id] = lobby;
+    return lobby;
+  }
+  private deleteLobby(id: LobbyId) {
+    delete this.lobbies[id];
+  }
 
   public attachHanlders() {
     this.bus.subscribeOnNewPlayers(this.onNewPlayerHandler);
@@ -16,11 +22,20 @@ export class GameOrganizer {
   }
 
   private onNewPlayerHandler = (rawPlayer: RawPlayer) => {
-    this.lobby.joinPlayer(new Player(rawPlayer));
-    this.lobby.isFull() && this.lobby.startGameAfterDelay();
+    let availableLobby: Lobby = this.selectNotFullLobby();
+    if (!availableLobby) {
+      availableLobby = this.createLobby();
+    }
+    rawPlayer.socket.lobbyId = availableLobby.id;
+    availableLobby.joinPlayer(new Player(rawPlayer, availableLobby.id));
+    availableLobby.isFull() && availableLobby.startGameAfterDelay();
   };
 
-  private onPlayerDisconnect = (userId: number) => {
-    this.lobby.kickPlayer(userId);
+  private selectNotFullLobby = (): Lobby | undefined => {
+    return Object.values(this.lobbies).find(({ isFull }) => !isFull())
+  }
+
+  private onPlayerDisconnect = ({ lobbyId, userId }: { lobbyId: string, userId: number }) => {
+    this.lobbies[lobbyId].kickPlayer(userId);
   }
 }

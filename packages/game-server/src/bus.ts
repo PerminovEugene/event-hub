@@ -12,8 +12,12 @@ enum BusEvents {
   broadcastToRoomStartGameAfterDelay = "broadcastToRoomStartGame",
 }
 
+export type ExtendedSocket = Socket & {
+  lobbyId?: string;
+}
+
 export type RawPlayer = {
-  socket: Socket;
+  socket: ExtendedSocket;
   user: { id: number };
 };
 
@@ -27,13 +31,13 @@ export class Bus {
     this.ee.on(BusEvents.addNewPlayer, callback);
   }
 
-  public disconnectPlayer(userId: number) {
+  public disconnectPlayer(lobbyId: string, userId: number) {
     if (this.ee) {
-      this.ee.emit(BusEvents.disconnectPlayer, userId);
+      this.ee.emit(BusEvents.disconnectPlayer, { lobbyId, userId });
     }
   }
   public subscribeOnPlayerDisconnect(
-    callback: (userId: number) => void
+    callback: ({ userId: number, lobbyId: string }) => void
   ) {
     this.ee.on(BusEvents.disconnectPlayer, callback);
   }

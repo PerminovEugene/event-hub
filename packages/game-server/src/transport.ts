@@ -1,12 +1,13 @@
 import io, { Socket } from "socket.io";
 import { Server } from "http";
-import { Bus } from "./bus";
+import { Bus, ExtendedSocket } from "./bus";
 import { PlayerPublicData, eventsMap, LobbyPublicData } from "@event-hub/shared";
 import { parseJWT } from "./auth";
 
 enum SocketEvent {
   connection = "connection",
   message = "message",
+  disconnecting = "disconnecting",
   disconnect = "disconnect",
 }
 
@@ -30,13 +31,17 @@ export class ServerTransport {
       next();
     });
  
-    this.socket.on(SocketEvent.connection, (socket: Socket) => {
+    this.socket.on(SocketEvent.connection, (socket: ExtendedSocket) => {
       const user = socket.request.user;
       
-      socket.on(SocketEvent.disconnect, () => {
-        this.bus.disconnectPlayer(user.id)
-        this.clients = this.clients.filter(({id}) => id !== socket.id)
+      socket.on(SocketEvent.disconnecting, () => {
+        this.bus.disconnectPlayer(socket.lobbyId, user.id);
+        this.clients = this.clients.filter(({id}) => id !== socket.id);
       });
+      // socket.on(SocketEvent.disconnect, () => {
+        // rooms are empty here
+      // });
+
       socket.on(SocketEvent.message, (eventName: string, data: any) => {
         console.log(eventName, data);
       });
