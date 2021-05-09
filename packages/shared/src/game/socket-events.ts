@@ -11,9 +11,9 @@ export enum ServerEventNames {
   GameIsStarted = "GameIsStarted",
 }
 
-export type SocketServerEvent = {
-  [ServerEventNames.PlayerJoinedRoom]: PlayerPublicData;
-};
+type GameStartPrepationOptions = {
+  delayBeforeStartGame: number;
+}
 
 export type LobbyPublicData = {
   players: PlayerPublicData[];
@@ -37,16 +37,19 @@ export const eventsMap = {
     ],
   },
   gameWillBeStartedAfterDelay: {
-    call: (): [ServerEventNames] => [ServerEventNames.GameStartAfterDelay],
-    handler: (callback: () => void): [ServerEventNames, () => void] => [
-      ServerEventNames.GameStartAfterDelay,
-      callback,
-    ],
+    call:
+      (options: GameStartPrepationOptions): [ServerEventNames, GameStartPrepationOptions] => [ServerEventNames.GameStartAfterDelay, options],
+    handler: 
+      (callback: (options: GameStartPrepationOptions) => void):
+        [ServerEventNames, (options: GameStartPrepationOptions) => void] => [
+          ServerEventNames.GameStartAfterDelay,
+          callback,
+        ],
   },
   startGame: {
-    call: (): [ServerEventNames] => [ServerEventNames.GameStartAfterDelay],
+    call: (): [ServerEventNames] => [ServerEventNames.GameIsStarted],
     handler: (callback: () => void): [ServerEventNames, () => void] => [
-      ServerEventNames.GameStartAfterDelay,
+      ServerEventNames.GameIsStarted,
       callback,
     ],
   },

@@ -1,4 +1,4 @@
-import { assert } from "chai";
+import { assert, expect } from "chai";
 import { Server } from './server';
 import { eventsMap } from "../../../shared/dist";
 import { checkClientHandlersSequence, createClientAndConnect, launchClient } from './testUtils';
@@ -77,6 +77,72 @@ describe("Server clients connection and adding to lobby", () => {
             assert.equal(lobbyPublicData.players.length, 2);
             assert.equal(lobbyPublicData.players[0].id, id1);
             assert.equal(lobbyPublicData.players[1].id, id2);
+          }
+        },
+      ]);
+      
+      client1.disconnect();
+      client2.disconnect();
+    }
+  );
+
+  it("Should send gameWillBeStartedAfterDelay event to two clients",
+    async () => {
+      const id1 = 1;
+      const id2 = 2;
+      const client1 = await createClientAndConnect(port, id1);
+      const client2 = await createClientAndConnect(port, id2);
+
+      launchClient(client1);
+      launchClient(client2);
+
+      await checkClientHandlersSequence([
+        {
+          client: client1,
+          handler: eventsMap.gameWillBeStartedAfterDelay.handler,
+          assertFunction: (options) => {
+            assert.equal(options.delayBeforeStartGame, 5000);
+          }
+        },
+        {
+          client: client2,
+          handler: eventsMap.gameWillBeStartedAfterDelay.handler,
+          assertFunction: (options) => {
+            assert.equal(options.delayBeforeStartGame, 5000);
+          }
+        },
+      ]);
+      
+      client1.disconnect();
+      client2.disconnect();
+    }
+  );
+
+  it("Should send event start game after delay",
+    async () => {
+      const id1 = 1;
+      const id2 = 2;
+      const client1 = await createClientAndConnect(port, id1);
+      const client2 = await createClientAndConnect(port, id2);
+      
+      const beforeMark = new Date();
+
+      launchClient(client1);
+      launchClient(client2);
+      
+      await checkClientHandlersSequence([
+        {
+          client: client1,
+          handler: eventsMap.startGame.handler,
+          assertFunction: (options) => {
+            expect(5000).lessThan(new Date().getTime() - beforeMark.getTime(), 'Game started to fast')
+          }
+        },
+        {
+          client: client2,
+          handler: eventsMap.startGame.handler,
+          assertFunction: (options) => {
+            expect(5000).lessThan(new Date().getTime() - beforeMark.getTime(), 'Game started to fast')
           }
         },
       ]);

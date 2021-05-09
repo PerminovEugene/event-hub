@@ -9,7 +9,7 @@ enum BusEvents {
 
   broadcastToRoomPlayerJoined = "broadcastToRoomPlayerJoined",
   broadcastToRoomStartGame = "broadcastToRoomStartGame",
-  broadcastToRoomStartGameAfterDelay = "broadcastToRoomStartGame",
+  broadcastToRoomStartGameAfterDelay = "broadcastToRoomStartGameAfterDelay",
 }
 
 export type ExtendedSocket = Socket & {
@@ -80,11 +80,14 @@ export class Bus {
   // }
 
 
-  public broadcastToRoomStartGameAfterDelay(roomId: string) {
-    this.ee.emit(BusEvents.broadcastToRoomStartGameAfterDelay, roomId);
+  public broadcastToRoomStartGameAfterDelay(
+    roomId: string,
+    launchOptions: { delayBeforeStartGame: number }
+  ) {
+    this.ee.emit(BusEvents.broadcastToRoomStartGameAfterDelay, roomId, launchOptions);
   }
   public subscribeOnBroadcastToRoomStartGameAfterDelay(
-    callback: (roomId: string) => void
+    callback: (roomId: string, launchOptions: { delayBeforeStartGame: number }) => void
   ) {
     this.ee.on(BusEvents.broadcastToRoomStartGameAfterDelay, callback);
   }
@@ -96,7 +99,7 @@ export class Bus {
   public subscribeOnBroadcastToRoomStartGame(
     callback: (roomId: string) => void
   ) {
-    this.ee.on(BusEvents.broadcastToRoomStartGameAfterDelay, callback);
+    this.ee.on(BusEvents.broadcastToRoomStartGame, callback);
   }
 
   public updateLobbyInfo(

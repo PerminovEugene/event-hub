@@ -107,10 +107,10 @@ export class ServerTransport {
 
 // Start game
 
-  public broadcastToRoomStartGameAfterDelay = (roomId: string) => {
+  public broadcastToRoomStartGameAfterDelay = (roomId: string, gameStartPreparationOptions) => {
     this.socket
       .to(roomId)
-      .emit(...eventsMap.gameWillBeStartedAfterDelay.call());
+      .emit(...eventsMap.gameWillBeStartedAfterDelay.call(gameStartPreparationOptions));
   }
 
   public broadcastToRoomStartGame = (roomId: string) => {

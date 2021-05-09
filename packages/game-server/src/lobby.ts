@@ -6,7 +6,7 @@ const FIVE_SECONDS = 5_000;
 
 export type LobbyConfig = {
   size: number;
-  delayBeforeStartingGame: number;
+  delayBeforeStartGame: number;
 };
 export type LobbyId = string;
 
@@ -19,7 +19,7 @@ export class Lobby {
     private bus: Bus,
     private lobbyConfig: LobbyConfig = {
       size: 2,
-      delayBeforeStartingGame: FIVE_SECONDS,
+      delayBeforeStartGame: FIVE_SECONDS,
     }
   ) {
     this._id = uuidv4();
@@ -50,7 +50,6 @@ export class Lobby {
 
   public kickPlayer = (userId: number) => {
     this.players = this.players.filter((player) => player.getPublicPlayerData().id !== userId);
-    // TODO this.bus.send
     clearTimeout(this.gameStartingTimer);
   }
 
@@ -59,10 +58,10 @@ export class Lobby {
   }
 
   public startGameAfterDelay() {
-    this.bus.broadcastToRoomStartGameAfterDelay(this.id);
-    // TODO if someone left lobby need to clean timer
+    const { delayBeforeStartGame } = this.lobbyConfig;
+    this.bus.broadcastToRoomStartGameAfterDelay(this.id, { delayBeforeStartGame });
     this.gameStartingTimer = setTimeout(() => {
       this.bus.broadcastToRoomStartGame(this.id);
-    }, this.lobbyConfig.delayBeforeStartingGame);
+    }, this.lobbyConfig.delayBeforeStartGame);
   }
 }
